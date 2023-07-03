@@ -76,13 +76,10 @@ Güneşli ve bulutlu hava durumuna göre güneş gözlüğü ve şapka takmanız
 - **Daily Scrum**: Daily Scrum toplantıları WhatsApp üzerinden yapıldı. Daily Scrum toplantısı ekran görüntüleri jpeg olarak README'de paylaşıldı.
     - [Daily Scrum 01](/assets/assets/daily-scrum-04.jpeg)
 - **Sprint Board Updates**: Screenshot ![Sprint 2](/assets/assets/scrum-board-sprint-2.png)
-- **Ürün Durumu**:
-![Login Ekranı](/assets/assets/screen-login.jpeg)
-*Login Ekranı*
-![Home Ekranı 1](/assets/assets/screen-home-01.jpeg)
-*Home Ekranı 1*
-![Home Ekranı 2](/assets/assets/screen-home-02.jpeg)
-*Home Ekranı 2*
+- **Ürün Durumu**: Ürün Ekranları<br>
+![Login Ekranı](/assets/assets/screen-login.jpeg)<br>
+![Home Ekranı 1](/assets/assets/screen-home-01.jpeg)<br>
+![Home Ekranı 2](/assets/assets/screen-home-02.jpeg)<br>
 
 - **Sprint Review**: Kullanıcı temel ekranlarının arayüzleri, algoritmaları kodlandı. Veri alınacak servislere bağlantıları yapıldı ve veriler Firebase'e aktarıldı. UV index ve hava durumu bilgileri alındı. Konum hizmetleri kullanıldı. Öncelikle harita entegrasyonu ve otomatlara yönlendiren yol tarifinin tamamlanmasına karar verildi. Eksiklikler değerlendirildi.
 - **Sprint Rewiew katılımcıları**: Kübra Gönül, Özcan Erdem Tosun, Yusuf Samet Karakurt
