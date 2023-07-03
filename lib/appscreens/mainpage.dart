@@ -19,7 +19,14 @@ class _MainPageState extends State<MainPage> {
   var city = "Istanbul";
   var client = WeatherData();
   var data;
-  List<String> cities = ["Istanbul", "Ankara", "Izmir", "Kocaeli", "London"];
+  List<String> cities = [
+    "Istanbul",
+    "Ankara",
+    "Izmir",
+    "Kocaeli",
+    "London",
+    "Balikesir"
+  ];
 
   info() async {
     data = await client.getData("$city");
