@@ -2,9 +2,9 @@
 
 import 'package:flutter/material.dart';
 import 'package:google_nav_bar/google_nav_bar.dart';
-import 'package:testui2/appscreens/mainpage.dart';
-import 'package:testui2/appscreens/mapscreen.dart';
-import 'package:testui2/appscreens/settings.dart';
+import 'package:testui2/uygulamaekranlari/anaekran.dart';
+import 'package:testui2/uygulamaekranlari/haritaekrani.dart';
+import 'package:testui2/uygulamaekranlari/ayarlar.dart';
 // ignore: unused_import
 
 class HomePage extends StatefulWidget {
@@ -15,7 +15,7 @@ class HomePage extends StatefulWidget {
 }
 
 class _FirstPageState extends State<HomePage> {
-  int currentindex = 0;
+  int currentindex = 1;
 
   @override
   Widget build(BuildContext context) {

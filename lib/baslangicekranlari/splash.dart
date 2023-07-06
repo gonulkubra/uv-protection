@@ -1,7 +1,7 @@
 // ignore_for_file: prefer_const_constructors
 
 import 'package:flutter/material.dart';
-import 'package:testui2/initscreens/loginpage.dart';
+import 'package:testui2/baslangicekranlari/girisekrani.dart';
 
 class Splash extends StatefulWidget {
   const Splash({super.key});
@@ -27,7 +27,7 @@ class _SplashState extends State<Splash> {
         child: Container(
           decoration: BoxDecoration(
               image: DecorationImage(
-                  image: AssetImage("assets/assets/wht.jpg"),
+                  image: AssetImage("assets/assets/UVPROTECTION.png"),
                   fit: BoxFit.cover)),
         ),
       ),

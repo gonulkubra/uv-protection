@@ -3,7 +3,8 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:testui2/servisler/weatherData.dart';
-import 'package:intl/intl.dart';
+import 'package:testui2/sabitler/sehirler.dart';
+import 'package:testui2/sabitler/kalicisabitler.dart';
 
 class MainPage extends StatefulWidget {
   const MainPage({super.key});
@@ -12,14 +13,10 @@ class MainPage extends StatefulWidget {
   State<MainPage> createState() => _MainPageState();
 }
 
-var today = DateTime.now();
-var dateformat = DateFormat("EEE,d MMM").format(today);
-
 class _MainPageState extends State<MainPage> {
   var city = "Istanbul";
   var client = WeatherData();
   var data;
-  List<String> cities = ["Istanbul", "Ankara", "Izmir", "Kocaeli", "London"];
 
   info() async {
     data = await client.getData("$city");
@@ -47,7 +44,7 @@ class _MainPageState extends State<MainPage> {
 
   Padding dropdown() {
     return Padding(
-      padding: const EdgeInsets.only(top: 25.0),
+      padding: const EdgeInsets.only(top: 37.0),
       child: Row(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
@@ -74,11 +71,11 @@ class _MainPageState extends State<MainPage> {
 
   Padding citycard(Size size) {
     return Padding(
-      padding: const EdgeInsets.only(top: 15.0),
+      padding: const EdgeInsets.only(top: 5.0),
       child: Container(
         height: size.height * 0.8,
         width: size.width,
-        margin: EdgeInsets.only(right: 10, left: 10),
+        margin: EdgeInsets.only(right: 1, left: 1),
         decoration: BoxDecoration(
             color: Colors.red,
             borderRadius: BorderRadius.circular(40),
@@ -89,13 +86,18 @@ class _MainPageState extends State<MainPage> {
                 stops: [0.3, 0.7])),
         child: Column(
           children: [
-            citynamefield(),
-            date(),
-            SizedBox(height: 15),
-            weathericon(size),
-            SizedBox(height: 10),
-            weatherstate(),
-            iconsandinfos(size),
+            SizedBox(height: 4),
+            sehirisimalani(),
+            ulke(),
+            SizedBox(height: 4),
+            tarih(),
+            SizedBox(height: 8),
+            havaiconu(size),
+            SizedBox(height: 5),
+            havadurumu(),
+            SizedBox(height: 18),
+            iconlar(size),
+            SizedBox(height: 12),
             otomattext()
           ],
         ),
@@ -103,14 +105,16 @@ class _MainPageState extends State<MainPage> {
     );
   }
 
-  Padding citynamefield() {
+  Text ulke() => Text("${data?.country}");
+
+  Padding sehirisimalani() {
     return Padding(
-      padding: const EdgeInsets.only(top: 18.0),
-      child: cityname(),
+      padding: const EdgeInsets.only(top: 8.0),
+      child: sehiradi(),
     );
   }
 
-  Image weathericon(Size size) {
+  Image havaiconu(Size size) {
     return Image.network(
       "https:${data?.icon}",
       width: size.width * 0.3,
@@ -118,15 +122,15 @@ class _MainPageState extends State<MainPage> {
     );
   }
 
-  Padding iconsandinfos(Size size) {
+  Padding iconlar(Size size) {
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 8.0),
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceEvenly,
         children: [
-          firstcolumn(size),
-          secondcolumn(size),
-          thirdcolumn(size),
+          ilksutun(size),
+          ikincisutun(size),
+          ucuncusutun(size),
         ],
       ),
     );
@@ -136,7 +140,7 @@ class _MainPageState extends State<MainPage> {
     return Padding(
       padding: const EdgeInsets.symmetric(vertical: 40.0),
       child: TextButton(
-          onPressed: () {},
+          onPressed: () => Navigator.pushNamed(context, "/AutomatScreen"),
           child: Text(
             "En yakın otomatı görmek için tıklayın",
             style: GoogleFonts.rajdhani(
@@ -147,52 +151,73 @@ class _MainPageState extends State<MainPage> {
     );
   }
 
-  Column thirdcolumn(Size size) {
+  Column ucuncusutun(Size size) {
     return Column(
       children: [
+        Text(
+          "SPF",
+          style: GoogleFonts.archivo(
+              fontSize: 18,
+              fontWeight: FontWeight.w600,
+              color: Colors.white.withOpacity(0.5)),
+        ),
+        SizedBox(height: 8),
+        spfdegeri(),
         SizedBox(height: 15),
-        sfpvalue(),
-        SizedBox(height: 15),
-        stayhome(size),
+        evdekalicon(size),
         SizedBox(height: 10),
-        stayhometext(),
+        evdekalyazi(),
         SizedBox(height: 10),
-        spftext(),
+        durumyazi(),
       ],
     );
   }
 
-  Column secondcolumn(Size size) {
+  Column ikincisutun(Size size) {
     return Column(
       children: [
+        Text(
+          "UV",
+          style: GoogleFonts.archivo(
+              fontSize: 18,
+              fontWeight: FontWeight.w600,
+              color: Colors.white.withOpacity(0.5)),
+        ),
+        SizedBox(height: 8),
+        uvdegeri(),
         SizedBox(height: 15),
-        uvvalue(),
-        SizedBox(height: 15),
-        humidityimage(size),
+        nemiconu(size),
         SizedBox(height: 10),
-        humidityvalue(),
+        nemdegeri(),
         SizedBox(height: 10),
-        humiditytext(),
+        nemyazi(),
       ],
     );
   }
 
-  Column firstcolumn(Size size) {
+  Column ilksutun(Size size) {
     return Column(
       children: [
+        Text(
+          "Sıcaklık",
+          style: GoogleFonts.archivo(
+              fontSize: 18,
+              fontWeight: FontWeight.w600,
+              color: Colors.white.withOpacity(0.5)),
+        ),
+        SizedBox(height: 8),
+        sicaklik(),
         SizedBox(height: 15),
-        temperature(),
-        SizedBox(height: 15),
-        windimage(size),
+        ruzgaricon(size),
         SizedBox(height: 10),
-        windspeed(),
+        ruzgarhizi(),
         SizedBox(height: 10),
-        windtext(),
+        ruzgaryazi(),
       ],
     );
   }
 
-  Text sfpvalue() {
+  Text spfdegeri() {
     return Text(
       "SPF " + "${data?.spfvalue}",
       style: GoogleFonts.archivo(
@@ -202,9 +227,9 @@ class _MainPageState extends State<MainPage> {
     );
   }
 
-  Text spftext() {
+  Text durumyazi() {
     return Text(
-      "SPF",
+      "Durum",
       style: GoogleFonts.archivo(
           fontSize: 18,
           fontWeight: FontWeight.w600,
@@ -212,15 +237,15 @@ class _MainPageState extends State<MainPage> {
     );
   }
 
-  Text stayhometext() {
+  Text evdekalyazi() {
     return Text(
-      "Stay Home ",
+      "Evde Kal ",
       style: GoogleFonts.archivo(
           fontSize: 20, fontWeight: FontWeight.w600, color: Colors.white),
     );
   }
 
-  Image stayhome(Size size) {
+  Image evdekalicon(Size size) {
     return Image.asset(
       "assets/assets/home.png",
       width: size.width * 0.2,
@@ -228,9 +253,9 @@ class _MainPageState extends State<MainPage> {
     );
   }
 
-  Text humiditytext() {
+  Text nemyazi() {
     return Text(
-      "Humidity",
+      "Nem",
       style: GoogleFonts.archivo(
           fontSize: 18,
           fontWeight: FontWeight.w600,
@@ -238,7 +263,7 @@ class _MainPageState extends State<MainPage> {
     );
   }
 
-  Text humidityvalue() {
+  Text nemdegeri() {
     return Text(
       "%" + "${data?.humidity}",
       style: GoogleFonts.archivo(
@@ -246,7 +271,7 @@ class _MainPageState extends State<MainPage> {
     );
   }
 
-  Image humidityimage(Size size) {
+  Image nemiconu(Size size) {
     return Image.asset(
       "assets/assets/humidity.png",
       width: size.width * 0.2,
@@ -254,7 +279,7 @@ class _MainPageState extends State<MainPage> {
     );
   }
 
-  Text uvvalue() {
+  Text uvdegeri() {
     return Text(
       "${data?.uv}",
       style: GoogleFonts.archivo(
@@ -264,9 +289,9 @@ class _MainPageState extends State<MainPage> {
     );
   }
 
-  Text windtext() {
+  Text ruzgaryazi() {
     return Text(
-      "Wind",
+      "Rüzgar",
       style: GoogleFonts.archivo(
           fontSize: 18,
           fontWeight: FontWeight.w600,
@@ -274,22 +299,22 @@ class _MainPageState extends State<MainPage> {
     );
   }
 
-  Text windspeed() {
+  Text ruzgarhizi() {
     return Text(
-      "${data?.wind}" + " km/h",
+      "${data?.wind}" + " km/s",
       style: GoogleFonts.archivo(
           fontSize: 20, fontWeight: FontWeight.w600, color: Colors.white),
     );
   }
 
-  Image windimage(Size size) {
+  Image ruzgaricon(Size size) {
     return Image.asset("assets/assets/wind.png",
         width: size.width * 0.2, height: size.height * 0.08);
   }
 
-  Text temperature() {
+  Text sicaklik() {
     return Text(
-      "${data?.temp}" + "C",
+      "${data?.temp}" + "°C",
       style: GoogleFonts.archivo(
           fontSize: 40,
           fontWeight: FontWeight.w600,
@@ -297,19 +322,19 @@ class _MainPageState extends State<MainPage> {
     );
   }
 
-  Text weatherstate() {
+  Text havadurumu() {
     return Text(
       "${data?.condition}",
       style: GoogleFonts.archivo(fontSize: 18, fontWeight: FontWeight.w600),
     );
   }
 
-  Text date() {
+  Text tarih() {
     return Text(dateformat,
         style: GoogleFonts.archivo(fontSize: 18, fontWeight: FontWeight.w400));
   }
 
-  Text cityname() {
+  Text sehiradi() {
     return Text(
       "${data?.cityname}",
       style: GoogleFonts.rajdhani(

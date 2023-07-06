@@ -1,8 +1,11 @@
-// ignore_for_file: body_might_complete_normally_nullable, duplicate_ignore, prefer_const_constructors, use_build_context_synchronously
+// ignore_for_file: body_might_complete_normally_nullable, duplicate_ignore, prefer_const_constructors, use_build_context_synchronously, unused_local_variable
 
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:testui2/main.dart';
+import 'package:testui2/servisler/girishizmetleri.dart';
+import 'package:testui2/sabitler/kalicisabitler.dart';
 
 class LoginPage extends StatefulWidget {
   const LoginPage({super.key});
@@ -11,15 +14,18 @@ class LoginPage extends StatefulWidget {
   State<LoginPage> createState() => _LoginPageState();
 }
 
+final renkler = Renkler();
+late String email, password;
+
 class _LoginPageState extends State<LoginPage> {
-  late String email, password;
   final formkey = GlobalKey<FormState>();
   final firebaseauth = FirebaseAuth.instance;
+  final girishizmetleri = girisHizmetleri();
   @override
   Widget build(BuildContext context) {
     var height = MediaQuery.of(context).size.height;
     return Scaffold(
-      backgroundColor: Colors.yellow[100],
+      backgroundColor: renkler.girisekranlari,
       body: SingleChildScrollView(
         child: SafeArea(
             child: Form(
@@ -28,22 +34,76 @@ class _LoginPageState extends State<LoginPage> {
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
               sunpng(height),
-              SizedBox(height: 30),
+              SizedBox(height: 25),
               welcometext(),
               SizedBox(height: 10),
               text(),
-              SizedBox(height: 20),
+              SizedBox(height: 25),
               usernamefield(),
-              SizedBox(height: 20),
+              SizedBox(height: 25),
               passwordfield(),
-              SizedBox(height: 20),
+              SizedBox(height: 25),
               signin(),
               SizedBox(height: 5),
-              registernow()
+              enaltsatir(),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  TextButton(
+                    onPressed: () =>
+                        Navigator.pushNamed(context, "/ResetPassword"),
+                    child: Text(
+                      "Şifremi Unuttum",
+                      style: GoogleFonts.rajdhani(
+                          color: Colors.purple,
+                          fontSize: 16,
+                          fontWeight: FontWeight.w500),
+                    ),
+                  )
+                ],
+              )
             ],
           ),
         )),
       ),
+    );
+  }
+
+  Row enaltsatir() {
+    return Row(
+      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+      children: [registernow(), misafirgirisimetodu()],
+    );
+  }
+
+  TextButton misafirgirisimetodu() {
+    return TextButton(
+      child: Column(
+        children: [
+          misafirgirisi(),
+          signinasaguest(),
+        ],
+      ),
+      onPressed: () async {
+        final result = await girishizmetleri.misafirgirisifonksiyonu();
+        Navigator.pushNamed(context, "/MapScreen");
+      },
+    );
+  }
+
+  Text signinasaguest() {
+    return Text(
+      "Sign In as a Guest",
+      style: GoogleFonts.rajdhani(
+          color: Colors.black, fontSize: 18, fontWeight: FontWeight.bold),
+    );
+  }
+
+  Text misafirgirisi() {
+    return Text(
+      "Misafir Girişi",
+      style: GoogleFonts.rajdhani(
+          color: Colors.black, fontSize: 18, fontWeight: FontWeight.bold),
     );
   }
 
@@ -55,8 +115,8 @@ class _LoginPageState extends State<LoginPage> {
   Center welcometext() {
     return Center(
       child: Text(
-        "Hoş Geldin !",
-        style: GoogleFonts.rajdhani(fontSize: 40, fontWeight: FontWeight.bold),
+        "Merhaba",
+        style: GoogleFonts.rajdhani(fontSize: 35, fontWeight: FontWeight.bold),
       ),
     );
   }
@@ -65,7 +125,7 @@ class _LoginPageState extends State<LoginPage> {
     return Center(
       child: Text(
         "Devam etmek için giriş yapın ",
-        style: GoogleFonts.rajdhani(fontSize: 25, fontWeight: FontWeight.bold),
+        style: GoogleFonts.rajdhani(fontSize: 20, fontWeight: FontWeight.bold),
       ),
     );
   }
@@ -73,9 +133,11 @@ class _LoginPageState extends State<LoginPage> {
   TextButton registernow() {
     return TextButton(
         onPressed: () => Navigator.pushNamed(context, "/RegisterPage"),
-        child: Text("Üye değil misiniz? Şimdi Kayıt Olun",
+        child: Text("Hesap Oluştur",
             style: GoogleFonts.rajdhani(
-                fontSize: 20, fontWeight: FontWeight.bold)));
+                color: Colors.black,
+                fontSize: 18,
+                fontWeight: FontWeight.bold)));
   }
 
   TextButton signin() {
@@ -83,15 +145,19 @@ class _LoginPageState extends State<LoginPage> {
         onPressed: () async {
           if (formkey.currentState!.validate()) {
             formkey.currentState!.save();
-            // ignore: unused_local_variable
-            final userresult = await firebaseauth.signInWithEmailAndPassword(
-                email: email, password: password);
+            final result =
+                girishizmetleri.kayitlikullanicigirisi(email, password);
             Navigator.pushNamed(context, "/HomePage");
+            setState(() {
+              registereduser = true;
+            });
           }
         },
         child: Text("Giriş yap",
             style: GoogleFonts.rajdhani(
-                fontSize: 30, fontWeight: FontWeight.bold)));
+                color: Colors.black,
+                fontSize: 25,
+                fontWeight: FontWeight.bold)));
   }
 
   Padding passwordfield() {
@@ -115,7 +181,7 @@ class _LoginPageState extends State<LoginPage> {
           textAlign: TextAlign.center,
           decoration: InputDecoration(
             border: InputBorder.none,
-            hintText: "Password",
+            hintText: "Şifre",
           ),
         ),
       ),
@@ -142,7 +208,7 @@ class _LoginPageState extends State<LoginPage> {
           },
           textAlign: TextAlign.center,
           decoration:
-              InputDecoration(border: InputBorder.none, hintText: "Username"),
+              InputDecoration(border: InputBorder.none, hintText: "Email"),
         ),
       ),
     );

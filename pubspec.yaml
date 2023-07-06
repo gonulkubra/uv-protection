@@ -46,6 +46,7 @@ dependencies:
   http: ^1.0.0
   dio: ^5.2.1+1
   geolocator: ^9.0.2
+  provider: ^6.0.5
 
 
 
@@ -74,11 +75,11 @@ flutter:
 
   # To add assets to your application, add an assets section, like this:
   assets:
-    - assets/assets/wht.jpg
     - assets/assets/sun.png
     - assets/assets/wind.png
     - assets/assets/humidity.png
     - assets/assets/home.png
+    - assets/assets/UVPROTECTION.png
 
 
   # An image asset can refer to one or more resolution-specific "variants", see

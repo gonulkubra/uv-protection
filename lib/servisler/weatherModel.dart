@@ -7,7 +7,7 @@ class Weather {
   var humidity;
   var uv;
   var spfvalue;
-
+  var country;
   Weather(
       {required this.cityname,
       required this.icon,
@@ -20,6 +20,7 @@ class Weather {
 
   Weather.fromJson(Map<String, dynamic> json) {
     cityname = json["location"]["name"];
+    country = json["location"]["country"];
     icon = json["current"]["condition"]["icon"];
     condition = json["current"]["condition"]["text"];
     temp = json["current"]["temp_c"];
