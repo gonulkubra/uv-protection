@@ -2,8 +2,8 @@
 
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:testui2/main.dart';
 import 'package:testui2/servisler/girishizmetleri.dart';
 import 'package:testui2/sabitler/kalicisabitler.dart';
 
@@ -14,6 +14,7 @@ class LoginPage extends StatefulWidget {
   State<LoginPage> createState() => _LoginPageState();
 }
 
+final firebaseAuth = FirebaseAuth.instance;
 final renkler = Renkler();
 late String email, password;
 
@@ -39,33 +40,55 @@ class _LoginPageState extends State<LoginPage> {
               SizedBox(height: 10),
               text(),
               SizedBox(height: 25),
-              usernamefield(),
+              emailfield(),
               SizedBox(height: 25),
               passwordfield(),
               SizedBox(height: 25),
-              signin(),
+              signin(context),
               SizedBox(height: 5),
               enaltsatir(),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  TextButton(
-                    onPressed: () =>
-                        Navigator.pushNamed(context, "/ResetPassword"),
-                    child: Text(
-                      "Şifremi Unuttum",
-                      style: GoogleFonts.rajdhani(
-                          color: Colors.purple,
-                          fontSize: 16,
-                          fontWeight: FontWeight.w500),
-                    ),
-                  )
-                ],
-              )
+              sifremiunuttum(context)
             ],
           ),
         )),
       ),
+    );
+  }
+
+  TextButton signin(BuildContext context) {
+    return TextButton(
+        onPressed: () async {
+          try {
+            await firebaseAuth.signInWithEmailAndPassword(
+                email: email, password: password);
+            Navigator.of(context).pushNamed("/HomePage");
+          } on FirebaseAuthException catch (error) {
+            Fluttertoast.showToast(
+                msg: error.toString(), gravity: ToastGravity.TOP);
+          }
+        },
+        child: Text("Giriş yap",
+            style: GoogleFonts.rajdhani(
+                color: Colors.black,
+                fontSize: 25,
+                fontWeight: FontWeight.bold)));
+  }
+
+  Row sifremiunuttum(BuildContext context) {
+    return Row(
+      mainAxisAlignment: MainAxisAlignment.center,
+      children: [
+        TextButton(
+          onPressed: () => Navigator.pushNamed(context, "/ResetPassword"),
+          child: Text(
+            "Şifremi Unuttum",
+            style: GoogleFonts.rajdhani(
+                color: Colors.purple,
+                fontSize: 16,
+                fontWeight: FontWeight.w500),
+          ),
+        )
+      ],
     );
   }
 
@@ -140,26 +163,6 @@ class _LoginPageState extends State<LoginPage> {
                 fontWeight: FontWeight.bold)));
   }
 
-  TextButton signin() {
-    return TextButton(
-        onPressed: () async {
-          if (formkey.currentState!.validate()) {
-            formkey.currentState!.save();
-            final result =
-                girishizmetleri.kayitlikullanicigirisi(email, password);
-            Navigator.pushNamed(context, "/HomePage");
-            setState(() {
-              registereduser = true;
-            });
-          }
-        },
-        child: Text("Giriş yap",
-            style: GoogleFonts.rajdhani(
-                color: Colors.black,
-                fontSize: 25,
-                fontWeight: FontWeight.bold)));
-  }
-
   Padding passwordfield() {
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 25),
@@ -168,49 +171,48 @@ class _LoginPageState extends State<LoginPage> {
             color: Colors.grey[200],
             border: Border.all(color: Colors.white),
             borderRadius: BorderRadius.circular(18)),
-        child: TextFormField(
-          validator: (value) {
-            if (value!.isEmpty) {
-              return "Bilgileri eksiksiz giriniz";
-            } else {}
-          },
-          onSaved: (value) {
-            password = value!;
-          },
-          obscureText: true,
-          textAlign: TextAlign.center,
-          decoration: InputDecoration(
-            border: InputBorder.none,
-            hintText: "Şifre",
+        child: Padding(
+          padding: const EdgeInsets.symmetric(horizontal: 20.0),
+          child: TextField(
+            obscureText: true,
+            decoration: InputDecoration(
+                hintText: "Şifre",
+                hintStyle: GoogleFonts.rajdhani(
+                    fontSize: 20, fontWeight: FontWeight.w700)),
+            onChanged: (value) {
+              setState(() {
+                password = value.trim();
+              });
+            },
           ),
         ),
       ),
     );
   }
 
-  Padding usernamefield() {
+  Padding emailfield() {
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 25),
       child: Container(
-        decoration: BoxDecoration(
-            color: Colors.grey[200],
-            border: Border.all(color: Colors.white),
-            borderRadius: BorderRadius.circular(18)),
-        child: TextFormField(
-          // ignore: body_might_complete_normally_nullable
-          validator: (value) {
-            if (value!.isEmpty) {
-              return "Bilgileri eksiksiz giriniz";
-            } else {}
-          },
-          onSaved: (value) {
-            email = value!;
-          },
-          textAlign: TextAlign.center,
-          decoration:
-              InputDecoration(border: InputBorder.none, hintText: "Email"),
-        ),
-      ),
+          decoration: BoxDecoration(
+              color: Colors.grey[200],
+              border: Border.all(color: Colors.white),
+              borderRadius: BorderRadius.circular(18)),
+          child: Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 20.0),
+            child: TextField(
+              keyboardType: TextInputType.emailAddress,
+              decoration: InputDecoration(
+                  hintText: "Email",
+                  hintStyle: GoogleFonts.rajdhani(
+                      fontSize: 20, fontWeight: FontWeight.w700)),
+              onChanged: (value) {
+                setState(() {
+                  email = value.trim();
+                });
+              },
+            ),
+          )),
     );
   }
 }

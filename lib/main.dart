@@ -23,8 +23,6 @@ void main() async {
       create: (BuildContext context) => themeColorData(), child: MyApp()));
 }
 
-bool registereduser = false;
-
 class MyApp extends StatelessWidget {
   const MyApp({super.key});
 

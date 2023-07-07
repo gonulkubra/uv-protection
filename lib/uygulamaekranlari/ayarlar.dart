@@ -84,8 +84,41 @@ class _SettingScreenState extends State<SettingScreen> {
         ElevatedButton.icon(
           style: ElevatedButton.styleFrom(backgroundColor: Colors.red[600]),
           onPressed: () {
-            girishizmetleri.cikisyap();
-            Navigator.pushNamed(context, "/LoginPage");
+            showDialog(
+                context: context,
+                builder: (context) {
+                  return AlertDialog(
+                    title: Row(
+                      children: [
+                        Icon(Icons.logout),
+                        SizedBox(width: 25),
+                        Text("Çıkış yap")
+                      ],
+                    ),
+                    content: Text("Çıkış yapmak istiyor musunuz ? "),
+                    actions: [
+                      TextButton(
+                          onPressed: () {
+                            Navigator.pop(context);
+                          },
+                          child: Text("Vazgeç",
+                              style: GoogleFonts.rajdhani(
+                                  fontSize: 16, fontWeight: FontWeight.bold))),
+                      TextButton(
+                          onPressed: () {
+                            girishizmetleri.cikisyap();
+                            Navigator.of(context).pushNamed("/LoginPage");
+                          },
+                          child: Text(
+                            "Çıkış yap",
+                            style: GoogleFonts.rajdhani(
+                                color: Colors.red,
+                                fontSize: 16,
+                                fontWeight: FontWeight.bold),
+                          ))
+                    ],
+                  );
+                });
           },
           icon: Icon(Icons.logout_outlined), //icon data for elevated button
           label: Text("Çıkış Yap",

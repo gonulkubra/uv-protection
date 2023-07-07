@@ -1,7 +1,8 @@
 // ignore_for_file: unused_local_variable, body_might_complete_normally_nullable, prefer_const_constructors, use_build_context_synchronously
 
-import 'package:firebase_auth/firebase_auth.dart';
+import 'package:testui2/servisler/girishizmetleri.dart';
 import 'package:flutter/material.dart';
+import 'package:testui2/sabitler/kalicisabitler.dart';
 
 class RegisterPage extends StatefulWidget {
   const RegisterPage({super.key});
@@ -10,15 +11,17 @@ class RegisterPage extends StatefulWidget {
   State<RegisterPage> createState() => _RegisterPageState();
 }
 
+final renkler = Renkler();
+
 class _RegisterPageState extends State<RegisterPage> {
-  late String username, password;
+  late String email, password;
   final formkey = GlobalKey<FormState>();
-  final firebaseauth = FirebaseAuth.instance;
+  final girishizmetleri = girisHizmetleri();
   @override
   Widget build(BuildContext context) {
     var height = MediaQuery.of(context).size.height;
     return Scaffold(
-      backgroundColor: Colors.yellow[100],
+      backgroundColor: renkler.girisekranlari,
       body: SingleChildScrollView(
         child: SafeArea(
             child: Form(
@@ -26,14 +29,14 @@ class _RegisterPageState extends State<RegisterPage> {
           child: Column(mainAxisAlignment: MainAxisAlignment.center, children: [
             sunpng(height),
             SizedBox(height: 30),
-            welcometext(),
+            hesapolustur(),
             SizedBox(height: 10),
             SizedBox(height: 20),
-            usernamefield(),
+            emailfield(),
             SizedBox(height: 20),
-            passwordfield(),
+            sifrealani(),
             SizedBox(height: 20),
-            signin(),
+            hesapolusturbutonu(),
             SizedBox(height: 5),
             IconButton(
                 onPressed: () => Navigator.pushNamed(context, "/LoginPage"),
@@ -49,35 +52,38 @@ class _RegisterPageState extends State<RegisterPage> {
         height: height * 0.3, child: Image.asset("assets/assets/sun.png"));
   }
 
-  Center welcometext() {
+  Center hesapolustur() {
     return Center(
       child: Text(
         "Hesap Oluştur",
-        style: TextStyle(fontSize: 40, fontWeight: FontWeight.bold),
+        style: TextStyle(fontSize: 30, fontWeight: FontWeight.bold),
       ),
     );
   }
 
-  TextButton signin() {
+  TextButton hesapolusturbutonu() {
     return TextButton(
         onPressed: () async {
           if (formkey.currentState!.validate()) {
             formkey.currentState!.save();
-            var userresult = await firebaseauth.createUserWithEmailAndPassword(
-                email: username, password: password);
+            girishizmetleri.hesapac(email, password);
             formkey.currentState!.reset();
-            ScaffoldMessenger.of(context).showSnackBar(SnackBar(
-                content: Text("Hesap oluşturuldu, Lütfen giriş yapın")));
+            showDialog(
+                context: context,
+                builder: (context) {
+                  return Text("Hesap oluşturuldu,");
+                });
             Navigator.pushNamed(context, "/LoginPage");
           }
         },
         child: Text(
           "Devam et",
-          style: TextStyle(fontSize: 40, fontWeight: FontWeight.bold),
+          style: TextStyle(
+              color: Colors.black, fontSize: 25, fontWeight: FontWeight.bold),
         ));
   }
 
-  Padding passwordfield() {
+  Padding sifrealani() {
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 25),
       child: Container(
@@ -87,8 +93,8 @@ class _RegisterPageState extends State<RegisterPage> {
             borderRadius: BorderRadius.circular(18)),
         child: TextFormField(
           validator: (value) {
-            if (value!.isEmpty) {
-              return "Bilgileri eksiksiz giriniz";
+            if (value!.isEmpty || value.length < 6) {
+              return "Şifre en az 6 karakter içermelidir";
             } else {}
           },
           onSaved: (value) {
@@ -98,14 +104,14 @@ class _RegisterPageState extends State<RegisterPage> {
           textAlign: TextAlign.center,
           decoration: InputDecoration(
             border: InputBorder.none,
-            hintText: "Password",
+            hintText: "Şifre",
           ),
         ),
       ),
     );
   }
 
-  Padding usernamefield() {
+  Padding emailfield() {
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 25),
       child: Container(
@@ -120,11 +126,11 @@ class _RegisterPageState extends State<RegisterPage> {
             } else {}
           },
           onSaved: (value) {
-            username = value!;
+            email = value!;
           },
           textAlign: TextAlign.center,
           decoration:
-              InputDecoration(border: InputBorder.none, hintText: "Username"),
+              InputDecoration(border: InputBorder.none, hintText: "Email"),
         ),
       ),
     );

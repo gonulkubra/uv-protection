@@ -14,15 +14,6 @@ class girisHizmetleri {
     }
   }
 
-  Future kayitlikullanicigirisi(email, password) async {
-    try {
-      final userresult = await firebaseAuth.signInWithEmailAndPassword(
-          email: email, password: password);
-    } catch (e) {
-      return "Hata";
-    }
-  }
-
   cikisyap() async {
     return await firebaseAuth.signOut();
   }
