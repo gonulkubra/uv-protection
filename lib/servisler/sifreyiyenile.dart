@@ -21,10 +21,11 @@ class _SifreyiYenileState extends State<SifreyiYenile> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: Colors.black,
       appBar: AppBar(
         title: const Text("Şifreyi Yenile"),
         centerTitle: true,
-        backgroundColor: Colors.purple[200],
+        backgroundColor: Colors.black,
         elevation: 0,
       ),
       body: Column(
@@ -36,6 +37,7 @@ class _SifreyiYenileState extends State<SifreyiYenile> {
               "Şifre Yenileme Bağlantısı gönderebilmemiz için bir e-posta adresi girin",
               textAlign: TextAlign.center,
               style: TextStyle(
+                  color: Colors.white,
                   fontFamily: 'Rajdhani',
                   fontSize: 20,
                   fontWeight: FontWeight.w600),
@@ -88,10 +90,11 @@ class _SifreyiYenileState extends State<SifreyiYenile> {
                     });
               }
             },
-            color: Colors.deepPurple[400],
+            color: Colors.black,
             child: const Text(
               "Şifreyi Yenile",
               style: TextStyle(
+                  color: Colors.white,
                   fontFamily: 'Rajdhani',
                   fontSize: 20,
                   fontWeight: FontWeight.w600),

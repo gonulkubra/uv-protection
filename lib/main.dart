@@ -8,6 +8,7 @@ import 'package:testui2/sabitler/tema.dart';
 import 'package:testui2/servisler/sifreyiyenile.dart';
 import 'package:testui2/uygulamaekranlari/anaekran.dart';
 import 'package:testui2/uygulamaekranlari/haritaekrani.dart';
+import 'package:testui2/uygulamaekranlari/misafirekrani.dart';
 import 'package:testui2/uygulamaekranlari/navigasyon.dart';
 import 'package:testui2/baslangicekranlari/ekrandegistirme.dart';
 import 'package:testui2/baslangicekranlari/girisekrani.dart';
@@ -40,6 +41,7 @@ class MyApp extends StatelessWidget {
         "/Navigasyon": (context) => NavigationScreen(),
         "/ResetPassword": (context) => SifreyiYenile(),
         "/AutomatScreen": (context) => OtomatEkrani(),
+        "/GuestScreen": (context) => MisafirEkrani()
       },
       title: 'UV Protection App Demo',
       theme: Provider.of<themeColorData>(context).themeColor,

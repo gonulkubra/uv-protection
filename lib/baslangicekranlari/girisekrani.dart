@@ -110,7 +110,7 @@ class _LoginPageState extends State<LoginPage> {
       ),
       onPressed: () async {
         final result = await girishizmetleri.misafirgirisifonksiyonu();
-        Navigator.pushNamed(context, "/MapScreen");
+        Navigator.pushNamed(context, "/GuestScreen");
       },
     );
   }

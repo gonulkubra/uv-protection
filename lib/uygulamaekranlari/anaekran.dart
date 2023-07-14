@@ -158,10 +158,10 @@ class _MainPageState extends State<MainPage> {
       child: TextButton(
           onPressed: () => Navigator.pushNamed(context, "/AutomatScreen"),
           child: Text(
-            "En yakın otomatı görmek için tıklayın",
+            "Otomatların stok durumunu görmek için tıklayın",
             style: TextStyle(
                 fontFamily: 'Rajdhani',
-                fontSize: 20,
+                fontSize: 18,
                 fontWeight: FontWeight.bold,
                 color: Colors.white.withOpacity(0.8)),
           )),

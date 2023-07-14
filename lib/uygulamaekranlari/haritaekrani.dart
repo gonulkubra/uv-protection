@@ -57,6 +57,7 @@ class _MapScreenState extends State<MapScreen> {
 
   @override
   Widget build(BuildContext context) {
+    Size size = MediaQuery.of(context).size;
     return Column(
       mainAxisAlignment: MainAxisAlignment.center,
       children: [
@@ -76,8 +77,8 @@ class _MapScreenState extends State<MapScreen> {
           ),
         ),
         SizedBox(
-          height: 600,
-          width: 400,
+          height: size.height - 90,
+          width: size.width,
           child: Visibility(
             visible: isVisible,
             child: FlutterMap(

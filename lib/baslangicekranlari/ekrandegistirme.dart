@@ -39,7 +39,7 @@ class _FirstPageState extends State<HomePage> {
             backgroundColor: Colors.black,
             color: Colors.white,
             activeColor: Colors.white,
-            gap: 20,
+            gap: 10,
             tabBackgroundColor: Colors.grey.shade800,
             selectedIndex: currentindex,
             onTabChange: (index) => onTabTapped(index),

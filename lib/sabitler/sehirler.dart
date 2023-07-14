@@ -1,10 +1,11 @@
 List<String> cities = [
   "Istanbul",
-  "Ankara",
+  "Mugla",
   "Izmir",
   "Antalya",
-  "Kocaeli",
-  "Gebze",
+  "Mersin",
+  "Mardin",
+  "Edirne",
   "London",
   "Berlin",
   "Tokyo"

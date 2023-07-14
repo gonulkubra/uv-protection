@@ -10,7 +10,7 @@ class OtomatEkrani extends StatefulWidget {
 
 String selectedCity = "Antalya";
 String selectedDistrict = 'Alanya';
-int stock = 5;
+int stock = 12;
 bool separateFromOtomat = false;
 
 class _OtomatEkraniState extends State<OtomatEkrani> {
@@ -18,7 +18,6 @@ class _OtomatEkraniState extends State<OtomatEkrani> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.purple[200],
       appBar: AppBar(
         leading: IconButton(
             onPressed: () => Navigator.pushNamed(context, "/HomePage"),
@@ -28,7 +27,6 @@ class _OtomatEkraniState extends State<OtomatEkrani> {
           style: TextStyle(fontSize: 20, fontWeight: FontWeight.w600),
         ),
         centerTitle: true,
-        backgroundColor: Colors.purple[200],
       ),
       body: Padding(
         padding: const EdgeInsets.all(16.0),
@@ -49,9 +47,46 @@ class _OtomatEkraniState extends State<OtomatEkrani> {
             ElevatedButton(
               style: ElevatedButton.styleFrom(backgroundColor: Colors.black),
               onPressed: () {
-                setState(() {
-                  stock--;
-                });
+                if (stock != 0) {
+                  showDialog(
+                    context: context,
+                    builder: (context) {
+                      return AlertDialog(
+                        title: Text(
+                          "Ürün rezerve edildi,60 dakika içerisinde almazsanız iptal edilecektir",
+                          style: TextStyle(
+                            fontFamily: 'Rajdhani',
+                            color: Colors.purple,
+                            fontSize: 20,
+                            fontWeight: FontWeight.w600,
+                            letterSpacing: 2,
+                          ),
+                        ),
+                      );
+                    },
+                  );
+                  setState(() {
+                    stock--;
+                  });
+                } else if (stock == 0) {
+                  showDialog(
+                    context: context,
+                    builder: (context) {
+                      return AlertDialog(
+                        title: Text(
+                          "Stokta ürün kalmamıştır",
+                          style: TextStyle(
+                            fontFamily: 'Rajdhani',
+                            color: Colors.white,
+                            fontSize: 20,
+                            fontWeight: FontWeight.w600,
+                            letterSpacing: 2,
+                          ),
+                        ),
+                      );
+                    },
+                  );
+                }
               },
               child: const Text(
                 'Satın Al',
