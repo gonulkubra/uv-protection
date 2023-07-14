@@ -1,7 +1,6 @@
 // ignore_for_file: prefer_const_constructors, sort_child_properties_last, prefer_const_literals_to_create_immutables
 
 import 'package:flutter/material.dart';
-import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
 import 'package:testui2/sabitler/tema.dart';
 import 'package:testui2/baslangicekranlari/girisekrani.dart';
@@ -49,8 +48,10 @@ class _SettingScreenState extends State<SettingScreen> {
       children: [
         Text(
           "version $appversion",
-          style:
-              GoogleFonts.rajdhani(fontSize: 15, fontWeight: FontWeight.w600),
+          style: TextStyle(
+              fontFamily: 'Rajdhani',
+              fontSize: 15,
+              fontWeight: FontWeight.w600),
         )
       ],
     );
@@ -59,7 +60,8 @@ class _SettingScreenState extends State<SettingScreen> {
   Text emailtextalani() {
     return Text(
       email,
-      style: GoogleFonts.rajdhani(fontWeight: FontWeight.w700, fontSize: 18),
+      style: TextStyle(
+          fontFamily: 'Rajdhani', fontWeight: FontWeight.w700, fontSize: 18),
     );
   }
 
@@ -102,8 +104,10 @@ class _SettingScreenState extends State<SettingScreen> {
                             Navigator.pop(context);
                           },
                           child: Text("Vazgeç",
-                              style: GoogleFonts.rajdhani(
-                                  fontSize: 16, fontWeight: FontWeight.bold))),
+                              style: TextStyle(
+                                  fontFamily: 'Rajdhani',
+                                  fontSize: 16,
+                                  fontWeight: FontWeight.bold))),
                       TextButton(
                           onPressed: () {
                             girishizmetleri.cikisyap();
@@ -111,7 +115,8 @@ class _SettingScreenState extends State<SettingScreen> {
                           },
                           child: Text(
                             "Çıkış yap",
-                            style: GoogleFonts.rajdhani(
+                            style: TextStyle(
+                                fontFamily: 'Rajdhani',
                                 color: Colors.red,
                                 fontSize: 16,
                                 fontWeight: FontWeight.bold),
@@ -122,8 +127,10 @@ class _SettingScreenState extends State<SettingScreen> {
           },
           icon: Icon(Icons.logout_outlined), //icon data for elevated button
           label: Text("Çıkış Yap",
-              style: GoogleFonts.rajdhani(
-                  fontSize: 18, fontWeight: FontWeight.bold)), //label text
+              style: TextStyle(
+                  fontFamily: 'Rajdhani',
+                  fontSize: 18,
+                  fontWeight: FontWeight.bold)), //label text
         )
       ],
     );
@@ -151,8 +158,10 @@ class _SettingScreenState extends State<SettingScreen> {
           children: [
             Text(
               "Şifre",
-              style: GoogleFonts.rajdhani(
-                  fontSize: 26, fontWeight: FontWeight.bold),
+              style: TextStyle(
+                  fontFamily: 'Rajdhani',
+                  fontSize: 26,
+                  fontWeight: FontWeight.bold),
             ),
             SizedBox(height: 5),
             TextButton(
@@ -160,7 +169,8 @@ class _SettingScreenState extends State<SettingScreen> {
                 onPressed: () => Navigator.pushNamed(context, "/ResetPassword"),
                 child: Text(
                   "Şifreyi yenile",
-                  style: GoogleFonts.rajdhani(
+                  style: TextStyle(
+                    fontFamily: 'Rajdhani',
                     fontSize: 15,
                     fontWeight: FontWeight.bold,
                   ),
@@ -183,13 +193,16 @@ class _SettingScreenState extends State<SettingScreen> {
           children: [
             Text(
               "Email",
-              style: GoogleFonts.rajdhani(
-                  fontSize: 26, fontWeight: FontWeight.bold),
+              style: TextStyle(
+                  fontFamily: 'Rajdhani',
+                  fontSize: 26,
+                  fontWeight: FontWeight.bold),
             ),
             SizedBox(height: 20),
             Text(
               "Doğrulanmadı",
-              style: GoogleFonts.rajdhani(
+              style: TextStyle(
+                fontFamily: 'Rajdhani',
                 fontSize: 15,
                 fontWeight: FontWeight.w600,
               ),
@@ -210,7 +223,8 @@ class _SettingScreenState extends State<SettingScreen> {
       SizedBox(width: 10),
       Text(
         "Güvenlik",
-        style: GoogleFonts.rajdhani(fontSize: 28, fontWeight: FontWeight.bold),
+        style: TextStyle(
+            fontFamily: 'Rajdhani', fontSize: 28, fontWeight: FontWeight.bold),
       )
     ]);
   }
@@ -240,8 +254,10 @@ class _SettingScreenState extends State<SettingScreen> {
           children: [
             Text(
               "Koyu Tema",
-              style: GoogleFonts.rajdhani(
-                  fontSize: 26, fontWeight: FontWeight.bold),
+              style: TextStyle(
+                  fontFamily: 'Rajdhani',
+                  fontSize: 26,
+                  fontWeight: FontWeight.bold),
             ),
             SizedBox(height: 20),
             Padding(
@@ -271,8 +287,10 @@ class _SettingScreenState extends State<SettingScreen> {
           children: [
             Text(
               "Dil",
-              style: GoogleFonts.rajdhani(
-                  fontSize: 26, fontWeight: FontWeight.bold),
+              style: TextStyle(
+                  fontFamily: 'Rajdhani',
+                  fontSize: 26,
+                  fontWeight: FontWeight.bold),
             ),
             SizedBox(height: 20),
             DropdownButtonHideUnderline(
@@ -284,8 +302,10 @@ class _SettingScreenState extends State<SettingScreen> {
                         value: location,
                         child: Text(
                           location,
-                          style: GoogleFonts.rajdhani(
-                              fontSize: 20, fontWeight: FontWeight.w500),
+                          style: TextStyle(
+                              fontFamily: 'Rajdhani',
+                              fontSize: 20,
+                              fontWeight: FontWeight.w500),
                         ));
                   }).toList(),
                   onChanged: (String? newValue) {
@@ -305,7 +325,8 @@ class _SettingScreenState extends State<SettingScreen> {
       SizedBox(width: 10),
       Text(
         "Genel",
-        style: GoogleFonts.rajdhani(fontSize: 28, fontWeight: FontWeight.bold),
+        style: TextStyle(
+            fontFamily: 'Rajdhani', fontSize: 28, fontWeight: FontWeight.bold),
       )
     ]);
   }

@@ -8,6 +8,7 @@ class Weather {
   var uv;
   var spfvalue;
   var country;
+  var isDay;
   Weather(
       {required this.cityname,
       required this.icon,
@@ -27,6 +28,7 @@ class Weather {
     wind = json["current"]["wind_kph"];
     humidity = json["current"]["humidity"];
     uv = json["current"]["uv"];
+    isDay = json["current"]["is_day"];
     if (uv < 2) {
       spfvalue = 15;
     } else {

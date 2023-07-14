@@ -1,7 +1,6 @@
 // ignore_for_file: avoid_unnecessary_containers, prefer_const_constructors, prefer_const_literals_to_create_immutables
 
 import 'package:flutter/material.dart';
-import 'package:google_fonts/google_fonts.dart';
 import 'package:testui2/servisler/weatherData.dart';
 import 'package:testui2/sabitler/sehirler.dart';
 import 'package:testui2/sabitler/kalicisabitler.dart';
@@ -19,7 +18,7 @@ class _MainPageState extends State<MainPage> {
   var data;
 
   info() async {
-    data = await client.getData("$city");
+    data = await client.getData(city);
     return data;
   }
 
@@ -115,11 +114,28 @@ class _MainPageState extends State<MainPage> {
   }
 
   Image havaiconu(Size size) {
-    return Image.network(
-      "https:${data?.icon}",
-      width: size.width * 0.3,
-      fit: BoxFit.fill,
-    );
+    print(data?.icon);
+    try {
+      String iconUrl = data?.icon;
+      print(iconUrl);
+    } catch (e) {
+      print("olduramadim");
+    }
+    //String iconUrl = data?.icon;
+    //String iconPath = iconUrl.substring(iconUrl.length - 7);
+    if (data?.icon == null) {
+      return Image(
+        image: AssetImage('assets/weather/day/119.png'),
+      );
+    } else if (data?.isDay == 0) {
+      return Image(
+        image: AssetImage('assets/weather/night/113.png'),
+      );
+    } else {
+      return Image(
+        image: AssetImage('assets/weather/day/113.png'),
+      );
+    }
   }
 
   Padding iconlar(Size size) {
@@ -143,7 +159,8 @@ class _MainPageState extends State<MainPage> {
           onPressed: () => Navigator.pushNamed(context, "/AutomatScreen"),
           child: Text(
             "En yakın otomatı görmek için tıklayın",
-            style: GoogleFonts.rajdhani(
+            style: TextStyle(
+                fontFamily: 'Rajdhani',
                 fontSize: 20,
                 fontWeight: FontWeight.bold,
                 color: Colors.white.withOpacity(0.8)),
@@ -156,7 +173,8 @@ class _MainPageState extends State<MainPage> {
       children: [
         Text(
           "SPF",
-          style: GoogleFonts.archivo(
+          style: TextStyle(
+              fontFamily: 'Archivo',
               fontSize: 18,
               fontWeight: FontWeight.w600,
               color: Colors.white.withOpacity(0.5)),
@@ -178,7 +196,8 @@ class _MainPageState extends State<MainPage> {
       children: [
         Text(
           "UV",
-          style: GoogleFonts.archivo(
+          style: TextStyle(
+              fontFamily: 'Archivo',
               fontSize: 18,
               fontWeight: FontWeight.w600,
               color: Colors.white.withOpacity(0.5)),
@@ -200,7 +219,8 @@ class _MainPageState extends State<MainPage> {
       children: [
         Text(
           "Sıcaklık",
-          style: GoogleFonts.archivo(
+          style: TextStyle(
+              fontFamily: 'Archivo',
               fontSize: 18,
               fontWeight: FontWeight.w600,
               color: Colors.white.withOpacity(0.5)),
@@ -219,8 +239,9 @@ class _MainPageState extends State<MainPage> {
 
   Text spfdegeri() {
     return Text(
-      "SPF " + "${data?.spfvalue}",
-      style: GoogleFonts.archivo(
+      "SPF ${data?.spfvalue}",
+      style: TextStyle(
+          fontFamily: 'Archivo',
           fontSize: 35,
           fontWeight: FontWeight.w600,
           color: Colors.white.withOpacity(0.7)),
@@ -230,7 +251,8 @@ class _MainPageState extends State<MainPage> {
   Text durumyazi() {
     return Text(
       "Durum",
-      style: GoogleFonts.archivo(
+      style: TextStyle(
+          fontFamily: 'Archivo',
           fontSize: 18,
           fontWeight: FontWeight.w600,
           color: Colors.white.withOpacity(0.5)),
@@ -240,8 +262,11 @@ class _MainPageState extends State<MainPage> {
   Text evdekalyazi() {
     return Text(
       "Evde Kal ",
-      style: GoogleFonts.archivo(
-          fontSize: 20, fontWeight: FontWeight.w600, color: Colors.white),
+      style: TextStyle(
+          fontFamily: 'Archivo',
+          fontSize: 20,
+          fontWeight: FontWeight.w600,
+          color: Colors.white),
     );
   }
 
@@ -256,7 +281,8 @@ class _MainPageState extends State<MainPage> {
   Text nemyazi() {
     return Text(
       "Nem",
-      style: GoogleFonts.archivo(
+      style: TextStyle(
+          fontFamily: 'Archivo',
           fontSize: 18,
           fontWeight: FontWeight.w600,
           color: Colors.white.withOpacity(0.5)),
@@ -265,9 +291,12 @@ class _MainPageState extends State<MainPage> {
 
   Text nemdegeri() {
     return Text(
-      "%" + "${data?.humidity}",
-      style: GoogleFonts.archivo(
-          fontSize: 20, fontWeight: FontWeight.w600, color: Colors.white),
+      "%${data?.humidity}",
+      style: TextStyle(
+          fontFamily: 'Archivo',
+          fontSize: 20,
+          fontWeight: FontWeight.w600,
+          color: Colors.white),
     );
   }
 
@@ -282,7 +311,8 @@ class _MainPageState extends State<MainPage> {
   Text uvdegeri() {
     return Text(
       "${data?.uv}",
-      style: GoogleFonts.archivo(
+      style: TextStyle(
+          fontFamily: 'Archivo',
           fontSize: 40,
           fontWeight: FontWeight.w600,
           color: Colors.white.withOpacity(0.7)),
@@ -292,7 +322,8 @@ class _MainPageState extends State<MainPage> {
   Text ruzgaryazi() {
     return Text(
       "Rüzgar",
-      style: GoogleFonts.archivo(
+      style: TextStyle(
+          fontFamily: 'Archivo',
           fontSize: 18,
           fontWeight: FontWeight.w600,
           color: Colors.white.withOpacity(0.5)),
@@ -301,9 +332,13 @@ class _MainPageState extends State<MainPage> {
 
   Text ruzgarhizi() {
     return Text(
-      "${data?.wind}" + " km/s",
-      style: GoogleFonts.archivo(
-          fontSize: 20, fontWeight: FontWeight.w600, color: Colors.white),
+      "${data?.wind} km/s",
+      style: TextStyle(
+        fontFamily: 'Archivo',
+        fontSize: 20,
+        fontWeight: FontWeight.w600,
+        color: Colors.white,
+      ),
     );
   }
 
@@ -314,31 +349,39 @@ class _MainPageState extends State<MainPage> {
 
   Text sicaklik() {
     return Text(
-      "${data?.temp}" + "°C",
-      style: GoogleFonts.archivo(
-          fontSize: 40,
-          fontWeight: FontWeight.w600,
-          color: Colors.white.withOpacity(0.7)),
+      "${data?.temp}°C",
+      style: TextStyle(
+        fontFamily: 'Archivo',
+        fontSize: 40,
+        fontWeight: FontWeight.w600,
+        color: Colors.white.withOpacity(0.7),
+      ),
     );
   }
 
   Text havadurumu() {
     return Text(
       "${data?.condition}",
-      style: GoogleFonts.archivo(fontSize: 18, fontWeight: FontWeight.w600),
+      style: TextStyle(
+          fontFamily: 'Archivo', fontSize: 18, fontWeight: FontWeight.w600),
     );
   }
 
   Text tarih() {
     return Text(dateformat,
-        style: GoogleFonts.archivo(fontSize: 18, fontWeight: FontWeight.w400));
+        style: TextStyle(
+            fontFamily: 'Archivo', fontSize: 18, fontWeight: FontWeight.w400));
   }
 
   Text sehiradi() {
     return Text(
       "${data?.cityname}",
-      style: GoogleFonts.rajdhani(
-          color: Colors.white, fontSize: 40, fontWeight: FontWeight.w800),
+      style: TextStyle(
+        fontFamily: 'Rajdhani',
+        color: Colors.white,
+        fontSize: 40,
+        fontWeight: FontWeight.w800,
+      ),
     );
   }
 }

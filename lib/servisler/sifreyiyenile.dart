@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:google_fonts/google_fonts.dart';
 import 'package:testui2/baslangicekranlari/girisekrani.dart';
 import 'package:testui2/servisler/girishizmetleri.dart';
 
@@ -23,7 +22,7 @@ class _SifreyiYenileState extends State<SifreyiYenile> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text("Şifreyi Yenile"),
+        title: const Text("Şifreyi Yenile"),
         centerTitle: true,
         backgroundColor: Colors.purple[200],
         elevation: 0,
@@ -31,33 +30,35 @@ class _SifreyiYenileState extends State<SifreyiYenile> {
       body: Column(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
-          Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 18.0),
+          const Padding(
+            padding: EdgeInsets.symmetric(horizontal: 18.0),
             child: Text(
               "Şifre Yenileme Bağlantısı gönderebilmemiz için bir e-posta adresi girin",
               textAlign: TextAlign.center,
-              style: GoogleFonts.rajdhani(
-                  fontSize: 20, fontWeight: FontWeight.w600),
+              style: TextStyle(
+                  fontFamily: 'Rajdhani',
+                  fontSize: 20,
+                  fontWeight: FontWeight.w600),
             ),
           ),
-          SizedBox(height: 40),
+          const SizedBox(height: 40),
           Padding(
             padding: const EdgeInsets.symmetric(horizontal: 25.0),
             child: TextField(
               controller: _emailcontroller,
               decoration: InputDecoration(
                   enabledBorder: OutlineInputBorder(
-                      borderSide: BorderSide(color: Colors.white),
+                      borderSide: const BorderSide(color: Colors.white),
                       borderRadius: BorderRadius.circular(12)),
                   focusedBorder: OutlineInputBorder(
-                      borderSide: BorderSide(color: Colors.deepPurple),
+                      borderSide: const BorderSide(color: Colors.deepPurple),
                       borderRadius: BorderRadius.circular(12)),
                   hintText: "Email",
                   fillColor: Colors.grey,
                   filled: true),
             ),
           ),
-          SizedBox(height: 40),
+          const SizedBox(height: 40),
           MaterialButton(
             onPressed: () {
               if (email == _emailcontroller) {
@@ -66,7 +67,7 @@ class _SifreyiYenileState extends State<SifreyiYenile> {
                   showDialog(
                       context: context,
                       builder: (context) {
-                        return AlertDialog(
+                        return const AlertDialog(
                           content: Text(
                               "Bağlantı gönderildi,e-postanızı kontrol edin"),
                         );
@@ -82,18 +83,20 @@ class _SifreyiYenileState extends State<SifreyiYenile> {
                 showDialog(
                     context: context,
                     builder: (context) {
-                      return AlertDialog(
+                      return const AlertDialog(
                           content: Text("Lütfen E-posta adresinizi girin"));
                     });
               }
             },
-            child: Text(
-              "Şifreyi Yenile",
-              style: GoogleFonts.rajdhani(
-                  fontSize: 20, fontWeight: FontWeight.w600),
-            ),
             color: Colors.deepPurple[400],
-          )
+            child: const Text(
+              "Şifreyi Yenile",
+              style: TextStyle(
+                  fontFamily: 'Rajdhani',
+                  fontSize: 20,
+                  fontWeight: FontWeight.w600),
+            ),
+          ),
         ],
       ),
     );

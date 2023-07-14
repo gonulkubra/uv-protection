@@ -3,7 +3,6 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
-import 'package:google_fonts/google_fonts.dart';
 import 'package:testui2/servisler/girishizmetleri.dart';
 import 'package:testui2/sabitler/kalicisabitler.dart';
 
@@ -68,7 +67,8 @@ class _LoginPageState extends State<LoginPage> {
           }
         },
         child: Text("Giriş yap",
-            style: GoogleFonts.rajdhani(
+            style: TextStyle(
+                fontFamily: 'Rajdhani',
                 color: Colors.black,
                 fontSize: 25,
                 fontWeight: FontWeight.bold)));
@@ -82,7 +82,8 @@ class _LoginPageState extends State<LoginPage> {
           onPressed: () => Navigator.pushNamed(context, "/ResetPassword"),
           child: Text(
             "Şifremi Unuttum",
-            style: GoogleFonts.rajdhani(
+            style: TextStyle(
+                fontFamily: 'Rajdhani',
                 color: Colors.purple,
                 fontSize: 16,
                 fontWeight: FontWeight.w500),
@@ -117,16 +118,23 @@ class _LoginPageState extends State<LoginPage> {
   Text signinasaguest() {
     return Text(
       "Sign In as a Guest",
-      style: GoogleFonts.rajdhani(
-          color: Colors.black, fontSize: 18, fontWeight: FontWeight.bold),
+      style: TextStyle(
+        fontFamily: 'Rajdhani',
+        color: Colors.black,
+        fontSize: 18,
+        fontWeight: FontWeight.bold,
+      ),
     );
   }
 
   Text misafirgirisi() {
     return Text(
       "Misafir Girişi",
-      style: GoogleFonts.rajdhani(
-          color: Colors.black, fontSize: 18, fontWeight: FontWeight.bold),
+      style: TextStyle(
+          fontFamily: 'Rajdhani',
+          color: Colors.black,
+          fontSize: 18,
+          fontWeight: FontWeight.bold),
     );
   }
 
@@ -139,7 +147,11 @@ class _LoginPageState extends State<LoginPage> {
     return Center(
       child: Text(
         "Merhaba",
-        style: GoogleFonts.rajdhani(fontSize: 35, fontWeight: FontWeight.bold),
+        style: TextStyle(
+          fontFamily: 'Rajdhani',
+          fontSize: 35,
+          fontWeight: FontWeight.bold,
+        ),
       ),
     );
   }
@@ -148,7 +160,8 @@ class _LoginPageState extends State<LoginPage> {
     return Center(
       child: Text(
         "Devam etmek için giriş yapın ",
-        style: GoogleFonts.rajdhani(fontSize: 20, fontWeight: FontWeight.bold),
+        style: TextStyle(
+            fontFamily: 'Rajdhani', fontSize: 20, fontWeight: FontWeight.bold),
       ),
     );
   }
@@ -157,7 +170,8 @@ class _LoginPageState extends State<LoginPage> {
     return TextButton(
         onPressed: () => Navigator.pushNamed(context, "/RegisterPage"),
         child: Text("Hesap Oluştur",
-            style: GoogleFonts.rajdhani(
+            style: TextStyle(
+                fontFamily: 'Rajdhani',
                 color: Colors.black,
                 fontSize: 18,
                 fontWeight: FontWeight.bold)));
@@ -177,8 +191,10 @@ class _LoginPageState extends State<LoginPage> {
             obscureText: true,
             decoration: InputDecoration(
                 hintText: "Şifre",
-                hintStyle: GoogleFonts.rajdhani(
-                    fontSize: 20, fontWeight: FontWeight.w700)),
+                hintStyle: TextStyle(
+                    fontFamily: 'Rajdhani',
+                    fontSize: 20,
+                    fontWeight: FontWeight.w700)),
             onChanged: (value) {
               setState(() {
                 password = value.trim();
@@ -204,8 +220,10 @@ class _LoginPageState extends State<LoginPage> {
               keyboardType: TextInputType.emailAddress,
               decoration: InputDecoration(
                   hintText: "Email",
-                  hintStyle: GoogleFonts.rajdhani(
-                      fontSize: 20, fontWeight: FontWeight.w700)),
+                  hintStyle: TextStyle(
+                      fontFamily: 'Rajdhani',
+                      fontSize: 20,
+                      fontWeight: FontWeight.w700)),
               onChanged: (value) {
                 setState(() {
                   email = value.trim();

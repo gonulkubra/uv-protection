@@ -9,6 +9,7 @@ class WeatherData {
         "http://api.weatherapi.com/v1/current.json?key=1d9502f66fe744a0ba785351232606&q={$city}.96&aqi=no");
     var response = await http.get(uriCall);
     var body = jsonDecode(response.body);
+
     return Weather.fromJson(body);
   }
 }

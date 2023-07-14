@@ -8,8 +8,8 @@ const String google_api_key = "API_KEY";
 String appversion = "1.0.0";
 
 class Renkler {
-  final girisekranlari = Color(0xffE7CEA6);
-  final uygulamaici = Color(0xffFFA3FD);
+  final girisekranlari = const Color(0xffE7CEA6);
+  final uygulamaici = const Color(0xffFFA3FD);
 }
 
 var today = DateTime.now();

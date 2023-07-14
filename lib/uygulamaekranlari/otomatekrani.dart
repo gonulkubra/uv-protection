@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:google_fonts/google_fonts.dart';
 import 'package:testui2/sabitler/kalicisabitler.dart';
 
 class OtomatEkrani extends StatefulWidget {
@@ -23,8 +22,8 @@ class _OtomatEkraniState extends State<OtomatEkrani> {
       appBar: AppBar(
         leading: IconButton(
             onPressed: () => Navigator.pushNamed(context, "/HomePage"),
-            icon: Icon(Icons.chevron_left)),
-        title: Text(
+            icon: const Icon(Icons.chevron_left)),
+        title: const Text(
           'Otomat 1',
           style: TextStyle(fontSize: 20, fontWeight: FontWeight.w600),
         ),
@@ -36,15 +35,17 @@ class _OtomatEkraniState extends State<OtomatEkrani> {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
-            SizedBox(height: 50),
-            SunscreenWidget(),
-            SizedBox(height: 32.0),
+            const SizedBox(height: 50),
+            const SunscreenWidget(),
+            const SizedBox(height: 32.0),
             Text(
               'Stok Bilgisi: $stock tane',
-              style: GoogleFonts.rajdhani(
-                  fontSize: 20, fontWeight: FontWeight.w600),
+              style: const TextStyle(
+                  fontFamily: 'Rajdhani',
+                  fontSize: 20,
+                  fontWeight: FontWeight.w600),
             ),
-            SizedBox(height: 25),
+            const SizedBox(height: 25),
             ElevatedButton(
               style: ElevatedButton.styleFrom(backgroundColor: Colors.black),
               onPressed: () {
@@ -52,18 +53,22 @@ class _OtomatEkraniState extends State<OtomatEkrani> {
                   stock--;
                 });
               },
-              child: Text(
+              child: const Text(
                 'Satın Al',
-                style: GoogleFonts.rajdhani(
-                    fontSize: 18, fontWeight: FontWeight.bold),
+                style: TextStyle(
+                    fontFamily: 'Rajdhani',
+                    fontSize: 18,
+                    fontWeight: FontWeight.bold),
               ),
             ),
-            SizedBox(height: 26.0),
+            const SizedBox(height: 26.0),
             CheckboxListTile(
-              title: Text(
+              title: const Text(
                 'Otomattan Ayır',
-                style: GoogleFonts.rajdhani(
-                    fontSize: 24, fontWeight: FontWeight.w700),
+                style: TextStyle(
+                    fontFamily: 'Rajdhani',
+                    fontSize: 24,
+                    fontWeight: FontWeight.w700),
               ),
               value: separateFromOtomat,
               onChanged: (value) {
@@ -72,12 +77,14 @@ class _OtomatEkraniState extends State<OtomatEkrani> {
                 });
               },
             ),
-            if (separateFromOtomat) SizedBox(height: 16.0),
+            if (separateFromOtomat) const SizedBox(height: 16.0),
             if (separateFromOtomat)
               Text(
                 'Seçilen adres: $selectedCity - $selectedDistrict',
-                style: GoogleFonts.rajdhani(
-                    fontSize: 20, fontWeight: FontWeight.w600),
+                style: const TextStyle(
+                    fontFamily: 'Rajdhani',
+                    fontSize: 20,
+                    fontWeight: FontWeight.w600),
               ),
           ],
         ),
@@ -87,16 +94,18 @@ class _OtomatEkraniState extends State<OtomatEkrani> {
 }
 
 class SunscreenWidget extends StatelessWidget {
+  const SunscreenWidget({super.key});
+
   @override
   Widget build(BuildContext context) {
     return Container(
       width: 200.0,
       height: 200.0,
-      decoration: BoxDecoration(
+      decoration: const BoxDecoration(
         color: Colors.yellow,
         shape: BoxShape.circle,
       ),
-      child: Center(
+      child: const Center(
         child: Icon(
           Icons.wb_sunny,
           size: 100.0,

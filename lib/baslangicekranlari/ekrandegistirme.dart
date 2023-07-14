@@ -5,6 +5,7 @@ import 'package:google_nav_bar/google_nav_bar.dart';
 import 'package:testui2/uygulamaekranlari/anaekran.dart';
 import 'package:testui2/uygulamaekranlari/haritaekrani.dart';
 import 'package:testui2/uygulamaekranlari/ayarlar.dart';
+import 'package:testui2/uygulamaekranlari/navigasyon.dart';
 // ignore: unused_import
 
 class HomePage extends StatefulWidget {
@@ -15,11 +16,16 @@ class HomePage extends StatefulWidget {
 }
 
 class _FirstPageState extends State<HomePage> {
-  int currentindex = 1;
+  int currentindex = 0;
 
   @override
   Widget build(BuildContext context) {
-    final screens = [MapScreen(), MainPage(), SettingScreen()];
+    final screens = [
+      MainPage(),
+      NavigationScreen(),
+      MapScreen(),
+      SettingScreen()
+    ];
     void onTabTapped(int index) {
       setState(() {
         currentindex = index;
@@ -39,13 +45,18 @@ class _FirstPageState extends State<HomePage> {
             onTabChange: (index) => onTabTapped(index),
             tabs: [
               GButton(
-                icon: Icons.map,
-                text: "Harita",
+                icon: Icons.home,
+                text: "Anasayfa",
                 iconColor: Colors.white,
               ),
               GButton(
-                icon: Icons.home,
-                text: "Anasayfa",
+                icon: Icons.navigation_sharp,
+                text: "Navigasyon",
+                iconColor: Colors.white,
+              ),
+              GButton(
+                icon: Icons.map,
+                text: "Harita",
                 iconColor: Colors.white,
               ),
               GButton(
