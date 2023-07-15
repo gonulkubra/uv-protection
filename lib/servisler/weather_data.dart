@@ -1,7 +1,7 @@
 import 'dart:convert';
 
 import 'package:http/http.dart' as http;
-import 'package:testui2/servisler/weatherModel.dart';
+import 'package:testui2/servisler/weather_model.dart';
 
 class WeatherData {
   Future<Weather> getData(String city) async {

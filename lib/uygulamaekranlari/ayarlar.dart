@@ -263,9 +263,9 @@ class _SettingScreenState extends State<SettingScreen> {
             Padding(
               padding: const EdgeInsets.symmetric(horizontal: 20.0),
               child: SwitchListTile(
-                  value: Provider.of<themeColorData>(context).isDarkMode,
+                  value: Provider.of<ThemeColorData>(context).isDarkMode,
                   onChanged: (_) {
-                    Provider.of<themeColorData>(context, listen: false)
+                    Provider.of<ThemeColorData>(context, listen: false)
                         .temadegistir();
                   }),
             )

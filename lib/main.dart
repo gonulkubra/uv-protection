@@ -21,8 +21,8 @@ void main() async {
   SystemChrome.setSystemUIOverlayStyle(
       SystemUiOverlayStyle(statusBarColor: Colors.transparent));
   await Firebase.initializeApp();
-  runApp(ChangeNotifierProvider<themeColorData>(
-      create: (BuildContext context) => themeColorData(), child: MyApp()));
+  runApp(ChangeNotifierProvider<ThemeColorData>(
+      create: (BuildContext context) => ThemeColorData(), child: MyApp()));
 }
 
 class MyApp extends StatelessWidget {
@@ -44,7 +44,7 @@ class MyApp extends StatelessWidget {
         "/GuestScreen": (context) => MisafirEkrani()
       },
       title: 'UV Protection App Demo',
-      theme: Provider.of<themeColorData>(context).themeColor,
+      theme: Provider.of<ThemeColorData>(context).themeColor,
       home: const Splash(),
     );
   }

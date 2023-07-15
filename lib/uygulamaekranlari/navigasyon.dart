@@ -75,12 +75,12 @@ class _NavigationScreenState extends State<NavigationScreen> {
                     // print(routePoints);
                   });
                 },
-                child: const Text('Yol Tarifi'),
+                child: const Text('Get Directions'),
               ),
-              SizedBox(
+              /* SizedBox(
                 height: 20,
                 child: Text('${routePoints.length} ${routePoints[0]}'),
-              ),
+              ), */
 /*               SizedBox(
                 height: 20,
                 child: Text('${value['lat']} ${value['long']}'),

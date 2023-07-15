@@ -77,7 +77,7 @@ class _MapScreenState extends State<MapScreen> {
           ),
         ),
         SizedBox(
-          height: size.height - 90,
+          height: size.height - 100,
           width: size.width,
           child: Visibility(
             visible: isVisible,

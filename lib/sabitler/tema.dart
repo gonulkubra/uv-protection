@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 ThemeData dark = ThemeData.dark();
 ThemeData light = ThemeData.light();
 
-class themeColorData with ChangeNotifier {
+class ThemeColorData with ChangeNotifier {
   bool _isDarkMode = false;
   bool get isDarkMode => _isDarkMode;
 

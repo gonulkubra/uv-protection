@@ -1,7 +1,7 @@
 // ignore_for_file: avoid_unnecessary_containers, prefer_const_constructors, prefer_const_literals_to_create_immutables
 
 import 'package:flutter/material.dart';
-import 'package:testui2/servisler/weatherData.dart';
+import 'package:testui2/servisler/weather_data.dart';
 import 'package:testui2/sabitler/sehirler.dart';
 import 'package:testui2/sabitler/kalicisabitler.dart';
 

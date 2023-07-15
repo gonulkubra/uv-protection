@@ -25,10 +25,10 @@ class _MyInputState extends State<MyInput> {
         ),
         focusedBorder: const OutlineInputBorder(
             borderSide: BorderSide(color: Colors.white)),
-        fillColor: Colors.blue,
+        fillColor: Colors.blue[500],
         filled: true,
         hintText: widget.hint,
-        hintStyle: TextStyle(color: Colors.grey[300]),
+        hintStyle: TextStyle(color: Colors.white),
       ),
     );
   }

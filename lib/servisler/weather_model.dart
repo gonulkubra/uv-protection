@@ -6,7 +6,7 @@ class Weather {
   var wind;
   var humidity;
   var uv;
-  var spfvalue;
+  String? spfvalue;
   var country;
   var isDay;
   Weather(
@@ -28,11 +28,16 @@ class Weather {
     wind = json["current"]["wind_kph"];
     humidity = json["current"]["humidity"];
     uv = json["current"]["uv"];
+    print("**************   uv: $uv");
     isDay = json["current"]["is_day"];
-    if (uv < 2) {
-      spfvalue = 15;
+    if (uv < 3) {
+      spfvalue = "15";
+    } else if (uv < 5) {
+      spfvalue = "30";
+    } else if (uv < 7) {
+      spfvalue = "50";
     } else {
-      spfvalue = 30;
+      spfvalue = "50+";
     }
   }
 }

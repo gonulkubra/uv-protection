@@ -23,17 +23,17 @@ class _MisafirEkraniState extends State<MisafirEkrani> {
                   IconButton(
                     color: Colors.white,
                     onPressed: () => Navigator.pushNamed(context, "/LoginPage"),
-                    icon: Icon(Icons.chevron_left),
+                    icon: const Icon(Icons.chevron_left),
                   ),
-                  SizedBox(width: 15),
-                  Text(
+                  const SizedBox(width: 15),
+                  const Text(
                     "Diğer özellikleri kullanabilmek için giriş yapın",
                     style: TextStyle(fontSize: 15, color: Colors.white),
                   )
                 ],
               ),
             ),
-            Row(
+            const Row(
               children: [MapScreen()],
             )
           ],

@@ -51,7 +51,7 @@ class _OtomatEkraniState extends State<OtomatEkrani> {
                   showDialog(
                     context: context,
                     builder: (context) {
-                      return AlertDialog(
+                      return const AlertDialog(
                         title: Text(
                           "Ürün rezerve edildi,60 dakika içerisinde almazsanız iptal edilecektir",
                           style: TextStyle(
@@ -72,7 +72,7 @@ class _OtomatEkraniState extends State<OtomatEkrani> {
                   showDialog(
                     context: context,
                     builder: (context) {
-                      return AlertDialog(
+                      return const AlertDialog(
                         title: Text(
                           "Stokta ürün kalmamıştır",
                           style: TextStyle(
