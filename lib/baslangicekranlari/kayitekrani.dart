@@ -15,6 +15,8 @@ final renkler = Renkler();
 
 class _RegisterPageState extends State<RegisterPage> {
   late String email, password;
+  final _emailController = TextEditingController();
+  final _passwordController = TextEditingController();
   final formkey = GlobalKey<FormState>();
   final girishizmetleri = girisHizmetleri();
   @override
@@ -29,15 +31,19 @@ class _RegisterPageState extends State<RegisterPage> {
           child: Column(mainAxisAlignment: MainAxisAlignment.center, children: [
             sunpng(height),
             SizedBox(height: 30),
-            hesapolustur(),
-            SizedBox(height: 10),
+            // hesapolustur(),
+            testEmailField(),
             SizedBox(height: 20),
-            emailfield(),
+            testPasswordField(),
             SizedBox(height: 20),
-            sifrealani(),
+            // emailfield(),
+            // SizedBox(height: 20),
+            // sifrealani(),
+            // SizedBox(height: 20),
+            testCreateAccountButton(),
             SizedBox(height: 20),
-            hesapolusturbutonu(),
-            SizedBox(height: 5),
+            // hesapolusturbutonu(),
+            // SizedBox(height: 5),
             IconButton(
                 onPressed: () => Navigator.pushNamed(context, "/LoginPage"),
                 icon: Icon(Icons.chevron_left))
@@ -52,35 +58,84 @@ class _RegisterPageState extends State<RegisterPage> {
         height: height * 0.3, child: Image.asset("assets/assets/sun.png"));
   }
 
-  Center hesapolustur() {
+/*   Center hesapolustur() {
     return Center(
       child: Text(
-        "Hesap Oluştur",
-        style: TextStyle(fontSize: 30, fontWeight: FontWeight.bold),
+        "Create Account",
+        style: TextStyle(
+            color: Colors.black54, fontSize: 30, fontWeight: FontWeight.bold),
+      ),
+    );
+  } */
+
+  Padding testEmailField() {
+    return Padding(
+      padding: const EdgeInsets.symmetric(horizontal: 25.0),
+      child: TextField(
+        controller: _emailController,
+        decoration: InputDecoration(
+          enabledBorder: OutlineInputBorder(
+            borderSide: BorderSide(color: Colors.white),
+            borderRadius: BorderRadius.circular(12),
+          ),
+          focusedBorder: OutlineInputBorder(
+            borderSide: BorderSide(color: Colors.black87),
+            borderRadius: BorderRadius.circular(12),
+          ),
+          hintText: 'Email',
+          fillColor: Colors.white,
+          filled: true,
+        ),
       ),
     );
   }
 
-  TextButton hesapolusturbutonu() {
-    return TextButton(
-        onPressed: () async {
-          if (formkey.currentState!.validate()) {
-            formkey.currentState!.save();
-            girishizmetleri.hesapac(email, password);
-            formkey.currentState!.reset();
-            showDialog(
-                context: context,
-                builder: (context) {
-                  return Text("Hesap oluşturuldu,");
-                });
-            Navigator.pushNamed(context, "/LoginPage");
-          }
-        },
-        child: Text(
-          "Devam et",
-          style: TextStyle(
-              color: Colors.black, fontSize: 25, fontWeight: FontWeight.bold),
-        ));
+  Padding testPasswordField() {
+    return Padding(
+      padding: const EdgeInsets.symmetric(horizontal: 25.0),
+      child: TextField(
+        controller: _passwordController,
+        obscureText: true,
+        decoration: InputDecoration(
+          enabledBorder: OutlineInputBorder(
+            borderSide: BorderSide(color: Colors.white),
+            borderRadius: BorderRadius.circular(12),
+          ),
+          focusedBorder: OutlineInputBorder(
+            borderSide: BorderSide(color: Colors.black87),
+            borderRadius: BorderRadius.circular(12),
+          ),
+          hintText: 'Password',
+          fillColor: Colors.white,
+          filled: true,
+        ),
+      ),
+    );
+  }
+
+  Padding emailfield() {
+    return Padding(
+      padding: const EdgeInsets.symmetric(horizontal: 25),
+      child: Container(
+        decoration: BoxDecoration(
+            color: Colors.grey[200],
+            border: Border.all(color: Colors.white),
+            borderRadius: BorderRadius.circular(18)),
+        child: TextFormField(
+          validator: (value) {
+            if (value!.isEmpty) {
+              return "Bilgileri eksiksiz giriniz";
+            } else {}
+          },
+          onSaved: (value) {
+            email = value!;
+          },
+          textAlign: TextAlign.center,
+          decoration:
+              InputDecoration(border: InputBorder.none, hintText: "Email"),
+        ),
+      ),
+    );
   }
 
   Padding sifrealani() {
@@ -111,27 +166,65 @@ class _RegisterPageState extends State<RegisterPage> {
     );
   }
 
-  Padding emailfield() {
+  Padding testCreateAccountButton() {
     return Padding(
-      padding: const EdgeInsets.symmetric(horizontal: 25),
-      child: Container(
-        decoration: BoxDecoration(
-            color: Colors.grey[200],
-            border: Border.all(color: Colors.white),
-            borderRadius: BorderRadius.circular(18)),
-        child: TextFormField(
-          validator: (value) {
-            if (value!.isEmpty) {
-              return "Bilgileri eksiksiz giriniz";
-            } else {}
-          },
-          onSaved: (value) {
-            email = value!;
-          },
-          textAlign: TextAlign.center,
-          decoration:
-              InputDecoration(border: InputBorder.none, hintText: "Email"),
+      padding: const EdgeInsets.symmetric(horizontal: 25.0),
+      child: GestureDetector(
+        onTap: () async {
+          if (formkey.currentState!.validate()) {
+            formkey.currentState!.save();
+            girishizmetleri.hesapac(
+                _emailController.text.trim(), _passwordController.text.trim());
+            formkey.currentState!.reset();
+            showDialog(
+                context: context,
+                builder: (context) {
+                  return Text("Account created.");
+                });
+            Navigator.pushNamed(context, "/LoginPage");
+          }
+        },
+        child: Container(
+          padding: EdgeInsets.all(20),
+          decoration: BoxDecoration(
+            color: Colors.black54,
+            borderRadius: BorderRadius.circular(12),
+          ),
+          child: Center(
+            child: Text(
+              'Create Account',
+              style: TextStyle(
+                color: Colors.white,
+                fontWeight: FontWeight.w700,
+                fontSize: 18,
+              ),
+            ),
+          ),
         ),
+      ),
+    );
+  }
+
+  TextButton hesapolusturbutonu() {
+    return TextButton(
+      onPressed: () async {
+        if (formkey.currentState!.validate()) {
+          formkey.currentState!.save();
+          girishizmetleri.hesapac(
+              _emailController.text.trim(), _passwordController.text.trim());
+          formkey.currentState!.reset();
+          showDialog(
+              context: context,
+              builder: (context) {
+                return Text("Account created.");
+              });
+          Navigator.pushNamed(context, "/LoginPage");
+        }
+      },
+      child: Text(
+        "Create Account",
+        style: TextStyle(
+            color: Colors.black54, fontSize: 25, fontWeight: FontWeight.bold),
       ),
     );
   }

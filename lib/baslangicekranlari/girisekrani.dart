@@ -21,6 +21,16 @@ class _LoginPageState extends State<LoginPage> {
   final formkey = GlobalKey<FormState>();
   final firebaseauth = FirebaseAuth.instance;
   final girishizmetleri = girisHizmetleri();
+  final _emailController = TextEditingController();
+  final _passwordController = TextEditingController();
+
+/*   @override
+  void dispose() {
+    _emailController.dispose();
+    _passwordController.dispose();
+    super.dispose();
+  } */
+
   @override
   Widget build(BuildContext context) {
     var height = MediaQuery.of(context).size.height;
@@ -35,106 +45,28 @@ class _LoginPageState extends State<LoginPage> {
             children: [
               sunpng(height),
               SizedBox(height: 25),
-              welcometext(),
+              welcomeText(),
               SizedBox(height: 10),
-              text(),
+              infoText(),
               SizedBox(height: 25),
-              emailfield(),
+              testEmailField(),
               SizedBox(height: 25),
-              passwordfield(),
+              testPasswordField(),
               SizedBox(height: 25),
-              signin(context),
-              SizedBox(height: 5),
-              enaltsatir(),
-              sifremiunuttum(context)
+              testSignInButton(),
+              SizedBox(height: 25),
+              // emailField(),
+              // SizedBox(height: 25),
+              // passwordField(),
+              // SizedBox(height: 25),
+              // signIn(context),
+              // SizedBox(height: 5),
+              enAltSatir(),
+              sifremiUnuttum(context)
             ],
           ),
         )),
       ),
-    );
-  }
-
-  TextButton signin(BuildContext context) {
-    return TextButton(
-        onPressed: () async {
-          try {
-            await firebaseAuth.signInWithEmailAndPassword(
-                email: email, password: password);
-            Navigator.of(context).pushNamed("/HomePage");
-          } on FirebaseAuthException catch (error) {
-            Fluttertoast.showToast(
-                msg: error.toString(), gravity: ToastGravity.TOP);
-          }
-        },
-        child: Text("Giriş yap",
-            style: TextStyle(
-                fontFamily: 'Rajdhani',
-                color: Colors.black,
-                fontSize: 25,
-                fontWeight: FontWeight.bold)));
-  }
-
-  Row sifremiunuttum(BuildContext context) {
-    return Row(
-      mainAxisAlignment: MainAxisAlignment.center,
-      children: [
-        TextButton(
-          onPressed: () => Navigator.pushNamed(context, "/ResetPassword"),
-          child: Text(
-            "Şifremi Unuttum",
-            style: TextStyle(
-                fontFamily: 'Rajdhani',
-                color: Colors.purple,
-                fontSize: 16,
-                fontWeight: FontWeight.w500),
-          ),
-        )
-      ],
-    );
-  }
-
-  Row enaltsatir() {
-    return Row(
-      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-      children: [registernow(), misafirgirisimetodu()],
-    );
-  }
-
-  TextButton misafirgirisimetodu() {
-    return TextButton(
-      child: Column(
-        children: [
-          misafirgirisi(),
-          signinasaguest(),
-        ],
-      ),
-      onPressed: () async {
-        final result = await girishizmetleri.misafirgirisifonksiyonu();
-        Navigator.pushNamed(context, "/GuestScreen");
-      },
-    );
-  }
-
-  Text signinasaguest() {
-    return Text(
-      "Sign In as a Guest",
-      style: TextStyle(
-        fontFamily: 'Rajdhani',
-        color: Colors.black,
-        fontSize: 18,
-        fontWeight: FontWeight.bold,
-      ),
-    );
-  }
-
-  Text misafirgirisi() {
-    return Text(
-      "Misafir Girişi",
-      style: TextStyle(
-          fontFamily: 'Rajdhani',
-          color: Colors.black,
-          fontSize: 18,
-          fontWeight: FontWeight.bold),
     );
   }
 
@@ -143,12 +75,12 @@ class _LoginPageState extends State<LoginPage> {
         height: height * 0.3, child: Image.asset("assets/assets/sun.png"));
   }
 
-  Center welcometext() {
+  Center welcomeText() {
     return Center(
       child: Text(
-        "Merhaba",
+        "Welcome",
         style: TextStyle(
-          fontFamily: 'Rajdhani',
+          color: Colors.black54,
           fontSize: 35,
           fontWeight: FontWeight.bold,
         ),
@@ -156,28 +88,90 @@ class _LoginPageState extends State<LoginPage> {
     );
   }
 
-  Center text() {
+  Center infoText() {
     return Center(
       child: Text(
-        "Devam etmek için giriş yapın ",
+        "Sign in to continue",
         style: TextStyle(
-            fontFamily: 'Rajdhani', fontSize: 20, fontWeight: FontWeight.bold),
+            color: Colors.black54, fontSize: 20, fontWeight: FontWeight.bold),
       ),
     );
   }
 
-  TextButton registernow() {
-    return TextButton(
-        onPressed: () => Navigator.pushNamed(context, "/RegisterPage"),
-        child: Text("Hesap Oluştur",
-            style: TextStyle(
-                fontFamily: 'Rajdhani',
-                color: Colors.black,
-                fontSize: 18,
-                fontWeight: FontWeight.bold)));
+  Padding testEmailField() {
+    return Padding(
+      padding: const EdgeInsets.symmetric(horizontal: 25.0),
+      child: TextField(
+        controller: _emailController,
+        decoration: InputDecoration(
+          enabledBorder: OutlineInputBorder(
+            borderSide: BorderSide(color: Colors.white),
+            borderRadius: BorderRadius.circular(12),
+          ),
+          focusedBorder: OutlineInputBorder(
+            borderSide: BorderSide(color: Colors.black87),
+            borderRadius: BorderRadius.circular(12),
+          ),
+          hintText: 'Email',
+          fillColor: Colors.white,
+          filled: true,
+        ),
+      ),
+    );
   }
 
-  Padding passwordfield() {
+  Padding testPasswordField() {
+    return Padding(
+      padding: const EdgeInsets.symmetric(horizontal: 25.0),
+      child: TextField(
+        controller: _passwordController,
+        obscureText: true,
+        decoration: InputDecoration(
+          enabledBorder: OutlineInputBorder(
+            borderSide: BorderSide(color: Colors.white),
+            borderRadius: BorderRadius.circular(12),
+          ),
+          focusedBorder: OutlineInputBorder(
+            borderSide: BorderSide(color: Colors.black87),
+            borderRadius: BorderRadius.circular(12),
+          ),
+          hintText: 'Password',
+          fillColor: Colors.white,
+          filled: true,
+        ),
+      ),
+    );
+  }
+
+  Padding emailField() {
+    return Padding(
+      padding: const EdgeInsets.symmetric(horizontal: 25),
+      child: Container(
+          decoration: BoxDecoration(
+              color: Colors.grey[200],
+              border: Border.all(color: Colors.white),
+              borderRadius: BorderRadius.circular(18)),
+          child: Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 20.0),
+            child: TextField(
+              keyboardType: TextInputType.emailAddress,
+              decoration: InputDecoration(
+                  hintText: "E-Posta",
+                  hintStyle: TextStyle(
+                      fontFamily: 'Rajdhani',
+                      fontSize: 20,
+                      fontWeight: FontWeight.w700)),
+              onChanged: (value) {
+                setState(() {
+                  email = value.trim();
+                });
+              },
+            ),
+          )),
+    );
+  }
+
+  Padding passwordField() {
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 25),
       child: Container(
@@ -206,31 +200,139 @@ class _LoginPageState extends State<LoginPage> {
     );
   }
 
-  Padding emailfield() {
+  Padding testSignInButton() {
     return Padding(
-      padding: const EdgeInsets.symmetric(horizontal: 25),
-      child: Container(
+      padding: const EdgeInsets.symmetric(horizontal: 25.0),
+      child: GestureDetector(
+        onTap: () async {
+          try {
+            await firebaseAuth.signInWithEmailAndPassword(
+              email: _emailController.text.trim(),
+              password: _passwordController.text.trim(),
+            );
+            Navigator.of(context).pushNamed("/HomePage");
+          } on FirebaseAuthException catch (error) {
+            Fluttertoast.showToast(
+                msg: error.toString(), gravity: ToastGravity.TOP);
+          }
+        },
+        child: Container(
+          padding: EdgeInsets.all(20),
           decoration: BoxDecoration(
-              color: Colors.grey[200],
-              border: Border.all(color: Colors.white),
-              borderRadius: BorderRadius.circular(18)),
-          child: Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 20.0),
-            child: TextField(
-              keyboardType: TextInputType.emailAddress,
-              decoration: InputDecoration(
-                  hintText: "Email",
-                  hintStyle: TextStyle(
-                      fontFamily: 'Rajdhani',
-                      fontSize: 20,
-                      fontWeight: FontWeight.w700)),
-              onChanged: (value) {
-                setState(() {
-                  email = value.trim();
-                });
-              },
+            color: Colors.black54,
+            borderRadius: BorderRadius.circular(12),
+          ),
+          child: Center(
+            child: Text(
+              'Sign In',
+              style: TextStyle(
+                color: Colors.white,
+                fontWeight: FontWeight.w700,
+                fontSize: 18,
+              ),
             ),
-          )),
+          ),
+        ),
+      ),
+    );
+  }
+
+  TextButton signIn(BuildContext context) {
+    return TextButton(
+        style: TextButton.styleFrom(
+          backgroundColor: Colors.white,
+        ),
+        onPressed: () async {
+          try {
+            await firebaseAuth.signInWithEmailAndPassword(
+              email: _emailController.text.trim(),
+              password: _passwordController.text.trim(),
+            );
+            Navigator.of(context).pushNamed("/HomePage");
+          } on FirebaseAuthException catch (error) {
+            Fluttertoast.showToast(
+                msg: error.toString(), gravity: ToastGravity.TOP);
+          }
+        },
+        child: Text("Giriş yap",
+            style: TextStyle(
+                fontFamily: 'Rajdhani',
+                color: Colors.black,
+                fontSize: 25,
+                fontWeight: FontWeight.bold)));
+  }
+
+  TextButton registerNow() {
+    return TextButton(
+        onPressed: () => Navigator.pushNamed(context, "/RegisterPage"),
+        child: Text("Don't have an account? Create new",
+            style: TextStyle(
+                color: Colors.black54,
+                fontSize: 18,
+                fontWeight: FontWeight.w500)));
+  }
+
+  /* Text misafirGirisi() {
+    return Text(
+      "Misafir Girişi",
+      style: TextStyle(
+          fontFamily: 'Rajdhani',
+          color: Colors.black,
+          fontSize: 18,
+          fontWeight: FontWeight.bold),
+    );
+  } */
+
+  Text signInAsaGuest() {
+    return Text(
+      "Sign In as a Guest",
+      style: TextStyle(
+        fontFamily: 'Rajdhani',
+        color: Colors.black,
+        fontSize: 18,
+        fontWeight: FontWeight.bold,
+      ),
+    );
+  }
+
+  TextButton misafirGirisiMetodu() {
+    return TextButton(
+      child: Column(
+        children: [
+          signInAsaGuest(),
+        ],
+      ),
+      onPressed: () async {
+        //final result = await girishizmetleri.misafirgirisifonksiyonu();
+        //Navigator.pushNamed(context, "/GuestScreen");
+        Navigator.pushNamed(context, "/HomePage");
+        print("veni vidi vici");
+      },
+    );
+  }
+
+  Column enAltSatir() {
+    return Column(
+      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+      children: [misafirGirisiMetodu(), registerNow()],
+    );
+  }
+
+  Row sifremiUnuttum(BuildContext context) {
+    return Row(
+      mainAxisAlignment: MainAxisAlignment.center,
+      children: [
+        TextButton(
+          onPressed: () => Navigator.pushNamed(context, "/ResetPassword"),
+          child: Text(
+            "Forgot your password?",
+            style: TextStyle(
+                color: Color.fromARGB(255, 79, 72, 145),
+                fontSize: 18,
+                fontWeight: FontWeight.w500),
+          ),
+        )
+      ],
     );
   }
 }

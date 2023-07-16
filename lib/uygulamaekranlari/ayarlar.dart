@@ -3,7 +3,7 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:testui2/sabitler/tema.dart';
-import 'package:testui2/baslangicekranlari/girisekrani.dart';
+//import 'package:testui2/baslangicekranlari/girisekrani.dart'; // kubra email
 import 'package:testui2/servisler/girishizmetleri.dart';
 import "package:testui2/sabitler/kalicisabitler.dart";
 
@@ -16,30 +16,31 @@ class SettingScreen extends StatefulWidget {
 
 class _SettingScreenState extends State<SettingScreen> {
   final girishizmetleri = girisHizmetleri();
-  String dil = "Türkçe";
-  List<String> diller = ["Türkçe"];
+  String dil = "English";
+  List<String> diller = ["English"];
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+        backgroundColor: Colors.blue[100],
         body: Column(
-      children: [
-        SizedBox(height: 90),
-        avataralani(),
-        emailtextalani(),
-        SizedBox(height: 15),
-        geneltext(),
-        SizedBox(height: 15),
-        ilksatir(context),
-        SizedBox(height: 15),
-        hesaptext(),
-        SizedBox(height: 15),
-        ikincisatir(),
-        SizedBox(height: 15),
-        cikisyap(),
-        SizedBox(height: 44),
-        version()
-      ],
-    ));
+          children: [
+            SizedBox(height: 90),
+            avataralani(),
+            emailtextalani(),
+            SizedBox(height: 15),
+            geneltext(),
+            SizedBox(height: 15),
+            ilksatir(context),
+            SizedBox(height: 15),
+            hesaptext(),
+            SizedBox(height: 15),
+            ikincisatir(),
+            SizedBox(height: 15),
+            cikisyap(),
+            SizedBox(height: 44),
+            version()
+          ],
+        ));
   }
 
   Row version() {
@@ -59,7 +60,7 @@ class _SettingScreenState extends State<SettingScreen> {
 
   Text emailtextalani() {
     return Text(
-      email,
+      "_emailControll", // kubra
       style: TextStyle(
           fontFamily: 'Rajdhani', fontWeight: FontWeight.w700, fontSize: 18),
     );
@@ -84,7 +85,8 @@ class _SettingScreenState extends State<SettingScreen> {
       mainAxisAlignment: MainAxisAlignment.center,
       children: [
         ElevatedButton.icon(
-          style: ElevatedButton.styleFrom(backgroundColor: Colors.red[600]),
+          style: ElevatedButton.styleFrom(
+              backgroundColor: const Color.fromARGB(255, 229, 53, 91)),
           onPressed: () {
             showDialog(
                 context: context,
@@ -94,17 +96,18 @@ class _SettingScreenState extends State<SettingScreen> {
                       children: [
                         Icon(Icons.logout),
                         SizedBox(width: 25),
-                        Text("Çıkış yap")
+                        Text("Log Out")
                       ],
                     ),
-                    content: Text("Çıkış yapmak istiyor musunuz ? "),
+                    content: Text("Do you want to sign out?"),
                     actions: [
                       TextButton(
                           onPressed: () {
                             Navigator.pop(context);
                           },
-                          child: Text("Vazgeç",
+                          child: Text("Cancel",
                               style: TextStyle(
+                                  color: Colors.blue[800],
                                   fontFamily: 'Rajdhani',
                                   fontSize: 16,
                                   fontWeight: FontWeight.bold))),
@@ -114,10 +117,10 @@ class _SettingScreenState extends State<SettingScreen> {
                             Navigator.of(context).pushNamed("/LoginPage");
                           },
                           child: Text(
-                            "Çıkış yap",
+                            "Log Out",
                             style: TextStyle(
                                 fontFamily: 'Rajdhani',
-                                color: Colors.red,
+                                color: const Color.fromARGB(255, 229, 53, 91),
                                 fontSize: 16,
                                 fontWeight: FontWeight.bold),
                           ))
@@ -126,7 +129,7 @@ class _SettingScreenState extends State<SettingScreen> {
                 });
           },
           icon: Icon(Icons.logout_outlined), //icon data for elevated button
-          label: Text("Çıkış Yap",
+          label: Text("Log Out",
               style: TextStyle(
                   fontFamily: 'Rajdhani',
                   fontSize: 18,
@@ -157,7 +160,7 @@ class _SettingScreenState extends State<SettingScreen> {
         child: Column(
           children: [
             Text(
-              "Şifre",
+              "Password",
               style: TextStyle(
                   fontFamily: 'Rajdhani',
                   fontSize: 26,
@@ -168,7 +171,7 @@ class _SettingScreenState extends State<SettingScreen> {
                 style: TextButton.styleFrom(foregroundColor: Colors.blue[800]),
                 onPressed: () => Navigator.pushNamed(context, "/ResetPassword"),
                 child: Text(
-                  "Şifreyi yenile",
+                  "Reset password",
                   style: TextStyle(
                     fontFamily: 'Rajdhani',
                     fontSize: 15,
@@ -222,7 +225,7 @@ class _SettingScreenState extends State<SettingScreen> {
     return Row(mainAxisAlignment: MainAxisAlignment.start, children: [
       SizedBox(width: 10),
       Text(
-        "Güvenlik",
+        "Security",
         style: TextStyle(
             fontFamily: 'Rajdhani', fontSize: 28, fontWeight: FontWeight.bold),
       )
@@ -253,7 +256,7 @@ class _SettingScreenState extends State<SettingScreen> {
         child: Column(
           children: [
             Text(
-              "Koyu Tema",
+              "Dark Theme",
               style: TextStyle(
                   fontFamily: 'Rajdhani',
                   fontSize: 26,
@@ -286,7 +289,7 @@ class _SettingScreenState extends State<SettingScreen> {
         child: Column(
           children: [
             Text(
-              "Dil",
+              "Language",
               style: TextStyle(
                   fontFamily: 'Rajdhani',
                   fontSize: 26,

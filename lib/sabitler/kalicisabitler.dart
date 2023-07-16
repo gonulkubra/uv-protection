@@ -8,7 +8,7 @@ const String google_api_key = "API_KEY";
 String appversion = "1.0.0";
 
 class Renkler {
-  final girisekranlari = const Color(0xffE7CEA6);
+  final girisekranlari = const Color.fromARGB(255, 15, 136, 184);
   final uygulamaici = const Color(0xffFFA3FD);
 }
 

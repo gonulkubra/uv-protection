@@ -37,7 +37,7 @@ class _FirstPageState extends State<HomePage> {
       body: Center(
         child: screens[_selectedIndex],
       ),
-      backgroundColor: Colors.white,
+      backgroundColor: Colors.blue[100], //body arka plan rengi kubra
       bottomNavigationBar: BottomNavigationBar(
         currentIndex: _selectedIndex,
         onTap: onItemTapped,

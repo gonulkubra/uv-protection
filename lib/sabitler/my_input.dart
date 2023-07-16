@@ -28,7 +28,7 @@ class _MyInputState extends State<MyInput> {
         fillColor: Colors.blue[500],
         filled: true,
         hintText: widget.hint,
-        hintStyle: TextStyle(color: Colors.white),
+        hintStyle: const TextStyle(color: Colors.white),
       ),
     );
   }

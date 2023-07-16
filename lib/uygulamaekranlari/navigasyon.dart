@@ -42,7 +42,7 @@ class _NavigationScreenState extends State<NavigationScreen> {
               ),
               ElevatedButton(
                 style:
-                    ElevatedButton.styleFrom(backgroundColor: Colors.grey[600]),
+                    ElevatedButton.styleFrom(backgroundColor: Colors.black54),
                 onPressed: () async {
                   List<Location> startCoord =
                       await locationFromAddress(start.text);
@@ -97,7 +97,7 @@ class _NavigationScreenState extends State<NavigationScreen> {
                     ),
                     nonRotatedChildren: [
                       AttributionWidget.defaultWidget(
-                          source: 'Kübra Gönül', onSourceTapped: null),
+                          source: 'UV Protection', onSourceTapped: null),
                     ],
                     children: [
                       TileLayer(

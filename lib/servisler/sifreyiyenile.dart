@@ -11,35 +11,39 @@ class SifreyiYenile extends StatefulWidget {
 
 class _SifreyiYenileState extends State<SifreyiYenile> {
   final girishizmetleri = girisHizmetleri();
-  final _emailcontroller = TextEditingController();
+  final _emailController = TextEditingController();
   @override
   void dispose() {
-    _emailcontroller.dispose();
+    _emailController.dispose();
     super.dispose();
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.black,
+      backgroundColor: const Color.fromARGB(255, 15, 136, 184),
       appBar: AppBar(
-        title: const Text("Şifreyi Yenile"),
+        title:
+            const Text("Reset Password", style: TextStyle(color: Colors.white)),
         centerTitle: true,
-        backgroundColor: Colors.black,
+        iconTheme: const IconThemeData(
+          color: Colors.white,
+        ),
+        backgroundColor: Colors.black54,
         elevation: 0,
       ),
       body: Column(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
           const Padding(
-            padding: EdgeInsets.symmetric(horizontal: 18.0),
+            padding: EdgeInsets.symmetric(horizontal: 25.0),
             child: Text(
-              "Şifre Yenileme Bağlantısı gönderebilmemiz için bir e-posta adresi girin",
+              "Enter an email address so we can send a Password Reset Link",
               textAlign: TextAlign.center,
               style: TextStyle(
                   color: Colors.white,
                   fontFamily: 'Rajdhani',
-                  fontSize: 20,
+                  fontSize: 22,
                   fontWeight: FontWeight.w600),
             ),
           ),
@@ -47,31 +51,82 @@ class _SifreyiYenileState extends State<SifreyiYenile> {
           Padding(
             padding: const EdgeInsets.symmetric(horizontal: 25.0),
             child: TextField(
-              controller: _emailcontroller,
+              controller: _emailController,
               decoration: InputDecoration(
-                  enabledBorder: OutlineInputBorder(
-                      borderSide: const BorderSide(color: Colors.white),
-                      borderRadius: BorderRadius.circular(12)),
-                  focusedBorder: OutlineInputBorder(
-                      borderSide: const BorderSide(color: Colors.deepPurple),
-                      borderRadius: BorderRadius.circular(12)),
-                  hintText: "Email",
-                  fillColor: Colors.grey,
-                  filled: true),
+                enabledBorder: OutlineInputBorder(
+                    borderSide: const BorderSide(color: Colors.white),
+                    borderRadius: BorderRadius.circular(12)),
+                focusedBorder: OutlineInputBorder(
+                    borderSide: const BorderSide(color: Colors.black87),
+                    borderRadius: BorderRadius.circular(12)),
+                hintText: "Email",
+                fillColor: Colors.white,
+                filled: true,
+              ),
             ),
           ),
-          const SizedBox(height: 40),
-          MaterialButton(
-            onPressed: () {
-              if (email == _emailcontroller) {
-                try {
-                  girishizmetleri.sifreyenile(_emailcontroller);
+          const SizedBox(height: 20),
+          Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 25.0),
+            child: GestureDetector(
+              onTap: () {
+                if (_emailController.text.trim() != "") {
+                  try {
+                    girishizmetleri.sifreyenile(_emailController.text.trim());
+                    showDialog(
+                        context: context,
+                        builder: (context) {
+                          return const AlertDialog(
+                            content: Text("Link sent, check your email."),
+                          );
+                        });
+                  } catch (e) {
+                    showDialog(
+                        context: context,
+                        builder: (context) {
+                          return AlertDialog(content: Text(e.toString()));
+                        });
+                  }
+                } else {
                   showDialog(
                       context: context,
                       builder: (context) {
                         return const AlertDialog(
-                          content: Text(
-                              "Bağlantı gönderildi,e-postanızı kontrol edin"),
+                            content:
+                                Text("Please, enter your e-mail address."));
+                      });
+                }
+              },
+              child: Container(
+                padding: const EdgeInsets.all(20),
+                decoration: BoxDecoration(
+                  color: Colors.black54,
+                  borderRadius: BorderRadius.circular(12),
+                ),
+                child: const Center(
+                  child: Text(
+                    'Reset Password',
+                    style: TextStyle(
+                      color: Colors.white,
+                      fontWeight: FontWeight.w700,
+                      fontSize: 18,
+                    ),
+                  ),
+                ),
+              ),
+            ),
+          ),
+          const SizedBox(height: 25),
+          MaterialButton(
+            onPressed: () {
+              if (email == _emailController.text.trim()) {
+                try {
+                  girishizmetleri.sifreyenile(_emailController.text.trim());
+                  showDialog(
+                      context: context,
+                      builder: (context) {
+                        return const AlertDialog(
+                          content: Text("Link sent, check your email."),
                         );
                       });
                 } catch (e) {
@@ -86,19 +141,19 @@ class _SifreyiYenileState extends State<SifreyiYenile> {
                     context: context,
                     builder: (context) {
                       return const AlertDialog(
-                          content: Text("Lütfen E-posta adresinizi girin"));
+                          content: Text("Please, enter your e-mail address."));
                     });
               }
             },
-            color: Colors.black,
+            /* color: Colors.black54,
             child: const Text(
-              "Şifreyi Yenile",
+              "Reset Password",
               style: TextStyle(
                   color: Colors.white,
                   fontFamily: 'Rajdhani',
                   fontSize: 20,
                   fontWeight: FontWeight.w600),
-            ),
+            ), */
           ),
         ],
       ),

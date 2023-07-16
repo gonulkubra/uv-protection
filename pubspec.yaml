@@ -51,6 +51,7 @@ dependencies:
   geocoding: ^2.1.0
   latlong2: ^0.8.1
   flutter_map: ^3.1.0
+  font_awesome_flutter: ^10.5.0
 
 
 
@@ -81,6 +82,7 @@ flutter:
   assets:
     - assets/weather/day/
     - assets/weather/night/
+    - assets/icons/
     - assets/assets/sun.png
     - assets/assets/wind.png
     - assets/assets/humidity.png
