@@ -124,7 +124,7 @@ class _RegisterPageState extends State<RegisterPage> {
         child: TextFormField(
           validator: (value) {
             if (value!.isEmpty) {
-              return "Bilgileri eksiksiz giriniz";
+              return "Enter the information completely";
             } else {}
           },
           onSaved: (value) {
@@ -149,7 +149,7 @@ class _RegisterPageState extends State<RegisterPage> {
         child: TextFormField(
           validator: (value) {
             if (value!.isEmpty || value.length < 6) {
-              return "Şifre en az 6 karakter içermelidir";
+              return "Password must contain at least 6 characters";
             } else {}
           },
           onSaved: (value) {

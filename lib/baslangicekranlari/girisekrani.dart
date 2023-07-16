@@ -287,10 +287,9 @@ class _LoginPageState extends State<LoginPage> {
     return Text(
       "Sign In as a Guest",
       style: TextStyle(
-        fontFamily: 'Rajdhani',
-        color: Colors.black,
+        color: Colors.black54,
         fontSize: 18,
-        fontWeight: FontWeight.bold,
+        fontWeight: FontWeight.w500,
       ),
     );
   }

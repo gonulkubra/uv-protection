@@ -23,17 +23,18 @@ class _OtomatEkraniState extends State<OtomatEkrani> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
+      /* appBar: AppBar(
         leading: IconButton(
             onPressed: () => Navigator.pushNamed(context, "/HomePage"),
             icon: const Icon(Icons.chevron_left)),
         title: const Text(
-          'Otomat 1',
-          style: TextStyle(fontSize: 20, fontWeight: FontWeight.w600),
+          'Refresh your sunscreen cream every 2 hours',
+          style: TextStyle(fontSize: 14, fontWeight: FontWeight.w600),
         ),
+        backgroundColor: Colors.green,
         centerTitle: true,
-      ),
-      backgroundColor: Colors.blue[100],
+      ), */
+      backgroundColor: Color.fromARGB(255, 137, 147, 241),
       body: Padding(
         padding: const EdgeInsets.all(12.0),
         child: GridView.count(

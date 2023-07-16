@@ -39,7 +39,7 @@ class _MainPageState extends State<MainPage> {
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;
     return Scaffold(
-        backgroundColor: Colors.blue[100],
+        backgroundColor: Color.fromARGB(255, 137, 147, 241),
         body: FutureBuilder(
           future: futureWeather,
           builder: (context, snapshot) {
@@ -56,7 +56,7 @@ class _MainPageState extends State<MainPage> {
             } else if (snapshot.hasError) {
               return Text('${snapshot.error}');
             } else {
-              return Text('ya bu isler ne');
+              return Text('');
             }
           },
         ));
@@ -118,6 +118,8 @@ class _MainPageState extends State<MainPage> {
             havadurumu(snapshot),
             SizedBox(height: 30),
             iconlar(size, snapshot),
+            // SizedBox(),
+            // noteText(snapshot),
             /* SizedBox(height: 12),
             otomattext() */
           ],
@@ -555,5 +557,19 @@ class _MainPageState extends State<MainPage> {
         fontWeight: FontWeight.w800,
       ),
     );
+  }
+
+  Padding noteText(snapshot) {
+    return Padding(
+        padding: const EdgeInsets.symmetric(vertical: 40.0),
+        child: Text(
+          "Please remember to use your sunscreen 30 minutes before going out in the sun.",
+          // "Refresh your sunscreen cream every 2 hours.",
+          style: TextStyle(
+              fontFamily: 'Rajdhani',
+              fontSize: 17,
+              fontWeight: FontWeight.w600,
+              color: Colors.white.withOpacity(0.85)),
+        ));
   }
 }

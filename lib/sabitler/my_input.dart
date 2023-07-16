@@ -20,15 +20,16 @@ class _MyInputState extends State<MyInput> {
     return TextField(
       controller: widget.controler,
       decoration: InputDecoration(
-        enabledBorder: const OutlineInputBorder(
-          borderSide: BorderSide(color: Colors.white),
-        ),
-        focusedBorder: const OutlineInputBorder(
-            borderSide: BorderSide(color: Colors.white)),
-        fillColor: Colors.blue[500],
+        enabledBorder: OutlineInputBorder(
+            borderSide: const BorderSide(color: Colors.white),
+            borderRadius: BorderRadius.circular(8)),
+        focusedBorder: OutlineInputBorder(
+            borderSide: const BorderSide(color: Colors.black87),
+            borderRadius: BorderRadius.circular(8)),
+        fillColor: Colors.white,
         filled: true,
         hintText: widget.hint,
-        hintStyle: const TextStyle(color: Colors.white),
+        // hintStyle: const TextStyle(color: Colors.white),
       ),
     );
   }

@@ -21,7 +21,7 @@ class _SettingScreenState extends State<SettingScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        backgroundColor: Colors.blue[100],
+        backgroundColor: Color.fromARGB(255, 137, 147, 241),
         body: Column(
           children: [
             SizedBox(height: 90),
@@ -71,7 +71,7 @@ class _SettingScreenState extends State<SettingScreen> {
       height: 75,
       width: 75,
       decoration:
-          BoxDecoration(shape: BoxShape.circle, color: Colors.lightGreen[100]),
+          BoxDecoration(shape: BoxShape.circle, color: Colors.lightBlue[200]),
       child: Icon(
         Icons.account_circle_outlined,
         color: Colors.black,
@@ -327,7 +327,7 @@ class _SettingScreenState extends State<SettingScreen> {
     return Row(mainAxisAlignment: MainAxisAlignment.start, children: [
       SizedBox(width: 10),
       Text(
-        "Genel",
+        "Settings",
         style: TextStyle(
             fontFamily: 'Rajdhani', fontSize: 28, fontWeight: FontWeight.bold),
       )
