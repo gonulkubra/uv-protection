@@ -3,8 +3,8 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
-import 'package:testui2/servisler/girishizmetleri.dart';
-import 'package:testui2/sabitler/kalicisabitler.dart';
+import 'package:uv_protection/servisler/girishizmetleri.dart';
+import 'package:uv_protection/sabitler/kalicisabitler.dart';
 
 class LoginPage extends StatefulWidget {
   const LoginPage({super.key});

@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:testui2/uygulamaekranlari/haritaekrani.dart';
+import 'package:uv_protection/uygulamaekranlari/haritaekrani.dart';
 
 class MisafirEkrani extends StatefulWidget {
   const MisafirEkrani({super.key});

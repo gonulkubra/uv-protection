@@ -5,10 +5,10 @@ List<String> cities = [
   "Antalya",
   "Mugla",
   "London",
+  "Los Angeles",
   "New York",
   "Paris",
   "Rome",
   "Tokyo",
-  "Los Angeles",
   "Vancouver"
 ];

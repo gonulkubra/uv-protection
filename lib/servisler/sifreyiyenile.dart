@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-//import 'package:testui2/baslangicekranlari/girisekrani.dart';
-import 'package:testui2/servisler/girishizmetleri.dart';
+//import 'package:uv_protection/baslangicekranlari/girisekrani.dart';
+import 'package:uv_protection/servisler/girishizmetleri.dart';
 
 class SifreyiYenile extends StatefulWidget {
   const SifreyiYenile({super.key});

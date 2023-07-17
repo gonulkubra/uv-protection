@@ -1,11 +1,11 @@
 // ignore_for_file: prefer_const_constructors, prefer_const_literals_to_create_immutables
 
 import 'package:flutter/material.dart';
-import 'package:testui2/uygulamaekranlari/anaekran.dart';
-import 'package:testui2/uygulamaekranlari/haritaekrani.dart';
-import 'package:testui2/uygulamaekranlari/ayarlar.dart';
-import 'package:testui2/uygulamaekranlari/navigasyon.dart';
-import 'package:testui2/uygulamaekranlari/otomatekrani.dart';
+import 'package:uv_protection/uygulamaekranlari/anaekran.dart';
+import 'package:uv_protection/uygulamaekranlari/haritaekrani.dart';
+import 'package:uv_protection/uygulamaekranlari/ayarlar.dart';
+import 'package:uv_protection/uygulamaekranlari/navigasyon.dart';
+import 'package:uv_protection/uygulamaekranlari/otomatekrani.dart';
 // ignore: unused_import
 
 class HomePage extends StatefulWidget {

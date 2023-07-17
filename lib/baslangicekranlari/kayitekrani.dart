@@ -1,8 +1,8 @@
 // ignore_for_file: unused_local_variable, body_might_complete_normally_nullable, prefer_const_constructors, use_build_context_synchronously
 
-import 'package:testui2/servisler/girishizmetleri.dart';
+import 'package:uv_protection/servisler/girishizmetleri.dart';
 import 'package:flutter/material.dart';
-import 'package:testui2/sabitler/kalicisabitler.dart';
+import 'package:uv_protection/sabitler/kalicisabitler.dart';
 
 class RegisterPage extends StatefulWidget {
   const RegisterPage({super.key});

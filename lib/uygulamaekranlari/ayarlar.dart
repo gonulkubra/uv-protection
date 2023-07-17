@@ -2,10 +2,10 @@
 
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:testui2/sabitler/tema.dart';
-import 'package:testui2/baslangicekranlari/girisekrani.dart'; // kubra email
-import 'package:testui2/servisler/girishizmetleri.dart';
-import "package:testui2/sabitler/kalicisabitler.dart";
+import 'package:uv_protection/sabitler/tema.dart';
+import 'package:uv_protection/baslangicekranlari/girisekrani.dart'; // kubra email
+import 'package:uv_protection/servisler/girishizmetleri.dart';
+import "package:uv_protection/sabitler/kalicisabitler.dart";
 
 class SettingScreen extends StatefulWidget {
   const SettingScreen({super.key});

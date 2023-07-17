@@ -1,7 +1,7 @@
 // ignore_for_file: prefer_const_constructors
 
 import 'package:flutter/material.dart';
-import 'package:testui2/baslangicekranlari/girisekrani.dart';
+import 'package:uv_protection/baslangicekranlari/girisekrani.dart';
 
 class Splash extends StatefulWidget {
   const Splash({super.key});

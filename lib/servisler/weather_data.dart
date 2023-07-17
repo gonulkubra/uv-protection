@@ -1,7 +1,7 @@
 import 'dart:convert';
 import 'dart:async';
 import 'package:http/http.dart' as http;
-import 'package:testui2/servisler/weather_model.dart';
+import 'package:uv_protection/servisler/weather_model.dart';
 
 Future<Weather> getWeather(String city) async {
   final response = await http.get(Uri.parse(

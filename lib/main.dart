@@ -4,17 +4,17 @@ import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:testui2/sabitler/tema.dart';
-import 'package:testui2/servisler/sifreyiyenile.dart';
-import 'package:testui2/uygulamaekranlari/anaekran.dart';
-import 'package:testui2/uygulamaekranlari/haritaekrani.dart';
-import 'package:testui2/uygulamaekranlari/misafirekrani.dart';
-import 'package:testui2/uygulamaekranlari/navigasyon.dart';
-import 'package:testui2/baslangicekranlari/ekrandegistirme.dart';
-import 'package:testui2/baslangicekranlari/girisekrani.dart';
-import 'package:testui2/baslangicekranlari/kayitekrani.dart';
-import 'package:testui2/baslangicekranlari/splash.dart';
-import 'package:testui2/uygulamaekranlari/otomatekrani.dart';
+import 'package:uv_protection/sabitler/tema.dart';
+import 'package:uv_protection/servisler/sifreyiyenile.dart';
+import 'package:uv_protection/uygulamaekranlari/anaekran.dart';
+import 'package:uv_protection/uygulamaekranlari/haritaekrani.dart';
+import 'package:uv_protection/uygulamaekranlari/misafirekrani.dart';
+import 'package:uv_protection/uygulamaekranlari/navigasyon.dart';
+import 'package:uv_protection/baslangicekranlari/ekrandegistirme.dart';
+import 'package:uv_protection/baslangicekranlari/girisekrani.dart';
+import 'package:uv_protection/baslangicekranlari/kayitekrani.dart';
+import 'package:uv_protection/baslangicekranlari/splash.dart';
+import 'package:uv_protection/uygulamaekranlari/otomatekrani.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
