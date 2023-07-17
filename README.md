@@ -13,7 +13,6 @@
 UV Protection App
 
 ![](/assets/assets/uv-protection-app-screens-02.gif)
-![](https://i.imgur.com/nON7gsR.gif)
 
 # Ürün Açıklaması
 UV Protection App, kullanıcıların bulunduğu konumdaki UV indeksi ve hava durumu bilgilerini görüntülemesini sağlar. Güneş koruyucusunun, UV derecesine göre hangi SPF oranında kullanılması gerektiği konusunda bilgilendirir. Güneş koruyucusu ve D vitamini takviyesini; tercihlerinize ve ihtiyaçlarınıza göre gruplandırıp en uygun ürüne kolayca ulaşmanızı sağlar.
