@@ -5,10 +5,10 @@ import 'package:intl/intl.dart';
 
 const String google_api_key = "API_KEY";
 
-String appversion = "1.0.0";
+String appversion = "2.0.0";
 
 class Renkler {
-  final girisekranlari = const Color.fromARGB(255, 15, 136, 184);
+  final girisekranlari = const Color(0xFF0F88B8);
   final uygulamaici = const Color(0xffFFA3FD);
 }
 

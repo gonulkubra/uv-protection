@@ -23,30 +23,64 @@ class _OtomatEkraniState extends State<OtomatEkrani> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      /* appBar: AppBar(
+      appBar: AppBar(
         leading: IconButton(
             onPressed: () => Navigator.pushNamed(context, "/HomePage"),
             icon: const Icon(Icons.chevron_left)),
         title: const Text(
-          'Refresh your sunscreen cream every 2 hours',
-          style: TextStyle(fontSize: 14, fontWeight: FontWeight.w600),
+          'Stock Status',
+          style: TextStyle(fontSize: 23, fontWeight: FontWeight.w600),
         ),
-        backgroundColor: Colors.green,
+        backgroundColor: const Color(0xFF965BEC),
         centerTitle: true,
-      ), */
-      backgroundColor: Color.fromARGB(255, 137, 147, 241),
+      ),
+      backgroundColor: const Color(0xFF8993F1),
       body: Padding(
         padding: const EdgeInsets.all(12.0),
         child: GridView.count(
+          mainAxisSpacing: 10.0,
+          crossAxisSpacing: 10.0,
           crossAxisCount: 2,
           children: <Widget>[
+            // reklam alindiginde, reklam icerigi ile guncellenecek
+            Container(
+              padding: const EdgeInsets.all(20.0),
+              decoration: BoxDecoration(
+                  border: Border.all(
+                    color: Colors.black,
+                  ),
+                  borderRadius: const BorderRadius.all(Radius.circular(20))),
+              child: const Center(
+                child: Text(
+                  "Ad Section",
+                  textAlign: TextAlign.center,
+                ),
+              ),
+            ),
+            Container(
+              padding: const EdgeInsets.all(20.0),
+              decoration: BoxDecoration(
+                  border: Border.all(
+                    color: Colors.black,
+                  ),
+                  borderRadius: const BorderRadius.all(Radius.circular(20))),
+              child: const Center(
+                child: Text(
+                  "Ad Section",
+                  textAlign: TextAlign.center,
+                ),
+              ),
+            ),
             Column(
               //crossAxisAlignment: CrossAxisAlignment.center,
               children: [
-                Image.asset("assets/icons/creme_tube.png"),
+                Image.asset("assets/icons/sunscreen.png"),
                 const Text("SunScreen Cream - SPF15"),
                 Text("Stock: $stockOne"),
                 ElevatedButton(
+                  style: ElevatedButton.styleFrom(
+                    backgroundColor: const Color(0xFF5B69EC),
+                  ),
                   onPressed: () {
                     if (stockOne > 0) {
                       showDialog(
@@ -102,10 +136,13 @@ class _OtomatEkraniState extends State<OtomatEkrani> {
             Column(
               //crossAxisAlignment: CrossAxisAlignment.center,
               children: [
-                Image.asset("assets/icons/creme_tube.png"),
+                Image.asset("assets/icons/sunscreen.png"),
                 const Text("SunScreen Cream - SPF30"),
                 Text("Stock: $stockTwo"),
                 ElevatedButton(
+                  style: ElevatedButton.styleFrom(
+                    backgroundColor: const Color(0xFF5B69EC),
+                  ),
                   onPressed: () {
                     if (stockTwo > 0) {
                       showDialog(
@@ -161,10 +198,13 @@ class _OtomatEkraniState extends State<OtomatEkrani> {
             Column(
               //crossAxisAlignment: CrossAxisAlignment.center,
               children: [
-                Image.asset("assets/icons/creme_tube.png"),
+                Image.asset("assets/icons/sunscreen.png"),
                 const Text("SunScreen Cream - SPF50"),
                 Text("Stock: $stockThree"),
                 ElevatedButton(
+                  style: ElevatedButton.styleFrom(
+                    backgroundColor: const Color(0xFF5B69EC),
+                  ),
                   onPressed: () {
                     if (stockThree > 0) {
                       showDialog(
@@ -220,10 +260,13 @@ class _OtomatEkraniState extends State<OtomatEkrani> {
             Column(
               //crossAxisAlignment: CrossAxisAlignment.center,
               children: [
-                Image.asset("assets/icons/creme_tube.png"),
+                Image.asset("assets/icons/sunscreen.png"),
                 const Text("SunScreen Cream - SPF50+"),
                 Text("Stock: $stockFour"),
                 ElevatedButton(
+                  style: ElevatedButton.styleFrom(
+                    backgroundColor: const Color(0xFF5B69EC),
+                  ),
                   onPressed: () {
                     if (stockFour > 0) {
                       showDialog(
@@ -279,10 +322,13 @@ class _OtomatEkraniState extends State<OtomatEkrani> {
             Column(
               //crossAxisAlignment: CrossAxisAlignment.center,
               children: [
-                Image.asset("assets/icons/creme_tube.png"),
+                Image.asset("assets/icons/vitamin-d.png"),
                 const Text("Vitamin D"),
                 Text("Stock: $stockFive"),
                 ElevatedButton(
+                  style: ElevatedButton.styleFrom(
+                    backgroundColor: const Color(0xFF5B69EC),
+                  ),
                   onPressed: () {
                     if (stockFive > 0) {
                       showDialog(
@@ -338,12 +384,13 @@ class _OtomatEkraniState extends State<OtomatEkrani> {
             Column(
               //crossAxisAlignment: CrossAxisAlignment.center,
               children: [
-                Image.asset("assets/icons/creme_tube.png"),
+                Image.asset("assets/icons/recycle-bin.png"),
                 const Text("Recycle Bin"),
                 Text("Stock: $stockSix"),
                 ElevatedButton(
-                  style:
-                      ElevatedButton.styleFrom(backgroundColor: Colors.green),
+                  style: ElevatedButton.styleFrom(
+                    backgroundColor: const Color(0xFF59B382),
+                  ),
                   onPressed: () {
                     showDialog(
                       context: context,
@@ -376,6 +423,7 @@ class _OtomatEkraniState extends State<OtomatEkrani> {
                 ),
               ],
             ),
+
 /*             CardWidget(
               productName: "SunScreen Cream - SPF30",
               stockQuantity: stockTwo,

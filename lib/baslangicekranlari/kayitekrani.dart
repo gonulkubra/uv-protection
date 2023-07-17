@@ -44,9 +44,17 @@ class _RegisterPageState extends State<RegisterPage> {
             SizedBox(height: 20),
             // hesapolusturbutonu(),
             // SizedBox(height: 5),
-            IconButton(
-                onPressed: () => Navigator.pushNamed(context, "/LoginPage"),
-                icon: Icon(Icons.chevron_left))
+            TextButton(
+              onPressed: () => Navigator.pushNamed(context, "/LoginPage"),
+              child: Text(
+                "<-- Back to Login Page",
+                style: TextStyle(
+                  color: Color(0xff040508),
+                  fontSize: 18,
+                  fontWeight: FontWeight.w500,
+                ),
+              ),
+            ),
           ]),
         )),
       ),

@@ -27,7 +27,7 @@ class _SplashState extends State<Splash> {
         child: Container(
           decoration: BoxDecoration(
               image: DecorationImage(
-                  image: AssetImage("assets/assets/UVPROTECTION.png"),
+                  image: AssetImage("assets/assets/splash-page.png"),
                   fit: BoxFit.cover)),
         ),
       ),

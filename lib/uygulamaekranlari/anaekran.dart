@@ -1,10 +1,11 @@
 // ignore_for_file: avoid_unnecessary_containers, prefer_const_constructors, prefer_const_literals_to_create_immutables
 
+import 'dart:math';
+
 import 'package:flutter/material.dart';
 import 'package:testui2/servisler/weather_data.dart';
 import 'package:testui2/sabitler/sehirler.dart';
 import 'package:testui2/sabitler/kalicisabitler.dart';
-import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:testui2/servisler/weather_model.dart';
 
 class MainPage extends StatefulWidget {
@@ -16,7 +17,7 @@ class MainPage extends StatefulWidget {
 
 class _MainPageState extends State<MainPage> {
   var city = "Istanbul";
-  var data;
+  late Weather data;
   // late Weather passData;
   late Future<Weather> futureWeather;
 
@@ -56,7 +57,10 @@ class _MainPageState extends State<MainPage> {
             } else if (snapshot.hasError) {
               return Text('${snapshot.error}');
             } else {
-              return Text('');
+              return Image(
+                image: AssetImage('assets/assets/splash-page.png'),
+                fit: BoxFit.fill,
+              );
             }
           },
         ));
@@ -101,7 +105,7 @@ class _MainPageState extends State<MainPage> {
             color: Colors.red,
             borderRadius: BorderRadius.circular(40),
             gradient: LinearGradient(
-                colors: [Color(0xff955cd1), Color(0xff3fa2fa)],
+                colors: [Color(0xffB389F1), Color(0xff89C7F1)],
                 begin: Alignment.bottomCenter,
                 end: Alignment.topCenter,
                 stops: [0.3, 0.7])),
@@ -116,19 +120,19 @@ class _MainPageState extends State<MainPage> {
             havaiconu(size, snapshot),
             SizedBox(height: 3),
             havadurumu(snapshot),
-            SizedBox(height: 30),
+            SizedBox(height: 15),
+            ozoneText(),
+            SizedBox(height: 20),
             iconlar(size, snapshot),
-            // SizedBox(),
-            // noteText(snapshot),
-            /* SizedBox(height: 12),
-            otomattext() */
           ],
         ),
       ),
     );
   }
 
-  Text ulke(snapshot) => Text("${snapshot.data!.country}");
+  Text ulke(snapshot) => Text(
+        "${snapshot.data!.country}",
+      );
 
   Padding sehirisimalani(snapshot) {
     return Padding(
@@ -138,15 +142,6 @@ class _MainPageState extends State<MainPage> {
   }
 
   Image havaiconu(Size size, snapshot) {
-    print(snapshot.data!.icon);
-    try {
-      String iconUrl = snapshot.data!.icon;
-      print(iconUrl);
-    } catch (e) {
-      print("olduramadim");
-    }
-    //String iconUrl = data?.icon;
-    //String iconPath = iconUrl.substring(iconUrl.length - 7);
     if (snapshot.data!.icon == null) {
       return Image(
         image: AssetImage('assets/weather/day/119.png'),
@@ -176,21 +171,6 @@ class _MainPageState extends State<MainPage> {
     );
   }
 
-  /* Padding otomattext() {
-    return Padding(
-      padding: const EdgeInsets.symmetric(vertical: 40.0),
-      child: TextButton(
-          onPressed: () => Navigator.pushNamed(context, "/AutomatScreen"),
-          child: Text(
-            "Otomatların stok durumunu görmek için tıklayın",
-            style: TextStyle(
-                fontFamily: 'Rajdhani',
-                fontSize: 18,
-                fontWeight: FontWeight.bold,
-                color: Colors.white.withOpacity(0.8)),
-          )),
-    );
-  } */
   Column ilksutun(Size size, snapshot) {
     return Column(
       children: [
@@ -359,36 +339,31 @@ class _MainPageState extends State<MainPage> {
     );
   }
 
-  FaIcon evdekalicon(Size size, snapshot) {
+  Image evdekalicon(Size size, snapshot) {
     double uv = snapshot.data!.uv;
     int isDay = snapshot.data!.isDay;
     if (isDay == 0) {
-      return FaIcon(
-        FontAwesomeIcons.glassWaterDroplet,
-        size: 45,
+      return Image(
+        image: AssetImage('assets/icons/glass-of-water.png'),
       );
     } else if (uv <= 3) {
-      return FaIcon(
-        FontAwesomeIcons.sun,
-        size: 45,
+      return Image(
+        image: AssetImage('assets/icons/sunbathing.png'),
       );
     } else if (uv <= 7) {
-      return FaIcon(
-        FontAwesomeIcons.glassWaterDroplet,
-        size: 45,
+      return Image(
+        image: AssetImage('assets/icons/glass-of-water.png'),
       );
     } else {
-      return FaIcon(
-        FontAwesomeIcons.couch,
-        size: 45,
+      return Image(
+        image: AssetImage('assets/icons/stay-at-home.png'),
       );
     }
   }
 
-  FaIcon semsiyeIcon(Size size) {
-    return FaIcon(
-      FontAwesomeIcons.umbrellaBeach,
-      size: 45,
+  Image semsiyeIcon(Size size) {
+    return Image(
+      image: AssetImage('assets/icons/parasol.png'),
     );
   }
 
@@ -436,17 +411,15 @@ class _MainPageState extends State<MainPage> {
     );
   }
 
-  Icon nemiconu(Size size) {
-    return Icon(
-      Icons.water_drop_rounded,
-      size: 45,
+  Image nemiconu(Size size) {
+    return Image(
+      image: AssetImage('assets/icons/humidity.png'),
     );
   }
 
-  FaIcon sapkaIconu(Size size) {
-    return FaIcon(
-      FontAwesomeIcons.redhat,
-      size: 45,
+  Image sapkaIconu(Size size) {
+    return Image(
+      image: AssetImage('assets/icons/mariachi.png'),
     );
   }
 
@@ -507,17 +480,15 @@ class _MainPageState extends State<MainPage> {
     );
   }
 
-  FaIcon ruzgaricon(Size size) {
-    return FaIcon(
-      FontAwesomeIcons.wind,
-      size: 45,
+  Image ruzgaricon(Size size) {
+    return Image(
+      image: AssetImage('assets/icons/windy.png'),
     );
   }
 
-  FaIcon gozlukIcon(Size size) {
-    return FaIcon(
-      FontAwesomeIcons.glasses,
-      size: 45,
+  Image gozlukIcon(Size size) {
+    return Image(
+      image: AssetImage('assets/icons/sunglasses.png'),
     );
   }
 
@@ -533,11 +504,36 @@ class _MainPageState extends State<MainPage> {
     );
   }
 
+  Text ozoneText() {
+    return Text(
+      [
+        "Plant a tree",
+        "Bike more",
+        "Drive less",
+        "Conserve water",
+        "Reduce - Reuse - Recycle",
+        "Don't send chemicals into our waterways",
+        "Choose sustainable",
+        "Conserve electricity",
+      ][Random().nextInt(8)],
+      style: TextStyle(
+        fontFamily: 'Archivo',
+        fontSize: 18,
+        fontWeight: FontWeight.w600,
+        color: Color.fromARGB(255, 11, 131, 77),
+      ),
+    );
+  }
+
   Text havadurumu(snapshot) {
     return Text(
       "${snapshot.data!.condition}",
       style: TextStyle(
-          fontFamily: 'Archivo', fontSize: 18, fontWeight: FontWeight.w600),
+        fontFamily: 'Archivo',
+        fontSize: 18,
+        fontWeight: FontWeight.w600,
+        color: Color(0xff5B69EC),
+      ),
     );
   }
 
@@ -557,19 +553,5 @@ class _MainPageState extends State<MainPage> {
         fontWeight: FontWeight.w800,
       ),
     );
-  }
-
-  Padding noteText(snapshot) {
-    return Padding(
-        padding: const EdgeInsets.symmetric(vertical: 40.0),
-        child: Text(
-          "Please remember to use your sunscreen 30 minutes before going out in the sun.",
-          // "Refresh your sunscreen cream every 2 hours.",
-          style: TextStyle(
-              fontFamily: 'Rajdhani',
-              fontSize: 17,
-              fontWeight: FontWeight.w600,
-              color: Colors.white.withOpacity(0.85)),
-        ));
   }
 }

@@ -41,8 +41,8 @@ class _NavigationScreenState extends State<NavigationScreen> {
                 height: 10,
               ),
               ElevatedButton(
-                style:
-                    ElevatedButton.styleFrom(backgroundColor: Colors.black54),
+                style: ElevatedButton.styleFrom(
+                    backgroundColor: const Color(0xFF505dd8)),
                 onPressed: () async {
                   List<Location> startCoord =
                       await locationFromAddress(start.text);

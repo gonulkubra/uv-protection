@@ -15,14 +15,15 @@ class LoginPage extends StatefulWidget {
 
 final firebaseAuth = FirebaseAuth.instance;
 final renkler = Renkler();
-late String email, password;
+final _emailController = TextEditingController();
+final _passwordController = TextEditingController();
+String emailaddress = "Guest User";
+//late String email, password;
 
 class _LoginPageState extends State<LoginPage> {
   final formkey = GlobalKey<FormState>();
   final firebaseauth = FirebaseAuth.instance;
   final girishizmetleri = girisHizmetleri();
-  final _emailController = TextEditingController();
-  final _passwordController = TextEditingController();
 
 /*   @override
   void dispose() {
@@ -143,7 +144,7 @@ class _LoginPageState extends State<LoginPage> {
     );
   }
 
-  Padding emailField() {
+/*   Padding emailField() {
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 25),
       child: Container(
@@ -169,9 +170,9 @@ class _LoginPageState extends State<LoginPage> {
             ),
           )),
     );
-  }
+  } */
 
-  Padding passwordField() {
+  /*  Padding passwordField() {
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 25),
       child: Container(
@@ -199,7 +200,7 @@ class _LoginPageState extends State<LoginPage> {
       ),
     );
   }
-
+ */
   Padding testSignInButton() {
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 25.0),
@@ -210,6 +211,7 @@ class _LoginPageState extends State<LoginPage> {
               email: _emailController.text.trim(),
               password: _passwordController.text.trim(),
             );
+            emailaddress = _emailController.text.trim();
             Navigator.of(context).pushNamed("/HomePage");
           } on FirebaseAuthException catch (error) {
             Fluttertoast.showToast(
@@ -267,7 +269,7 @@ class _LoginPageState extends State<LoginPage> {
         onPressed: () => Navigator.pushNamed(context, "/RegisterPage"),
         child: Text("Don't have an account? Create new",
             style: TextStyle(
-                color: Colors.black54,
+                color: Color(0xff040508),
                 fontSize: 18,
                 fontWeight: FontWeight.w500)));
   }
@@ -287,7 +289,7 @@ class _LoginPageState extends State<LoginPage> {
     return Text(
       "Sign In as a Guest",
       style: TextStyle(
-        color: Colors.black54,
+        color: Color(0xff040508),
         fontSize: 18,
         fontWeight: FontWeight.w500,
       ),
@@ -305,7 +307,6 @@ class _LoginPageState extends State<LoginPage> {
         //final result = await girishizmetleri.misafirgirisifonksiyonu();
         //Navigator.pushNamed(context, "/GuestScreen");
         Navigator.pushNamed(context, "/HomePage");
-        print("veni vidi vici");
       },
     );
   }
@@ -326,7 +327,7 @@ class _LoginPageState extends State<LoginPage> {
           child: Text(
             "Forgot your password?",
             style: TextStyle(
-                color: Color.fromARGB(255, 79, 72, 145),
+                color: Color(0xff040508),
                 fontSize: 18,
                 fontWeight: FontWeight.w500),
           ),

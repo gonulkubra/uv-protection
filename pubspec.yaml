@@ -83,11 +83,7 @@ flutter:
     - assets/weather/day/
     - assets/weather/night/
     - assets/icons/
-    - assets/assets/sun.png
-    - assets/assets/wind.png
-    - assets/assets/humidity.png
-    - assets/assets/home.png
-    - assets/assets/UVPROTECTION.png
+    - assets/assets/
 
 
 

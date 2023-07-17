@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:testui2/baslangicekranlari/girisekrani.dart';
+//import 'package:testui2/baslangicekranlari/girisekrani.dart';
 import 'package:testui2/servisler/girishizmetleri.dart';
 
 class SifreyiYenile extends StatefulWidget {
@@ -119,7 +119,7 @@ class _SifreyiYenileState extends State<SifreyiYenile> {
           const SizedBox(height: 25),
           MaterialButton(
             onPressed: () {
-              if (email == _emailController.text.trim()) {
+              if (_emailController.text.trim() != "") {
                 try {
                   girishizmetleri.sifreyenile(_emailController.text.trim());
                   showDialog(
