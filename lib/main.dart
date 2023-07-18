@@ -41,7 +41,7 @@ class MyApp extends StatelessWidget {
         "/Navigasyon": (context) => NavigationScreen(),
         "/ResetPassword": (context) => SifreyiYenile(),
         "/AutomatScreen": (context) => OtomatEkrani(),
-        "/GuestScreen": (context) => MisafirEkrani()
+        "/GuestScreen": (context) => MisafirEkrani(),
       },
       title: 'UV Protection App Demo',
       theme: Provider.of<ThemeColorData>(context).themeColor,

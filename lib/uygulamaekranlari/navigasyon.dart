@@ -77,14 +77,6 @@ class _NavigationScreenState extends State<NavigationScreen> {
                 },
                 child: const Text('Get Directions'),
               ),
-              /* SizedBox(
-                height: 20,
-                child: Text('${routePoints.length} ${routePoints[0]}'),
-              ), */
-/*               SizedBox(
-                height: 20,
-                child: Text('${value['lat']} ${value['long']}'),
-              ), */
               SizedBox(
                 height: 500,
                 width: 400,

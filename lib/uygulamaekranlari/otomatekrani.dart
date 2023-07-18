@@ -8,9 +8,6 @@ class OtomatEkrani extends StatefulWidget {
   State<OtomatEkrani> createState() => _OtomatEkraniState();
 }
 
-/* String selectedCity = "Antalya";
-String selectedDistrict = 'Alanya'; */
-
 class _OtomatEkraniState extends State<OtomatEkrani> {
   final renkler = Renkler();
   int stockOne = 15;
@@ -31,7 +28,7 @@ class _OtomatEkraniState extends State<OtomatEkrani> {
           'Stock Status',
           style: TextStyle(fontSize: 23, fontWeight: FontWeight.w600),
         ),
-        backgroundColor: const Color(0xFF965BEC),
+        backgroundColor: Colors.black54,
         centerTitle: true,
       ),
       backgroundColor: const Color(0xFF8993F1),
@@ -446,113 +443,12 @@ class _OtomatEkraniState extends State<OtomatEkrani> {
             ), */
           ],
         ),
-        /* child: Column(
-          crossAxisAlignment: CrossAxisAlignment.center,
-          children: <Widget>[
-            const SizedBox(height: 7),
-            const SunscreenWidget(),
-            const SizedBox(height: 7.0),
-            const Text(
-              'Sunscreen Cream - SPF15',
-              style: TextStyle(
-                  fontFamily: 'Rajdhani',
-                  fontSize: 17,
-                  fontWeight: FontWeight.w600),
-            ),
-            const SizedBox(height: 3),
-            Text(
-              'Stock Quantity: $stock',
-              style: const TextStyle(
-                  fontFamily: 'Rajdhani',
-                  fontSize: 17,
-                  fontWeight: FontWeight.w600),
-            ),
-            const SizedBox(height: 5),
-            ElevatedButton(
-              style: ElevatedButton.styleFrom(backgroundColor: Colors.black54),
-              onPressed: () {
-                if (stock != 0) {
-                  showDialog(
-                    context: context,
-                    builder: (context) {
-                      return const AlertDialog(
-                        title: Text(
-                          "The product is reserved. If you do not receive it within 60 minutes, it will be cancelled.",
-                          style: TextStyle(
-                            fontFamily: 'Rajdhani',
-                            color: Color.fromARGB(255, 79, 72, 145),
-                            fontSize: 17,
-                            fontWeight: FontWeight.w600,
-                            letterSpacing: 2,
-                          ),
-                        ),
-                      );
-                    },
-                  );
-                  setState(() {
-                    stock--;
-                  });
-                } else if (stock == 0) {
-                  showDialog(
-                    context: context,
-                    builder: (context) {
-                      return const AlertDialog(
-                        title: Text(
-                          "The product is out of stock.",
-                          style: TextStyle(
-                            fontFamily: 'Rajdhani',
-                            color: Color.fromARGB(255, 244, 54, 79),
-                            fontSize: 17,
-                            fontWeight: FontWeight.w600,
-                            letterSpacing: 2,
-                          ),
-                        ),
-                      );
-                    },
-                  );
-                }
-              },
-              child: const Text(
-                'Buy',
-                style: TextStyle(
-                    fontFamily: 'Rajdhani',
-                    fontSize: 17,
-                    fontWeight: FontWeight.bold),
-              ),
-            ),
-            /* const SizedBox(height: 26.0),
-            CheckboxListTile(
-              title: const Text(
-                'Otomattan Ayır',
-                style: TextStyle(
-                    fontFamily: 'Rajdhani',
-                    fontSize: 24,
-                    fontWeight: FontWeight.w700),
-              ),
-              value: separateFromOtomat,
-              onChanged: (value) {
-                setState(() {
-                  separateFromOtomat = value!;
-                });
-              },
-            ),
-            if (separateFromOtomat) const SizedBox(height: 16.0),
-            if (separateFromOtomat)
-              Text(
-                'Seçilen adres: $selectedCity - $selectedDistrict',
-                style: const TextStyle(
-                    fontFamily: 'Rajdhani',
-                    fontSize: 20,
-                    fontWeight: FontWeight.w600),
-              ), */
-          ],
-        ), */
       ),
     );
   }
 }
 
-class SunscreenWidget extends StatelessWidget {
+/* class SunscreenWidget extends StatelessWidget {
   const SunscreenWidget({super.key});
 
   @override
@@ -574,7 +470,7 @@ class SunscreenWidget extends StatelessWidget {
     );
   }
 }
-
+ */
 /* class CardWidget extends StatelessWidget {
   const CardWidget(
       {super.key, required this.productName, required this.stockQuantity});

@@ -3,7 +3,7 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:uv_protection/sabitler/tema.dart';
-import 'package:uv_protection/baslangicekranlari/girisekrani.dart'; // kubra email
+import 'package:uv_protection/baslangicekranlari/girisekrani.dart';
 import 'package:uv_protection/servisler/girishizmetleri.dart';
 import "package:uv_protection/sabitler/kalicisabitler.dart";
 
@@ -24,18 +24,18 @@ class _SettingScreenState extends State<SettingScreen> {
         backgroundColor: Color.fromARGB(255, 137, 147, 241),
         body: Column(
           children: [
-            SizedBox(height: 90),
-            avatarAlani(),
+            SizedBox(height: 70),
+            rectAvatar(),
+            SizedBox(height: 10),
+            displayNameField(),
             SizedBox(height: 10),
             emailTextAlani(),
             SizedBox(height: 50),
             settingsText(),
-            SizedBox(height: 25),
-            testLanguage(),
-            //ilksatir(context),
+            SizedBox(height: 1),
+            languageField(),
             SizedBox(height: 10),
             themeSection(),
-            //hesaptext(),
             SizedBox(height: 40),
             sifreyiYenile(),
             SizedBox(height: 15),
@@ -46,23 +46,45 @@ class _SettingScreenState extends State<SettingScreen> {
         ));
   }
 
-  Container avatarAlani() {
-    return Container(
-      height: 75,
-      width: 75,
-      decoration:
-          BoxDecoration(shape: BoxShape.circle, color: Colors.lightBlue[200]),
-      child: Icon(
-        Icons.account_circle_outlined,
-        color: Colors.black,
+  CircleAvatar circleA() {
+    return CircleAvatar(
+      radius: 48, // Image radius
+      backgroundImage: NetworkImage(photoURL),
+    );
+  }
+
+  ClipRRect rectAvatar() {
+    if (photoURL != "notFill") {
+      return ClipRRect(
+        borderRadius: BorderRadius.circular(20), // Image border
+        child: SizedBox.fromSize(
+          size: Size.fromRadius(48), // Image radius
+          child: Image.network(photoURL, fit: BoxFit.cover),
+        ),
+      );
+    }
+    return ClipRRect(
+      borderRadius: BorderRadius.circular(20), // Image border
+      child: SizedBox.fromSize(
+        size: Size.fromRadius(48), // Image radius
+        child: Image(
+          image: AssetImage('assets/assets/cat-face.png'),
+        ),
       ),
-      alignment: Alignment.center,
     );
   }
 
   Text emailTextAlani() {
     return Text(
-      emailaddress, // kubra
+      emailaddress,
+      style: TextStyle(
+          fontFamily: 'Rajdhani', fontWeight: FontWeight.w700, fontSize: 18),
+    );
+  }
+
+  Text displayNameField() {
+    return Text(
+      displayName,
       style: TextStyle(
           fontFamily: 'Rajdhani', fontWeight: FontWeight.w700, fontSize: 18),
     );
@@ -83,7 +105,7 @@ class _SettingScreenState extends State<SettingScreen> {
     );
   }
 
-  Padding testLanguage() {
+  Padding languageField() {
     return Padding(
       padding: const EdgeInsets.only(left: 25.0),
       child: Row(
@@ -122,89 +144,6 @@ class _SettingScreenState extends State<SettingScreen> {
     );
   }
 
-  Padding ilksatir(BuildContext context) {
-    return Padding(
-      padding: const EdgeInsets.symmetric(horizontal: 10.0),
-      child: Column(
-        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-        children: [
-          dilalani(),
-          koyutema(context),
-        ],
-      ),
-    );
-  }
-
-  Row hesaptext() {
-    return Row(mainAxisAlignment: MainAxisAlignment.start, children: [
-      SizedBox(width: 10),
-      Text(
-        "Security",
-        style: TextStyle(
-            fontFamily: 'Rajdhani', fontSize: 28, fontWeight: FontWeight.bold),
-      )
-    ]);
-  }
-
-  Container sifreyiYenile() {
-    return Container(
-      decoration: BoxDecoration(
-          borderRadius: BorderRadius.circular(50), color: Colors.transparent),
-      child: Padding(
-        padding: const EdgeInsets.symmetric(vertical: 15.0),
-        child: TextButton(
-          style: TextButton.styleFrom(foregroundColor: Colors.blue[800]),
-          onPressed: () => Navigator.pushNamed(context, "/ResetPassword"),
-          child: Text(
-            "[Reset Password]",
-            style: TextStyle(
-              fontFamily: 'Rajdhani',
-              fontSize: 20.0,
-              fontWeight: FontWeight.bold,
-            ),
-          ),
-        ),
-      ),
-    );
-  }
-
-  Container emailalani() {
-    return Container(
-      height: 150,
-      width: 140,
-      decoration: BoxDecoration(
-          borderRadius: BorderRadius.circular(50), color: Colors.transparent),
-      child: Padding(
-        padding: const EdgeInsets.symmetric(vertical: 15.0),
-        child: Column(
-          children: [
-            Text(
-              "Email",
-              style: TextStyle(
-                  fontFamily: 'Rajdhani',
-                  fontSize: 26,
-                  fontWeight: FontWeight.bold),
-            ),
-            SizedBox(height: 20),
-            Text(
-              "Doğrulanmadı",
-              style: TextStyle(
-                fontFamily: 'Rajdhani',
-                fontSize: 15,
-                fontWeight: FontWeight.w600,
-              ),
-            ),
-            SizedBox(height: 5),
-            Icon(
-              Icons.cancel_outlined,
-              color: Colors.red,
-            )
-          ],
-        ),
-      ),
-    );
-  }
-
   Padding themeSection() {
     return Padding(
       padding: const EdgeInsets.only(left: 10.0),
@@ -224,76 +163,23 @@ class _SettingScreenState extends State<SettingScreen> {
     );
   }
 
-  Container koyutema(BuildContext context) {
-    return Container(
-      height: 150,
-      width: 150,
-      decoration: BoxDecoration(
-          borderRadius: BorderRadius.circular(50), color: Colors.transparent),
-      child: Padding(
-        padding: const EdgeInsets.symmetric(vertical: 15.0),
-        child: Row(
-          children: [
-            Text(
-              "Dark Theme",
-              style: TextStyle(
-                  fontFamily: 'Rajdhani',
-                  fontSize: 26,
-                  fontWeight: FontWeight.bold),
-            ),
-            SizedBox(height: 20),
-            Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 20.0),
-              child: SwitchListTile(
-                  value: Provider.of<ThemeColorData>(context).isDarkMode,
-                  onChanged: (_) {
-                    Provider.of<ThemeColorData>(context, listen: false)
-                        .temadegistir();
-                  }),
-            )
-          ],
-        ),
-      ),
-    );
-  }
-
-  Container dilalani() {
+  Container sifreyiYenile() {
     return Container(
       decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(50), color: Colors.transparent),
       child: Padding(
         padding: const EdgeInsets.symmetric(vertical: 15.0),
-        child: Row(
-          children: [
-            Text(
-              "Language: ",
-              style: TextStyle(
-                  fontFamily: 'Rajdhani',
-                  fontSize: 26,
-                  fontWeight: FontWeight.bold),
+        child: TextButton(
+          style: TextButton.styleFrom(foregroundColor: Colors.blue[800]),
+          onPressed: () => Navigator.pushNamed(context, "/ResetPassword"),
+          child: Text(
+            "[Reset Password]",
+            style: TextStyle(
+              fontFamily: 'Rajdhani',
+              fontSize: 20.0,
+              fontWeight: FontWeight.bold,
             ),
-            DropdownButtonHideUnderline(
-              child: DropdownButton(
-                  value: dil,
-                  icon: const Icon(Icons.keyboard_arrow_down),
-                  items: diller.map((String location) {
-                    return DropdownMenuItem(
-                        value: location,
-                        child: Text(
-                          location,
-                          style: TextStyle(
-                              fontFamily: 'Rajdhani',
-                              fontSize: 20,
-                              fontWeight: FontWeight.w500),
-                        ));
-                  }).toList(),
-                  onChanged: (String? newValue) {
-                    setState(() {
-                      dil = newValue!;
-                    });
-                  }),
-            ),
-          ],
+          ),
         ),
       ),
     );

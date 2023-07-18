@@ -21,7 +21,7 @@ class _SifreyiYenileState extends State<SifreyiYenile> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: const Color.fromARGB(255, 15, 136, 184),
+      backgroundColor: const Color.fromARGB(255, 137, 147, 241),
       appBar: AppBar(
         title:
             const Text("Reset Password", style: TextStyle(color: Colors.white)),
@@ -138,22 +138,15 @@ class _SifreyiYenileState extends State<SifreyiYenile> {
                 }
               } else {
                 showDialog(
-                    context: context,
-                    builder: (context) {
-                      return const AlertDialog(
-                          content: Text("Please, enter your e-mail address."));
-                    });
+                  context: context,
+                  builder: (context) {
+                    return const AlertDialog(
+                      content: Text("Please, enter your e-mail address."),
+                    );
+                  },
+                );
               }
             },
-            /* color: Colors.black54,
-            child: const Text(
-              "Reset Password",
-              style: TextStyle(
-                  color: Colors.white,
-                  fontFamily: 'Rajdhani',
-                  fontSize: 20,
-                  fontWeight: FontWeight.w600),
-            ), */
           ),
         ],
       ),

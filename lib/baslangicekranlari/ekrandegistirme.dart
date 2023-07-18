@@ -6,7 +6,6 @@ import 'package:uv_protection/uygulamaekranlari/haritaekrani.dart';
 import 'package:uv_protection/uygulamaekranlari/ayarlar.dart';
 import 'package:uv_protection/uygulamaekranlari/navigasyon.dart';
 import 'package:uv_protection/uygulamaekranlari/otomatekrani.dart';
-// ignore: unused_import
 
 class HomePage extends StatefulWidget {
   const HomePage({super.key});

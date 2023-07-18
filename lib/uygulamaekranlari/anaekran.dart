@@ -55,7 +55,17 @@ class _MainPageState extends State<MainPage> {
                 ),
               );
             } else if (snapshot.hasError) {
-              return Text('${snapshot.error}');
+              return Center(
+                child: Padding(
+                  padding: EdgeInsets.all(30.0),
+                  child: Text(
+                    "Please make sure, you have an internet connection",
+                    style: TextStyle(
+                      fontSize: 20.0,
+                    ),
+                  ),
+                ),
+              );
             } else {
               return Image(
                 image: AssetImage('assets/assets/splash-page.png'),

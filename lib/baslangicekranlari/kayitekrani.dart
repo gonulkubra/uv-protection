@@ -26,37 +26,34 @@ class _RegisterPageState extends State<RegisterPage> {
       backgroundColor: renkler.girisekranlari,
       body: SingleChildScrollView(
         child: SafeArea(
-            child: Form(
-          key: formkey,
-          child: Column(mainAxisAlignment: MainAxisAlignment.center, children: [
-            sunpng(height),
-            SizedBox(height: 30),
-            // hesapolustur(),
-            testEmailField(),
-            SizedBox(height: 20),
-            testPasswordField(),
-            SizedBox(height: 20),
-            // emailfield(),
-            // SizedBox(height: 20),
-            // sifrealani(),
-            // SizedBox(height: 20),
-            testCreateAccountButton(),
-            SizedBox(height: 20),
-            // hesapolusturbutonu(),
-            // SizedBox(height: 5),
-            TextButton(
-              onPressed: () => Navigator.pushNamed(context, "/LoginPage"),
-              child: Text(
-                "<-- Back to Login Page",
-                style: TextStyle(
-                  color: Color(0xff040508),
-                  fontSize: 18,
-                  fontWeight: FontWeight.w500,
+          child: Form(
+            key: formkey,
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                sunpng(height),
+                SizedBox(height: 30),
+                emailField(),
+                SizedBox(height: 20),
+                passwordField(),
+                SizedBox(height: 20),
+                createAccountButton(),
+                SizedBox(height: 20),
+                TextButton(
+                  onPressed: () => Navigator.pushNamed(context, "/LoginPage"),
+                  child: Text(
+                    "<-- Back to Login Page",
+                    style: TextStyle(
+                      color: Color(0xff040508),
+                      fontSize: 18,
+                      fontWeight: FontWeight.w500,
+                    ),
+                  ),
                 ),
-              ),
+              ],
             ),
-          ]),
-        )),
+          ),
+        ),
       ),
     );
   }
@@ -66,17 +63,7 @@ class _RegisterPageState extends State<RegisterPage> {
         height: height * 0.3, child: Image.asset("assets/assets/sun.png"));
   }
 
-/*   Center hesapolustur() {
-    return Center(
-      child: Text(
-        "Create Account",
-        style: TextStyle(
-            color: Colors.black54, fontSize: 30, fontWeight: FontWeight.bold),
-      ),
-    );
-  } */
-
-  Padding testEmailField() {
+  Padding emailField() {
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 25.0),
       child: TextField(
@@ -98,7 +85,7 @@ class _RegisterPageState extends State<RegisterPage> {
     );
   }
 
-  Padding testPasswordField() {
+  Padding passwordField() {
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 25.0),
       child: TextField(
@@ -121,60 +108,7 @@ class _RegisterPageState extends State<RegisterPage> {
     );
   }
 
-  Padding emailfield() {
-    return Padding(
-      padding: const EdgeInsets.symmetric(horizontal: 25),
-      child: Container(
-        decoration: BoxDecoration(
-            color: Colors.grey[200],
-            border: Border.all(color: Colors.white),
-            borderRadius: BorderRadius.circular(18)),
-        child: TextFormField(
-          validator: (value) {
-            if (value!.isEmpty) {
-              return "Enter the information completely";
-            } else {}
-          },
-          onSaved: (value) {
-            email = value!;
-          },
-          textAlign: TextAlign.center,
-          decoration:
-              InputDecoration(border: InputBorder.none, hintText: "Email"),
-        ),
-      ),
-    );
-  }
-
-  Padding sifrealani() {
-    return Padding(
-      padding: const EdgeInsets.symmetric(horizontal: 25),
-      child: Container(
-        decoration: BoxDecoration(
-            color: Colors.grey[200],
-            border: Border.all(color: Colors.white),
-            borderRadius: BorderRadius.circular(18)),
-        child: TextFormField(
-          validator: (value) {
-            if (value!.isEmpty || value.length < 6) {
-              return "Password must contain at least 6 characters";
-            } else {}
-          },
-          onSaved: (value) {
-            password = value!;
-          },
-          obscureText: true,
-          textAlign: TextAlign.center,
-          decoration: InputDecoration(
-            border: InputBorder.none,
-            hintText: "Şifre",
-          ),
-        ),
-      ),
-    );
-  }
-
-  Padding testCreateAccountButton() {
+  Padding createAccountButton() {
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 25.0),
       child: GestureDetector(
@@ -209,30 +143,6 @@ class _RegisterPageState extends State<RegisterPage> {
             ),
           ),
         ),
-      ),
-    );
-  }
-
-  TextButton hesapolusturbutonu() {
-    return TextButton(
-      onPressed: () async {
-        if (formkey.currentState!.validate()) {
-          formkey.currentState!.save();
-          girishizmetleri.hesapac(
-              _emailController.text.trim(), _passwordController.text.trim());
-          formkey.currentState!.reset();
-          showDialog(
-              context: context,
-              builder: (context) {
-                return Text("Account created.");
-              });
-          Navigator.pushNamed(context, "/LoginPage");
-        }
-      },
-      child: Text(
-        "Create Account",
-        style: TextStyle(
-            color: Colors.black54, fontSize: 25, fontWeight: FontWeight.bold),
       ),
     );
   }

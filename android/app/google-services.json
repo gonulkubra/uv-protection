@@ -22,7 +22,15 @@
           }
         },
         {
-          "client_id": "136482577215-3m126ma20g9cs3a5hnjta6vvd7m7mjqt.apps.googleusercontent.com",
+          "client_id": "136482577215-cio1av9tl7ngocepi8kk1o1t58rkeq6f.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.testui2",
+            "certificate_hash": "db273f476b7f86c8d78191fc47b2ecfae32e0181"
+          }
+        },
+        {
+          "client_id": "136482577215-vq5c8upfuvij6jfbf1qr4mlf29tfkg1f.apps.googleusercontent.com",
           "client_type": 3
         }
       ],

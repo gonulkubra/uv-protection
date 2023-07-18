@@ -1,6 +1,7 @@
 // ignore_for_file: body_might_complete_normally_nullable, duplicate_ignore, prefer_const_constructors, use_build_context_synchronously, unused_local_variable
 
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:google_sign_in/google_sign_in.dart';
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:uv_protection/servisler/girishizmetleri.dart';
@@ -17,12 +18,15 @@ final firebaseAuth = FirebaseAuth.instance;
 final renkler = Renkler();
 final _emailController = TextEditingController();
 final _passwordController = TextEditingController();
-String emailaddress = "Guest User";
+String emailaddress = "No Email Address";
+String displayName = "Guest User";
+String photoURL = "notFill";
 //late String email, password;
 
 class _LoginPageState extends State<LoginPage> {
   final formkey = GlobalKey<FormState>();
   final firebaseauth = FirebaseAuth.instance;
+  // GoogleSignInAccount? _currentUser;
   final girishizmetleri = girisHizmetleri();
 
 /*   @override
@@ -45,25 +49,25 @@ class _LoginPageState extends State<LoginPage> {
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
               sunpng(height),
-              SizedBox(height: 25),
+              SizedBox(height: 10),
               welcomeText(),
               SizedBox(height: 10),
               infoText(),
-              SizedBox(height: 25),
-              testEmailField(),
-              SizedBox(height: 25),
-              testPasswordField(),
-              SizedBox(height: 25),
-              testSignInButton(),
-              SizedBox(height: 25),
-              // emailField(),
-              // SizedBox(height: 25),
-              // passwordField(),
-              // SizedBox(height: 25),
-              // signIn(context),
-              // SizedBox(height: 5),
-              enAltSatir(),
-              sifremiUnuttum(context)
+              SizedBox(height: 10),
+              emailField(),
+              SizedBox(height: 10),
+              passwordField(),
+              SizedBox(height: 10),
+              sifremiUnuttum(context),
+              SizedBox(height: 10),
+              signInButton(),
+              SizedBox(height: 10),
+              orContinueWith(),
+              SizedBox(height: 10),
+              iconLogin(),
+              SizedBox(height: 10),
+              registerText(),
+              //enAltSatir(),
             ],
           ),
         )),
@@ -99,7 +103,7 @@ class _LoginPageState extends State<LoginPage> {
     );
   }
 
-  Padding testEmailField() {
+  Padding emailField() {
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 25.0),
       child: TextField(
@@ -121,7 +125,7 @@ class _LoginPageState extends State<LoginPage> {
     );
   }
 
-  Padding testPasswordField() {
+  Padding passwordField() {
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 25.0),
       child: TextField(
@@ -144,64 +148,7 @@ class _LoginPageState extends State<LoginPage> {
     );
   }
 
-/*   Padding emailField() {
-    return Padding(
-      padding: const EdgeInsets.symmetric(horizontal: 25),
-      child: Container(
-          decoration: BoxDecoration(
-              color: Colors.grey[200],
-              border: Border.all(color: Colors.white),
-              borderRadius: BorderRadius.circular(18)),
-          child: Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 20.0),
-            child: TextField(
-              keyboardType: TextInputType.emailAddress,
-              decoration: InputDecoration(
-                  hintText: "E-Posta",
-                  hintStyle: TextStyle(
-                      fontFamily: 'Rajdhani',
-                      fontSize: 20,
-                      fontWeight: FontWeight.w700)),
-              onChanged: (value) {
-                setState(() {
-                  email = value.trim();
-                });
-              },
-            ),
-          )),
-    );
-  } */
-
-  /*  Padding passwordField() {
-    return Padding(
-      padding: const EdgeInsets.symmetric(horizontal: 25),
-      child: Container(
-        decoration: BoxDecoration(
-            color: Colors.grey[200],
-            border: Border.all(color: Colors.white),
-            borderRadius: BorderRadius.circular(18)),
-        child: Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 20.0),
-          child: TextField(
-            obscureText: true,
-            decoration: InputDecoration(
-                hintText: "Şifre",
-                hintStyle: TextStyle(
-                    fontFamily: 'Rajdhani',
-                    fontSize: 20,
-                    fontWeight: FontWeight.w700)),
-            onChanged: (value) {
-              setState(() {
-                password = value.trim();
-              });
-            },
-          ),
-        ),
-      ),
-    );
-  }
- */
-  Padding testSignInButton() {
+  Padding signInButton() {
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 25.0),
       child: GestureDetector(
@@ -212,6 +159,7 @@ class _LoginPageState extends State<LoginPage> {
               password: _passwordController.text.trim(),
             );
             emailaddress = _emailController.text.trim();
+            displayName = "No Name Info";
             Navigator.of(context).pushNamed("/HomePage");
           } on FirebaseAuthException catch (error) {
             Fluttertoast.showToast(
@@ -239,29 +187,111 @@ class _LoginPageState extends State<LoginPage> {
     );
   }
 
-  TextButton signIn(BuildContext context) {
-    return TextButton(
-        style: TextButton.styleFrom(
-          backgroundColor: Colors.white,
+  Padding orContinueWith() {
+    return Padding(
+      padding: const EdgeInsets.symmetric(horizontal: 25.0),
+      child: Row(
+        children: [
+          Expanded(
+            child: Divider(
+              thickness: 0.5,
+              color: Colors.grey[400],
+            ),
+          ),
+          const Padding(
+            padding: EdgeInsets.symmetric(horizontal: 10.0),
+            child: Text("Or continue with"),
+          ),
+          Expanded(
+            child: Divider(
+              thickness: 0.5,
+              color: Colors.grey[400],
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+
+  Row iconLogin() {
+    return Row(
+      mainAxisAlignment: MainAxisAlignment.center,
+      children: [
+        GestureDetector(
+          onTap: () async {
+            try {
+              await signInWithGoogle().then((UserCredential user) {
+                Navigator.of(context).pushNamed("/HomePage");
+              });
+            } catch (error) {
+              Fluttertoast.showToast(
+                  msg: error.toString(), gravity: ToastGravity.TOP);
+            }
+          },
+          child: Container(
+            padding: const EdgeInsets.all(15),
+            decoration: BoxDecoration(
+              border: Border.all(color: Colors.white),
+              borderRadius: BorderRadius.circular(16),
+              color: Colors.grey[200],
+            ),
+            child: Image.asset(
+              "assets/assets/google-logo.png",
+              height: 35,
+            ),
+          ),
         ),
-        onPressed: () async {
-          try {
-            await firebaseAuth.signInWithEmailAndPassword(
-              email: _emailController.text.trim(),
-              password: _passwordController.text.trim(),
-            );
-            Navigator.of(context).pushNamed("/HomePage");
-          } on FirebaseAuthException catch (error) {
-            Fluttertoast.showToast(
-                msg: error.toString(), gravity: ToastGravity.TOP);
-          }
-        },
-        child: Text("Giriş yap",
+        const SizedBox(width: 10),
+        GestureDetector(
+          onTap: () async {
+            //final result = await girishizmetleri.misafirgirisifonksiyonu();
+            //Navigator.pushNamed(context, "/GuestScreen");
+            Navigator.pushNamed(context, "/HomePage");
+          },
+          child: Container(
+            padding: const EdgeInsets.all(10),
+            decoration: BoxDecoration(
+              border: Border.all(color: Colors.white),
+              borderRadius: BorderRadius.circular(16),
+              color: Color.fromRGBO(238, 238, 238, 1),
+            ),
+            child: Image.asset(
+              "assets/assets/guest-icon.png",
+              height: 40,
+            ),
+          ),
+        ),
+      ],
+    );
+  }
+
+  Padding registerText() {
+    return Padding(
+      padding: EdgeInsets.symmetric(horizontal: 25.0),
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: [
+          Text(
+            "Not a member?",
             style: TextStyle(
-                fontFamily: 'Rajdhani',
-                color: Colors.black,
-                fontSize: 25,
-                fontWeight: FontWeight.bold)));
+                color: Color(0xff040508),
+                fontSize: 15,
+                fontWeight: FontWeight.w400),
+          ),
+          SizedBox(width: 4),
+          TextButton(
+            onPressed: () => Navigator.pushNamed(context, "/RegisterPage"),
+            child: Text(
+              "Register Now",
+              style: TextStyle(
+                  color: Color(0xff040508),
+                  fontSize: 15,
+                  fontWeight: FontWeight.w700),
+            ),
+          ),
+        ],
+      ),
+    );
   }
 
   TextButton registerNow() {
@@ -273,17 +303,6 @@ class _LoginPageState extends State<LoginPage> {
                 fontSize: 18,
                 fontWeight: FontWeight.w500)));
   }
-
-  /* Text misafirGirisi() {
-    return Text(
-      "Misafir Girişi",
-      style: TextStyle(
-          fontFamily: 'Rajdhani',
-          color: Colors.black,
-          fontSize: 18,
-          fontWeight: FontWeight.bold),
-    );
-  } */
 
   Text signInAsaGuest() {
     return Text(
@@ -311,28 +330,66 @@ class _LoginPageState extends State<LoginPage> {
     );
   }
 
-  Column enAltSatir() {
-    return Column(
-      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-      children: [misafirGirisiMetodu(), registerNow()],
-    );
-  }
-
-  Row sifremiUnuttum(BuildContext context) {
-    return Row(
-      mainAxisAlignment: MainAxisAlignment.center,
-      children: [
-        TextButton(
-          onPressed: () => Navigator.pushNamed(context, "/ResetPassword"),
-          child: Text(
-            "Forgot your password?",
+/*   TextButton signInGoogle() {
+    return TextButton(
+        onPressed: () async {
+          signInWithGoogle().then((UserCredential user) {
+            Navigator.of(context).pushNamed("/HomePage");
+          }).catchError((e) => print(e));
+        },
+        child: Text("Google Sign In",
             style: TextStyle(
                 color: Color(0xff040508),
                 fontSize: 18,
-                fontWeight: FontWeight.w500),
-          ),
-        )
-      ],
+                fontWeight: FontWeight.w500)));
+  }
+ */
+/*   Column enAltSatir() {
+    return Column(
+      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+      children: [misafirGirisiMetodu(), registerNow(), signInGoogle()],
     );
+  } */
+
+  Padding sifremiUnuttum(BuildContext context) {
+    return Padding(
+      padding: const EdgeInsets.symmetric(horizontal: 25.0),
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.end,
+        children: [
+          TextButton(
+            onPressed: () => Navigator.pushNamed(context, "/ResetPassword"),
+            child: const Text(
+              "Forgot your password?",
+              style: TextStyle(
+                  color: Color(0xff040508),
+                  fontSize: 15,
+                  fontWeight: FontWeight.w700),
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+
+  Future<UserCredential> signInWithGoogle() async {
+    // Trigger the authentication flow
+    final GoogleSignInAccount? googleUser = await GoogleSignIn().signIn();
+    emailaddress = googleUser?.email ?? "Guest User";
+    photoURL = googleUser?.photoUrl ?? photoURL;
+    displayName = googleUser?.displayName ?? displayName;
+
+    // Obtain the auth details from the request
+    final GoogleSignInAuthentication? googleAuth =
+        await googleUser?.authentication;
+
+    // Create a new credential
+    final credential = GoogleAuthProvider.credential(
+      accessToken: googleAuth?.accessToken,
+      idToken: googleAuth?.idToken,
+    );
+
+    // Once signed in, return the UserCredential
+    return await FirebaseAuth.instance.signInWithCredential(credential);
   }
 }
