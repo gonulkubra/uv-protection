@@ -21,10 +21,10 @@ class _MainPageState extends State<MainPage> {
   // late Weather passData;
   late Future<Weather> futureWeather;
 
-  info() async {
+  /*  info() async {
     data = await getWeather(city);
     return data;
-  }
+  } */
 
   void updateInfo(city) async {
     futureWeather = getWeather(city);
