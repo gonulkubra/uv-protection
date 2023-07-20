@@ -10,7 +10,7 @@ class SifreyiYenile extends StatefulWidget {
 }
 
 class _SifreyiYenileState extends State<SifreyiYenile> {
-  final girishizmetleri = girisHizmetleri();
+  final girishizmetleri = GirisHizmetleri();
   final _emailController = TextEditingController();
   @override
   void dispose() {
@@ -72,7 +72,7 @@ class _SifreyiYenileState extends State<SifreyiYenile> {
               onTap: () {
                 if (_emailController.text.trim() != "") {
                   try {
-                    girishizmetleri.sifreyenile(_emailController.text.trim());
+                    girishizmetleri.sifreYenile(_emailController.text.trim());
                     showDialog(
                         context: context,
                         builder: (context) {
@@ -121,7 +121,7 @@ class _SifreyiYenileState extends State<SifreyiYenile> {
             onPressed: () {
               if (_emailController.text.trim() != "") {
                 try {
-                  girishizmetleri.sifreyenile(_emailController.text.trim());
+                  girishizmetleri.sifreYenile(_emailController.text.trim());
                   showDialog(
                       context: context,
                       builder: (context) {

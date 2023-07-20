@@ -10,5 +10,6 @@ List<String> cities = [
   "Paris",
   "Rome",
   "Tokyo",
-  "Vancouver"
+  "Vancouver",
+  "39.6480,27.8882",
 ];

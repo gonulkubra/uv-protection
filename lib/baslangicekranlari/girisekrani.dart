@@ -1,5 +1,3 @@
-// ignore_for_file: body_might_complete_normally_nullable, duplicate_ignore, prefer_const_constructors, use_build_context_synchronously, unused_local_variable
-
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 import 'package:flutter/material.dart';
@@ -27,7 +25,7 @@ class _LoginPageState extends State<LoginPage> {
   final formkey = GlobalKey<FormState>();
   final firebaseauth = FirebaseAuth.instance;
   // GoogleSignInAccount? _currentUser;
-  final girishizmetleri = girisHizmetleri();
+  final girishizmetleri = GirisHizmetleri();
 
 /*   @override
   void dispose() {
@@ -49,25 +47,24 @@ class _LoginPageState extends State<LoginPage> {
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
               sunpng(height),
-              SizedBox(height: 10),
+              const SizedBox(height: 10),
               welcomeText(),
-              SizedBox(height: 10),
+              const SizedBox(height: 10),
               infoText(),
-              SizedBox(height: 10),
+              const SizedBox(height: 10),
               emailField(),
-              SizedBox(height: 10),
+              const SizedBox(height: 10),
               passwordField(),
-              SizedBox(height: 10),
+              const SizedBox(height: 10),
               sifremiUnuttum(context),
-              SizedBox(height: 10),
+              const SizedBox(height: 10),
               signInButton(),
-              SizedBox(height: 10),
+              const SizedBox(height: 10),
               orContinueWith(),
-              SizedBox(height: 10),
+              const SizedBox(height: 10),
               iconLogin(),
-              SizedBox(height: 10),
+              const SizedBox(height: 10),
               registerText(),
-              //enAltSatir(),
             ],
           ),
         )),
@@ -81,7 +78,7 @@ class _LoginPageState extends State<LoginPage> {
   }
 
   Center welcomeText() {
-    return Center(
+    return const Center(
       child: Text(
         "Welcome",
         style: TextStyle(
@@ -94,7 +91,7 @@ class _LoginPageState extends State<LoginPage> {
   }
 
   Center infoText() {
-    return Center(
+    return const Center(
       child: Text(
         "Sign in to continue",
         style: TextStyle(
@@ -110,11 +107,11 @@ class _LoginPageState extends State<LoginPage> {
         controller: _emailController,
         decoration: InputDecoration(
           enabledBorder: OutlineInputBorder(
-            borderSide: BorderSide(color: Colors.white),
+            borderSide: const BorderSide(color: Colors.white),
             borderRadius: BorderRadius.circular(12),
           ),
           focusedBorder: OutlineInputBorder(
-            borderSide: BorderSide(color: Colors.black87),
+            borderSide: const BorderSide(color: Colors.black87),
             borderRadius: BorderRadius.circular(12),
           ),
           hintText: 'Email',
@@ -133,11 +130,11 @@ class _LoginPageState extends State<LoginPage> {
         obscureText: true,
         decoration: InputDecoration(
           enabledBorder: OutlineInputBorder(
-            borderSide: BorderSide(color: Colors.white),
+            borderSide: const BorderSide(color: Colors.white),
             borderRadius: BorderRadius.circular(12),
           ),
           focusedBorder: OutlineInputBorder(
-            borderSide: BorderSide(color: Colors.black87),
+            borderSide: const BorderSide(color: Colors.black87),
             borderRadius: BorderRadius.circular(12),
           ),
           hintText: 'Password',
@@ -167,12 +164,12 @@ class _LoginPageState extends State<LoginPage> {
           }
         },
         child: Container(
-          padding: EdgeInsets.all(20),
+          padding: const EdgeInsets.all(20),
           decoration: BoxDecoration(
             color: Colors.black54,
             borderRadius: BorderRadius.circular(12),
           ),
-          child: Center(
+          child: const Center(
             child: Text(
               'Sign In',
               style: TextStyle(
@@ -244,7 +241,7 @@ class _LoginPageState extends State<LoginPage> {
         const SizedBox(width: 10),
         GestureDetector(
           onTap: () async {
-            //final result = await girishizmetleri.misafirgirisifonksiyonu();
+            //final result = await girishizmetleri.misafirGirisiFonksiyonu();
             //Navigator.pushNamed(context, "/GuestScreen");
             Navigator.pushNamed(context, "/HomePage");
           },
@@ -253,7 +250,7 @@ class _LoginPageState extends State<LoginPage> {
             decoration: BoxDecoration(
               border: Border.all(color: Colors.white),
               borderRadius: BorderRadius.circular(16),
-              color: Color.fromRGBO(238, 238, 238, 1),
+              color: const Color.fromRGBO(238, 238, 238, 1),
             ),
             child: Image.asset(
               "assets/assets/guest-icon.png",
@@ -267,21 +264,21 @@ class _LoginPageState extends State<LoginPage> {
 
   Padding registerText() {
     return Padding(
-      padding: EdgeInsets.symmetric(horizontal: 25.0),
+      padding: const EdgeInsets.symmetric(horizontal: 25.0),
       child: Row(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
-          Text(
+          const Text(
             "Not a member?",
             style: TextStyle(
                 color: Color(0xff040508),
                 fontSize: 15,
                 fontWeight: FontWeight.w400),
           ),
-          SizedBox(width: 4),
+          const SizedBox(width: 4),
           TextButton(
             onPressed: () => Navigator.pushNamed(context, "/RegisterPage"),
-            child: Text(
+            child: const Text(
               "Register Now",
               style: TextStyle(
                   color: Color(0xff040508),
@@ -297,7 +294,7 @@ class _LoginPageState extends State<LoginPage> {
   TextButton registerNow() {
     return TextButton(
         onPressed: () => Navigator.pushNamed(context, "/RegisterPage"),
-        child: Text("Don't have an account? Create new",
+        child: const Text("Don't have an account? Create new",
             style: TextStyle(
                 color: Color(0xff040508),
                 fontSize: 18,
@@ -305,7 +302,7 @@ class _LoginPageState extends State<LoginPage> {
   }
 
   Text signInAsaGuest() {
-    return Text(
+    return const Text(
       "Sign In as a Guest",
       style: TextStyle(
         color: Color(0xff040508),
@@ -323,7 +320,7 @@ class _LoginPageState extends State<LoginPage> {
         ],
       ),
       onPressed: () async {
-        //final result = await girishizmetleri.misafirgirisifonksiyonu();
+        //final result = await girishizmetleri.misafirGirisiFonksiyonu();
         //Navigator.pushNamed(context, "/GuestScreen");
         Navigator.pushNamed(context, "/HomePage");
       },

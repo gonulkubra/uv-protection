@@ -1,5 +1,3 @@
-// ignore_for_file: unused_local_variable, body_might_complete_normally_nullable, prefer_const_constructors, use_build_context_synchronously
-
 import 'package:uv_protection/servisler/girishizmetleri.dart';
 import 'package:flutter/material.dart';
 import 'package:uv_protection/sabitler/kalicisabitler.dart';
@@ -18,7 +16,7 @@ class _RegisterPageState extends State<RegisterPage> {
   final _emailController = TextEditingController();
   final _passwordController = TextEditingController();
   final formkey = GlobalKey<FormState>();
-  final girishizmetleri = girisHizmetleri();
+  final girishizmetleri = GirisHizmetleri();
   @override
   Widget build(BuildContext context) {
     var height = MediaQuery.of(context).size.height;
@@ -32,16 +30,16 @@ class _RegisterPageState extends State<RegisterPage> {
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 sunpng(height),
-                SizedBox(height: 30),
+                const SizedBox(height: 30),
                 emailField(),
-                SizedBox(height: 20),
+                const SizedBox(height: 20),
                 passwordField(),
-                SizedBox(height: 20),
+                const SizedBox(height: 20),
                 createAccountButton(),
-                SizedBox(height: 20),
+                const SizedBox(height: 20),
                 TextButton(
                   onPressed: () => Navigator.pushNamed(context, "/LoginPage"),
-                  child: Text(
+                  child: const Text(
                     "<-- Back to Login Page",
                     style: TextStyle(
                       color: Color(0xff040508),
@@ -70,11 +68,11 @@ class _RegisterPageState extends State<RegisterPage> {
         controller: _emailController,
         decoration: InputDecoration(
           enabledBorder: OutlineInputBorder(
-            borderSide: BorderSide(color: Colors.white),
+            borderSide: const BorderSide(color: Colors.white),
             borderRadius: BorderRadius.circular(12),
           ),
           focusedBorder: OutlineInputBorder(
-            borderSide: BorderSide(color: Colors.black87),
+            borderSide: const BorderSide(color: Colors.black87),
             borderRadius: BorderRadius.circular(12),
           ),
           hintText: 'Email',
@@ -93,11 +91,11 @@ class _RegisterPageState extends State<RegisterPage> {
         obscureText: true,
         decoration: InputDecoration(
           enabledBorder: OutlineInputBorder(
-            borderSide: BorderSide(color: Colors.white),
+            borderSide: const BorderSide(color: Colors.white),
             borderRadius: BorderRadius.circular(12),
           ),
           focusedBorder: OutlineInputBorder(
-            borderSide: BorderSide(color: Colors.black87),
+            borderSide: const BorderSide(color: Colors.black87),
             borderRadius: BorderRadius.circular(12),
           ),
           hintText: 'Password',
@@ -115,24 +113,24 @@ class _RegisterPageState extends State<RegisterPage> {
         onTap: () async {
           if (formkey.currentState!.validate()) {
             formkey.currentState!.save();
-            girishizmetleri.hesapac(
+            girishizmetleri.hesapAc(
                 _emailController.text.trim(), _passwordController.text.trim());
             formkey.currentState!.reset();
             showDialog(
                 context: context,
                 builder: (context) {
-                  return Text("Account created.");
+                  return const Text("Account created.");
                 });
             Navigator.pushNamed(context, "/LoginPage");
           }
         },
         child: Container(
-          padding: EdgeInsets.all(20),
+          padding: const EdgeInsets.all(20),
           decoration: BoxDecoration(
             color: Colors.black54,
             borderRadius: BorderRadius.circular(12),
           ),
-          child: Center(
+          child: const Center(
             child: Text(
               'Create Account',
               style: TextStyle(

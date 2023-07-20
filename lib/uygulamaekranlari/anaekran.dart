@@ -38,7 +38,7 @@ class _MainPageState extends State<MainPage> {
             return Column(
               children: [
                 dropdown(),
-                Expanded(child: citycard(snapshot)),
+                citycard(snapshot),
               ],
             );
           } else if (snapshot.hasError) {
@@ -101,29 +101,26 @@ class _MainPageState extends State<MainPage> {
     );
   }
 
-  Padding citycard(snapshot) {
-    return Padding(
-      padding: const EdgeInsets.only(top: 5.0),
-      child: Expanded(
-        child: Container(
-          margin: const EdgeInsets.only(right: 1, left: 1),
-          decoration: BoxDecoration(
-              color: Colors.red,
-              borderRadius: BorderRadius.circular(40),
-              gradient: const LinearGradient(
-                  colors: [Color(0xffB389F1), Color(0xff89C7F1)],
-                  begin: Alignment.bottomCenter,
-                  end: Alignment.topCenter,
-                  stops: [0.3, 0.7])),
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-            children: [
-              HavaDurumuBlock(snapshot: snapshot),
-              IlkSatir(snapshot: snapshot),
-              IkinciSatir(snapshot: snapshot),
-              const UcuncuSatir(),
-            ],
-          ),
+  Expanded citycard(snapshot) {
+    return Expanded(
+      child: Container(
+        margin: const EdgeInsets.only(right: 1, left: 1),
+        decoration: BoxDecoration(
+            color: Colors.red,
+            borderRadius: BorderRadius.circular(40),
+            gradient: const LinearGradient(
+                colors: [Color(0xffB389F1), Color(0xff89C7F1)],
+                begin: Alignment.bottomCenter,
+                end: Alignment.topCenter,
+                stops: [0.3, 0.7])),
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+          children: [
+            HavaDurumuBlock(snapshot: snapshot),
+            IlkSatir(snapshot: snapshot),
+            IkinciSatir(snapshot: snapshot),
+            const UcuncuSatir(),
+          ],
         ),
       ),
     );
@@ -299,7 +296,6 @@ class IkinciSatir extends StatelessWidget {
       crossAxisAlignment: CrossAxisAlignment.center,
       children: <Widget>[
         Expanded(
-          flex: 1,
           child: Center(
             child: IconFieldBuilder(
               iconPath: 'assets/icons/windy.png',
@@ -309,7 +305,6 @@ class IkinciSatir extends StatelessWidget {
           ),
         ),
         Expanded(
-          flex: 1,
           child: Center(
             child: IconFieldBuilder(
               iconPath: 'assets/icons/humidity.png',
@@ -319,7 +314,6 @@ class IkinciSatir extends StatelessWidget {
           ),
         ),
         Expanded(
-          flex: 1,
           child: Center(
             child: IconFieldBuilder(
               iconPath: statusIconPath(),
@@ -343,7 +337,6 @@ class UcuncuSatir extends StatelessWidget {
       crossAxisAlignment: CrossAxisAlignment.center,
       children: <Widget>[
         Expanded(
-          flex: 1,
           child: Center(
             child: IconFieldBuilder(
               iconPath: 'assets/icons/sunglasses.png',
@@ -353,7 +346,6 @@ class UcuncuSatir extends StatelessWidget {
           ),
         ),
         Expanded(
-          flex: 1,
           child: Center(
             child: IconFieldBuilder(
               iconPath: 'assets/icons/mariachi.png',
@@ -363,7 +355,6 @@ class UcuncuSatir extends StatelessWidget {
           ),
         ),
         Expanded(
-          flex: 1,
           child: Center(
             child: IconFieldBuilder(
               iconPath: 'assets/icons/parasol.png',

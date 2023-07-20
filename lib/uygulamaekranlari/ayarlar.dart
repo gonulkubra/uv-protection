@@ -15,7 +15,7 @@ class SettingScreen extends StatefulWidget {
 }
 
 class _SettingScreenState extends State<SettingScreen> {
-  final girishizmetleri = girisHizmetleri();
+  final girishizmetleri = GirisHizmetleri();
   String dil = "English";
   List<String> diller = ["English"];
   @override
@@ -218,7 +218,7 @@ class _SettingScreenState extends State<SettingScreen> {
                                   fontWeight: FontWeight.bold))),
                       TextButton(
                           onPressed: () {
-                            girishizmetleri.cikisyap();
+                            girishizmetleri.cikisYap();
                             Navigator.of(context).pushNamed("/LoginPage");
                           },
                           child: Text(
