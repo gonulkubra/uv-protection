@@ -1,5 +1,3 @@
-// ignore_for_file: avoid_unnecessary_containers, prefer_const_constructors, prefer_const_literals_to_create_immutables
-
 import 'dart:math';
 
 import 'package:flutter/material.dart';
@@ -17,14 +15,7 @@ class MainPage extends StatefulWidget {
 
 class _MainPageState extends State<MainPage> {
   var city = "Istanbul";
-  late Weather data;
-  // late Weather passData;
   late Future<Weather> futureWeather;
-
-  /*  info() async {
-    data = await getWeather(city);
-    return data;
-  } */
 
   void updateInfo(city) async {
     futureWeather = getWeather(city);
@@ -38,42 +29,48 @@ class _MainPageState extends State<MainPage> {
 
   @override
   Widget build(BuildContext context) {
-    Size size = MediaQuery.of(context).size;
     return Scaffold(
-        backgroundColor: Color.fromARGB(255, 137, 147, 241),
-        body: FutureBuilder(
-          future: futureWeather,
-          builder: (context, snapshot) {
-            if (snapshot.hasData) {
-              //passData = snapshot.data;
-              return Container(
-                child: Column(
-                  children: [
-                    dropdown(),
-                    citycard(size, snapshot),
-                  ],
+      backgroundColor: const Color.fromARGB(255, 137, 147, 241),
+      body: FutureBuilder(
+        future: futureWeather,
+        builder: (context, snapshot) {
+          if (snapshot.hasData) {
+            return Column(
+              children: [
+                dropdown(),
+                Expanded(child: citycard(snapshot)),
+              ],
+            );
+          } else if (snapshot.hasError) {
+            return const Center(
+              child: Padding(
+                padding: EdgeInsets.all(30.0),
+                child: Text(
+                  "Please make sure, you have an internet connection",
+                  style: TextStyle(
+                    fontSize: 20.0,
+                  ),
                 ),
-              );
-            } else if (snapshot.hasError) {
-              return Center(
+              ),
+            );
+          } else {
+            return const Center(
+              child: SizedBox(
                 child: Padding(
                   padding: EdgeInsets.all(30.0),
                   child: Text(
-                    "Please make sure, you have an internet connection",
+                    "Please Wait \n\nWeather info is fetching right now.",
                     style: TextStyle(
                       fontSize: 20.0,
                     ),
                   ),
                 ),
-              );
-            } else {
-              return Image(
-                image: AssetImage('assets/assets/splash-page.png'),
-                fit: BoxFit.fill,
-              );
-            }
-          },
-        ));
+              ),
+            );
+          }
+        },
+      ),
+    );
   }
 
   Padding dropdown() {
@@ -82,8 +79,8 @@ class _MainPageState extends State<MainPage> {
       child: Row(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
-          Icon(Icons.pin_drop),
-          SizedBox(width: 5),
+          const Icon(Icons.pin_drop),
+          const SizedBox(width: 5),
           DropdownButtonHideUnderline(
             child: DropdownButton(
                 value: city,
@@ -104,464 +101,355 @@ class _MainPageState extends State<MainPage> {
     );
   }
 
-  Padding citycard(Size size, snapshot) {
+  Padding citycard(snapshot) {
     return Padding(
       padding: const EdgeInsets.only(top: 5.0),
-      child: Container(
-        height: size.height * 0.8,
-        width: size.width,
-        margin: EdgeInsets.only(right: 1, left: 1),
-        decoration: BoxDecoration(
-            color: Colors.red,
-            borderRadius: BorderRadius.circular(40),
-            gradient: LinearGradient(
-                colors: [Color(0xffB389F1), Color(0xff89C7F1)],
-                begin: Alignment.bottomCenter,
-                end: Alignment.topCenter,
-                stops: [0.3, 0.7])),
-        child: Column(
-          children: [
-            SizedBox(height: 12),
-            sehirisimalani(snapshot),
-            ulke(snapshot),
-            SizedBox(height: 4),
-            tarih(),
-            SizedBox(height: 15),
-            havaiconu(size, snapshot),
-            SizedBox(height: 3),
-            havadurumu(snapshot),
-            SizedBox(height: 15),
-            ozoneText(),
-            SizedBox(height: 20),
-            iconlar(size, snapshot),
-          ],
+      child: Expanded(
+        child: Container(
+          margin: const EdgeInsets.only(right: 1, left: 1),
+          decoration: BoxDecoration(
+              color: Colors.red,
+              borderRadius: BorderRadius.circular(40),
+              gradient: const LinearGradient(
+                  colors: [Color(0xffB389F1), Color(0xff89C7F1)],
+                  begin: Alignment.bottomCenter,
+                  end: Alignment.topCenter,
+                  stops: [0.3, 0.7])),
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+            children: [
+              HavaDurumuBlock(snapshot: snapshot),
+              IlkSatir(snapshot: snapshot),
+              IkinciSatir(snapshot: snapshot),
+              const UcuncuSatir(),
+            ],
+          ),
         ),
       ),
     );
   }
+}
 
-  Text ulke(snapshot) => Text(
-        "${snapshot.data!.country}",
-      );
+class HavaDurumuBlock extends StatelessWidget {
+  const HavaDurumuBlock({super.key, required this.snapshot});
 
-  Padding sehirisimalani(snapshot) {
-    return Padding(
-      padding: const EdgeInsets.only(top: 8.0),
-      child: sehiradi(snapshot),
-    );
-  }
+  final AsyncSnapshot<Weather> snapshot;
 
-  Image havaiconu(Size size, snapshot) {
-    if (snapshot.data!.icon == null) {
+  Image havaiconu() {
+    String pathEnd = snapshot.data!.icon;
+    if (snapshot.data!.isDay == 0) {
       return Image(
-        image: AssetImage('assets/weather/day/119.png'),
+        image: AssetImage(
+            'assets/weather/night/${pathEnd.substring(pathEnd.length - 7)}'),
       );
-    } else if (snapshot.data!.isDay == 0) {
+    } else if (snapshot.data!.isDay == 1) {
       return Image(
-        image: AssetImage('assets/weather/night/113.png'),
-      );
-    } else {
-      return Image(
-        image: AssetImage('assets/weather/day/113.png'),
+        image: AssetImage(
+            'assets/weather/day/${pathEnd.substring(pathEnd.length - 7)}'),
       );
     }
-  }
-
-  Padding iconlar(Size size, snapshot) {
-    return Padding(
-      padding: const EdgeInsets.symmetric(horizontal: 8.0),
-      child: Row(
-        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-        children: [
-          ilksutun(size, snapshot),
-          ikincisutun(size, snapshot),
-          ucuncusutun(size, snapshot),
-        ],
-      ),
+    return const Image(
+      image: AssetImage('assets/weather/day/113.png'),
     );
   }
 
-  Column ilksutun(Size size, snapshot) {
+  @override
+  Widget build(BuildContext context) {
     return Column(
       children: [
         Text(
-          "Temperature",
-          style: TextStyle(
-              fontFamily: 'Archivo',
-              fontSize: 18,
-              fontWeight: FontWeight.w600,
-              color: Colors.white.withOpacity(0.5)),
+          snapshot.data!.cityname,
+          style: const TextStyle(
+            fontFamily: 'Rajdhani',
+            color: Colors.white,
+            fontSize: 40,
+            fontWeight: FontWeight.w800,
+          ),
         ),
-        SizedBox(height: 8),
-        sicaklik(snapshot),
-        SizedBox(height: 15),
-        ruzgaricon(size),
-        SizedBox(height: 10),
-        ruzgarhizi(snapshot),
-        SizedBox(height: 10),
-        ruzgaryazi(),
-        SizedBox(height: 15),
-        gozlukIcon(size),
-        SizedBox(height: 10),
-        gozlukDurum(),
-        SizedBox(height: 10),
-        gozlukYazi(),
-      ],
-    );
-  }
-
-  Column ikincisutun(Size size, snapshot) {
-    return Column(
-      children: [
+        Text(snapshot.data!.country),
+        const SizedBox(height: 10),
         Text(
-          "UV",
-          style: TextStyle(
-              fontFamily: 'Archivo',
-              fontSize: 18,
-              fontWeight: FontWeight.w600,
-              color: Colors.white.withOpacity(0.5)),
+          dateformat,
+          style: const TextStyle(
+              fontFamily: 'Archivo', fontSize: 18, fontWeight: FontWeight.w400),
         ),
-        SizedBox(height: 8),
-        uvdegeri(snapshot),
-        SizedBox(height: 15),
-        nemiconu(size),
-        SizedBox(height: 10),
-        nemdegeri(snapshot),
-        SizedBox(height: 10),
-        nemyazi(),
-        SizedBox(height: 15),
-        sapkaIconu(size),
-        SizedBox(height: 10),
-        sapkaDurum(),
-        SizedBox(height: 10),
-        sapkaYazi(),
-      ],
-    );
-  }
-
-  Column ucuncusutun(Size size, snapshot) {
-    return Column(
-      children: [
+        havaiconu(),
         Text(
-          "SPF",
-          style: TextStyle(
-              fontFamily: 'Archivo',
-              fontSize: 18,
-              fontWeight: FontWeight.w600,
-              color: Colors.white.withOpacity(0.5)),
+          snapshot.data!.condition,
+          style: const TextStyle(
+            fontFamily: 'Archivo',
+            fontSize: 18,
+            fontWeight: FontWeight.w600,
+            color: Color(0xff5B69EC),
+          ),
         ),
-        SizedBox(height: 8),
-        spfdegeri(snapshot),
-        SizedBox(height: 15),
-        evdekalicon(size, snapshot),
-        SizedBox(height: 10),
-        evdekalDurum(snapshot),
-        SizedBox(height: 10),
-        evdekalYazi(),
-        SizedBox(height: 15),
-        semsiyeIcon(size),
-        SizedBox(height: 10),
-        semsiyeDurum(),
-        SizedBox(height: 10),
-        semsiyeYazi(),
+        const SizedBox(height: 10),
+        Text(
+          [
+            "Plant a tree",
+            "Bike more",
+            "Drive less",
+            "Conserve water",
+            "Reduce - Reuse - Recycle",
+            "Don't send chemicals into our waterways",
+            "Choose sustainable",
+            "Conserve electricity",
+          ][Random().nextInt(8)],
+          style: const TextStyle(
+            fontFamily: 'Archivo',
+            fontSize: 18,
+            fontWeight: FontWeight.w600,
+            color: Color.fromARGB(255, 11, 131, 77),
+          ),
+        )
       ],
     );
   }
+}
 
-  Text spfdegeri(snapshot) {
-    String spfvalue;
+class IlkSatir extends StatelessWidget {
+  const IlkSatir({super.key, required this.snapshot});
+
+  final AsyncSnapshot<Weather> snapshot;
+
+  String spfValue() {
     double uv = snapshot.data!.uv;
     if (uv <= 1) {
-      spfvalue = "0";
+      return "0";
     } else if (uv < 3) {
-      spfvalue = "15";
+      return "15";
     } else if (uv <= 5) {
-      spfvalue = "30";
+      return "30";
     } else if (uv <= 7) {
-      spfvalue = "50";
-    } else {
-      spfvalue = "50+";
+      return "50";
     }
-    return Text(
-      "SPF $spfvalue",
-      style: TextStyle(
-          fontFamily: 'Archivo',
-          fontSize: 37,
-          fontWeight: FontWeight.w600,
-          color: Colors.white.withOpacity(0.7)),
-    );
+    return "50+";
   }
 
-  Text evdekalYazi() {
-    return Text(
-      "Status",
-      style: TextStyle(
-          fontFamily: 'Archivo',
-          fontSize: 15,
-          fontWeight: FontWeight.w600,
-          color: Colors.white.withOpacity(0.45)),
+  @override
+  Widget build(BuildContext context) {
+    return Row(
+      mainAxisAlignment: MainAxisAlignment.center,
+      crossAxisAlignment: CrossAxisAlignment.center,
+      children: [
+        Expanded(
+          child: Center(
+            child: ColumnBuilder(
+              title: "Temperature",
+              value: "${snapshot.data!.temp.toInt().toString()}°C",
+            ),
+          ),
+        ),
+        Expanded(
+          child: Center(
+            child: ColumnBuilder(
+              title: "UV",
+              value: snapshot.data!.uv.toInt().toString(),
+            ),
+          ),
+        ),
+        Expanded(
+          child: Center(
+            child: ColumnBuilder(
+              title: "SPF",
+              value: spfValue(),
+            ),
+          ),
+        ),
+      ],
     );
   }
+}
 
-  Text semsiyeYazi() {
-    return Text(
-      "Tip Note",
-      style: TextStyle(
-          fontFamily: 'Archivo',
-          fontSize: 15,
-          fontWeight: FontWeight.w600,
-          color: Colors.white.withOpacity(0.45)),
-    );
-  }
+class IkinciSatir extends StatelessWidget {
+  const IkinciSatir({super.key, required this.snapshot});
 
-  Text evdekalDurum(snapshot) {
-    String statusText;
+  final AsyncSnapshot<Weather> snapshot;
+
+  String statusText() {
     double uv = snapshot.data!.uv;
     int isDay = snapshot.data!.isDay;
     if (isDay == 0) {
-      statusText = "Drink Water";
+      return "Drink Water";
     } else if (uv <= 3) {
-      statusText = "Sunbath";
+      return "Sunbath";
     } else if (uv <= 7) {
-      statusText = "Drink Water";
-    } else {
-      statusText = "Stay at Home";
+      return "Drink Water";
     }
-
-    return Text(
-      statusText,
-      style: TextStyle(
-          fontFamily: 'Archivo',
-          fontSize: 18,
-          fontWeight: FontWeight.w600,
-          color: Colors.white.withOpacity(0.85)),
-    );
+    return "Stay at Home";
   }
 
-  Text semsiyeDurum() {
-    return Text(
-      "Under Shade",
-      style: TextStyle(
-          fontFamily: 'Archivo',
-          fontSize: 18,
-          fontWeight: FontWeight.w600,
-          color: Colors.white.withOpacity(0.85)),
-    );
-  }
-
-  Image evdekalicon(Size size, snapshot) {
+  String statusIconPath() {
     double uv = snapshot.data!.uv;
     int isDay = snapshot.data!.isDay;
     if (isDay == 0) {
-      return Image(
-        image: AssetImage('assets/icons/glass-of-water.png'),
-      );
+      return 'assets/icons/glass-of-water.png';
     } else if (uv <= 3) {
-      return Image(
-        image: AssetImage('assets/icons/sunbathing.png'),
-      );
+      return 'assets/icons/sunbathing.png';
     } else if (uv <= 7) {
-      return Image(
-        image: AssetImage('assets/icons/glass-of-water.png'),
-      );
-    } else {
-      return Image(
-        image: AssetImage('assets/icons/stay-at-home.png'),
-      );
+      return 'assets/icons/glass-of-water.png';
     }
+    return 'assets/icons/stay-at-home.png';
   }
 
-  Image semsiyeIcon(Size size) {
-    return Image(
-      image: AssetImage('assets/icons/parasol.png'),
+  @override
+  Widget build(BuildContext context) {
+    return Row(
+      mainAxisAlignment: MainAxisAlignment.center,
+      crossAxisAlignment: CrossAxisAlignment.center,
+      children: <Widget>[
+        Expanded(
+          flex: 1,
+          child: Center(
+            child: IconFieldBuilder(
+              iconPath: 'assets/icons/windy.png',
+              infoField: "${snapshot.data!.wind} km/s",
+              fieldName: "Wind",
+            ),
+          ),
+        ),
+        Expanded(
+          flex: 1,
+          child: Center(
+            child: IconFieldBuilder(
+              iconPath: 'assets/icons/humidity.png',
+              infoField: "%${snapshot.data!.humidity}",
+              fieldName: "Humidity",
+            ),
+          ),
+        ),
+        Expanded(
+          flex: 1,
+          child: Center(
+            child: IconFieldBuilder(
+              iconPath: statusIconPath(),
+              infoField: statusText(),
+              fieldName: "Status",
+            ),
+          ),
+        ),
+      ],
     );
   }
+}
 
-  Text nemyazi() {
-    return Text(
-      "Humidity",
-      style: TextStyle(
-          fontFamily: 'Archivo',
-          fontSize: 15,
-          fontWeight: FontWeight.w600,
-          color: Colors.white.withOpacity(0.45)),
+class UcuncuSatir extends StatelessWidget {
+  const UcuncuSatir({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return const Row(
+      mainAxisAlignment: MainAxisAlignment.center,
+      crossAxisAlignment: CrossAxisAlignment.center,
+      children: <Widget>[
+        Expanded(
+          flex: 1,
+          child: Center(
+            child: IconFieldBuilder(
+              iconPath: 'assets/icons/sunglasses.png',
+              infoField: "Sunglasses",
+              fieldName: "Tip Note",
+            ),
+          ),
+        ),
+        Expanded(
+          flex: 1,
+          child: Center(
+            child: IconFieldBuilder(
+              iconPath: 'assets/icons/mariachi.png',
+              infoField: "Wear a Hat",
+              fieldName: "Tip Note",
+            ),
+          ),
+        ),
+        Expanded(
+          flex: 1,
+          child: Center(
+            child: IconFieldBuilder(
+              iconPath: 'assets/icons/parasol.png',
+              infoField: "Under Shade",
+              fieldName: "Tip Note",
+            ),
+          ),
+        ),
+      ],
     );
   }
+}
 
-  Text sapkaYazi() {
-    return Text(
-      "Tip Note",
-      style: TextStyle(
-          fontFamily: 'Archivo',
-          fontSize: 15,
-          fontWeight: FontWeight.w600,
-          color: Colors.white.withOpacity(0.45)),
+class ColumnBuilder extends StatelessWidget {
+  const ColumnBuilder({
+    super.key,
+    required this.title,
+    required this.value,
+  });
+  final String title;
+  final String value;
+
+  @override
+  Widget build(BuildContext context) {
+    return Column(
+      children: [
+        Text(
+          title,
+          style: const TextStyle(
+              fontFamily: 'Archivo',
+              fontSize: 18,
+              decoration: TextDecoration.underline,
+              fontWeight: FontWeight.w600,
+              color: Colors.black54),
+        ),
+        Text(
+          value,
+          style: TextStyle(
+            fontFamily: 'Archivo',
+            fontSize: 37,
+            fontWeight: FontWeight.w600,
+            color: Colors.white.withOpacity(0.7),
+          ),
+        ),
+      ],
     );
   }
+}
 
-  Text nemdegeri(snapshot) {
-    return Text(
-      "%${snapshot.data!.humidity}",
-      style: TextStyle(
-          fontFamily: 'Archivo',
-          fontSize: 18,
-          fontWeight: FontWeight.w600,
-          color: Colors.white.withOpacity(0.85)),
-    );
-  }
+class IconFieldBuilder extends StatelessWidget {
+  const IconFieldBuilder({
+    super.key,
+    required this.iconPath,
+    required this.infoField,
+    required this.fieldName,
+  });
 
-  Text sapkaDurum() {
-    return Text(
-      "Wear a Hat",
-      style: TextStyle(
-          fontFamily: 'Archivo',
-          fontSize: 18,
-          fontWeight: FontWeight.w600,
-          color: Colors.white.withOpacity(0.85)),
-    );
-  }
+  final String iconPath;
+  final String infoField;
+  final String fieldName;
 
-  Image nemiconu(Size size) {
-    return Image(
-      image: AssetImage('assets/icons/humidity.png'),
-    );
-  }
-
-  Image sapkaIconu(Size size) {
-    return Image(
-      image: AssetImage('assets/icons/mariachi.png'),
-    );
-  }
-
-  Text uvdegeri(snapshot) {
-    return Text(
-      "${snapshot.data!.uv}",
-      style: TextStyle(
-          fontFamily: 'Archivo',
-          fontSize: 37,
-          fontWeight: FontWeight.w600,
-          color: Colors.white.withOpacity(0.7)),
-    );
-  }
-
-  Text ruzgaryazi() {
-    return Text(
-      "Wind",
-      style: TextStyle(
-          fontFamily: 'Archivo',
-          fontSize: 15,
-          fontWeight: FontWeight.w600,
-          color: Colors.white.withOpacity(0.45)),
-    );
-  }
-
-  Text gozlukYazi() {
-    return Text(
-      "Tip Note",
-      style: TextStyle(
-          fontFamily: 'Archivo',
-          fontSize: 15,
-          fontWeight: FontWeight.w600,
-          color: Colors.white.withOpacity(0.45)),
-    );
-  }
-
-  Text ruzgarhizi(snapshot) {
-    return Text(
-      "${snapshot.data!.wind} km/s",
-      style: TextStyle(
-        fontFamily: 'Archivo',
-        fontSize: 18,
-        fontWeight: FontWeight.w600,
-        color: Colors.white.withOpacity(0.85),
-      ),
-    );
-  }
-
-  Text gozlukDurum() {
-    return Text(
-      "Sunglasses",
-      style: TextStyle(
-        fontFamily: 'Archivo',
-        fontSize: 18,
-        fontWeight: FontWeight.w600,
-        color: Colors.white.withOpacity(0.85),
-      ),
-    );
-  }
-
-  Image ruzgaricon(Size size) {
-    return Image(
-      image: AssetImage('assets/icons/windy.png'),
-    );
-  }
-
-  Image gozlukIcon(Size size) {
-    return Image(
-      image: AssetImage('assets/icons/sunglasses.png'),
-    );
-  }
-
-  Text sicaklik(snapshot) {
-    return Text(
-      "${snapshot.data!.temp}°C",
-      style: TextStyle(
-        fontFamily: 'Archivo',
-        fontSize: 37,
-        fontWeight: FontWeight.w600,
-        color: Colors.white.withOpacity(0.7),
-      ),
-    );
-  }
-
-  Text ozoneText() {
-    return Text(
-      [
-        "Plant a tree",
-        "Bike more",
-        "Drive less",
-        "Conserve water",
-        "Reduce - Reuse - Recycle",
-        "Don't send chemicals into our waterways",
-        "Choose sustainable",
-        "Conserve electricity",
-      ][Random().nextInt(8)],
-      style: TextStyle(
-        fontFamily: 'Archivo',
-        fontSize: 18,
-        fontWeight: FontWeight.w600,
-        color: Color.fromARGB(255, 11, 131, 77),
-      ),
-    );
-  }
-
-  Text havadurumu(snapshot) {
-    return Text(
-      "${snapshot.data!.condition}",
-      style: TextStyle(
-        fontFamily: 'Archivo',
-        fontSize: 18,
-        fontWeight: FontWeight.w600,
-        color: Color(0xff5B69EC),
-      ),
-    );
-  }
-
-  Text tarih() {
-    return Text(dateformat,
-        style: TextStyle(
-            fontFamily: 'Archivo', fontSize: 18, fontWeight: FontWeight.w400));
-  }
-
-  Text sehiradi(snapshot) {
-    return Text(
-      "${snapshot.data!.cityname}",
-      style: TextStyle(
-        fontFamily: 'Rajdhani',
-        color: Colors.white,
-        fontSize: 40,
-        fontWeight: FontWeight.w800,
-      ),
+  @override
+  Widget build(BuildContext context) {
+    return Column(
+      children: [
+        Image(
+          image: AssetImage(iconPath),
+        ),
+        Text(
+          infoField,
+          style: TextStyle(
+            fontFamily: 'Archivo',
+            fontSize: 18,
+            fontWeight: FontWeight.w600,
+            color: Colors.white.withOpacity(0.85),
+          ),
+        ),
+        Text(
+          fieldName,
+          style: TextStyle(
+              fontFamily: 'Archivo',
+              fontSize: 15,
+              fontWeight: FontWeight.w600,
+              color: Colors.white.withOpacity(0.45)),
+        )
+      ],
     );
   }
 }
