@@ -1,7 +1,5 @@
-// ignore_for_file: prefer_const_constructors
-
 import 'package:flutter/material.dart';
-import 'package:uv_protection/baslangicekranlari/girisekrani.dart';
+import 'package:uv_protection/baslangicekranlari/giris_ekrani.dart';
 
 class Splash extends StatefulWidget {
   const Splash({super.key});
@@ -14,9 +12,9 @@ class _SplashState extends State<Splash> {
   @override
   void initState() {
     super.initState();
-    Future.delayed(Duration(seconds: 3), () {
+    Future.delayed(const Duration(seconds: 3), () {
       Navigator.push(
-          context, MaterialPageRoute(builder: (context) => LoginPage()));
+          context, MaterialPageRoute(builder: (context) => const LoginPage()));
     });
   }
 
@@ -25,7 +23,7 @@ class _SplashState extends State<Splash> {
     return Scaffold(
       body: Center(
         child: Container(
-          decoration: BoxDecoration(
+          decoration: const BoxDecoration(
               image: DecorationImage(
                   image: AssetImage("assets/assets/splash-page.png"),
                   fit: BoxFit.cover)),

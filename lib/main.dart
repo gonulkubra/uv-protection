@@ -4,14 +4,14 @@ import 'package:flutter/services.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:uv_protection/sabitler/tema.dart';
-import 'package:uv_protection/servisler/sifreyiyenile.dart';
-import 'package:uv_protection/uygulamaekranlari/haritaekrani.dart';
-import 'package:uv_protection/uygulamaekranlari/misafirekrani.dart';
+import 'package:uv_protection/servisler/sifreyi_yenile.dart';
+import 'package:uv_protection/uygulamaekranlari/harita_ekrani.dart';
+import 'package:uv_protection/uygulamaekranlari/misafir_ekrani.dart';
 import 'package:uv_protection/uygulamaekranlari/navigasyon.dart';
-import 'package:uv_protection/baslangicekranlari/ekrandegistirme.dart';
-import 'package:uv_protection/baslangicekranlari/girisekrani.dart';
-import 'package:uv_protection/baslangicekranlari/kayitekrani.dart';
-import 'package:uv_protection/uygulamaekranlari/otomatekrani.dart';
+import 'package:uv_protection/baslangicekranlari/ekran_degistirme.dart';
+import 'package:uv_protection/baslangicekranlari/giris_ekrani.dart';
+import 'package:uv_protection/baslangicekranlari/kayit_ekrani.dart';
+import 'package:uv_protection/uygulamaekranlari/otomat_ekrani.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();

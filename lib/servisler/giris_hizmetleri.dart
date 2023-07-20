@@ -1,5 +1,5 @@
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:uv_protection/baslangicekranlari/girisekrani.dart';
+import 'package:uv_protection/baslangicekranlari/giris_ekrani.dart';
 
 class GirisHizmetleri {
   final firebaseAuth = FirebaseAuth.instance;

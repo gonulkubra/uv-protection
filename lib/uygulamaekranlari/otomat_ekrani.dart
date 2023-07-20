@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:uv_protection/sabitler/kalicisabitler.dart';
+import 'package:uv_protection/sabitler/kalici_sabitler.dart';
 
 class OtomatEkrani extends StatefulWidget {
   const OtomatEkrani({super.key});

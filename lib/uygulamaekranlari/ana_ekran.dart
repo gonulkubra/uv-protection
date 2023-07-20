@@ -3,7 +3,7 @@ import 'dart:math';
 import 'package:flutter/material.dart';
 import 'package:uv_protection/servisler/weather_data.dart';
 import 'package:uv_protection/sabitler/sehirler.dart';
-import 'package:uv_protection/sabitler/kalicisabitler.dart';
+import 'package:uv_protection/sabitler/kalici_sabitler.dart';
 import 'package:uv_protection/servisler/weather_model.dart';
 
 class MainPage extends StatefulWidget {

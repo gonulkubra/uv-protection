@@ -1,6 +1,6 @@
-import 'package:uv_protection/servisler/girishizmetleri.dart';
+import 'package:uv_protection/servisler/giris_hizmetleri.dart';
 import 'package:flutter/material.dart';
-import 'package:uv_protection/sabitler/kalicisabitler.dart';
+import 'package:uv_protection/sabitler/kalici_sabitler.dart';
 
 class RegisterPage extends StatefulWidget {
   const RegisterPage({super.key});

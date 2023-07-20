@@ -2,8 +2,8 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
-import 'package:uv_protection/servisler/girishizmetleri.dart';
-import 'package:uv_protection/sabitler/kalicisabitler.dart';
+import 'package:uv_protection/servisler/giris_hizmetleri.dart';
+import 'package:uv_protection/sabitler/kalici_sabitler.dart';
 
 class LoginPage extends StatefulWidget {
   const LoginPage({super.key});
@@ -157,7 +157,7 @@ class _LoginPageState extends State<LoginPage> {
             );
             emailaddress = _emailController.text.trim();
             displayName = "No Name Info";
-            Navigator.of(context).pushNamed("/HomePage");
+            if (context.mounted) Navigator.of(context).pushNamed("/HomePage");
           } on FirebaseAuthException catch (error) {
             Fluttertoast.showToast(
                 msg: error.toString(), gravity: ToastGravity.TOP);

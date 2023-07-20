@@ -1,11 +1,9 @@
-// ignore_for_file: prefer_const_constructors, sort_child_properties_last, prefer_const_literals_to_create_immutables
-
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:uv_protection/sabitler/tema.dart';
-import 'package:uv_protection/baslangicekranlari/girisekrani.dart';
-import 'package:uv_protection/servisler/girishizmetleri.dart';
-import "package:uv_protection/sabitler/kalicisabitler.dart";
+import 'package:uv_protection/baslangicekranlari/giris_ekrani.dart';
+import 'package:uv_protection/servisler/giris_hizmetleri.dart';
+import 'package:uv_protection/sabitler/kalici_sabitler.dart';
 
 class SettingScreen extends StatefulWidget {
   const SettingScreen({super.key});
@@ -21,26 +19,26 @@ class _SettingScreenState extends State<SettingScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        backgroundColor: Color.fromARGB(255, 137, 147, 241),
+        backgroundColor: const Color.fromARGB(255, 137, 147, 241),
         body: Column(
           children: [
-            SizedBox(height: 70),
+            const SizedBox(height: 70),
             rectAvatar(),
-            SizedBox(height: 10),
+            const SizedBox(height: 10),
             displayNameField(),
-            SizedBox(height: 10),
+            const SizedBox(height: 10),
             emailTextAlani(),
-            SizedBox(height: 50),
+            const SizedBox(height: 50),
             settingsText(),
-            SizedBox(height: 1),
+            const SizedBox(height: 1),
             languageField(),
-            SizedBox(height: 10),
+            const SizedBox(height: 10),
             themeSection(),
-            SizedBox(height: 40),
+            const SizedBox(height: 40),
             sifreyiYenile(),
-            SizedBox(height: 15),
+            const SizedBox(height: 15),
             cikisyap(),
-            SizedBox(height: 20),
+            const SizedBox(height: 20),
             version()
           ],
         ));
@@ -58,7 +56,7 @@ class _SettingScreenState extends State<SettingScreen> {
       return ClipRRect(
         borderRadius: BorderRadius.circular(20), // Image border
         child: SizedBox.fromSize(
-          size: Size.fromRadius(48), // Image radius
+          size: const Size.fromRadius(48), // Image radius
           child: Image.network(photoURL, fit: BoxFit.cover),
         ),
       );
@@ -66,8 +64,8 @@ class _SettingScreenState extends State<SettingScreen> {
     return ClipRRect(
       borderRadius: BorderRadius.circular(20), // Image border
       child: SizedBox.fromSize(
-        size: Size.fromRadius(48), // Image radius
-        child: Image(
+        size: const Size.fromRadius(48), // Image radius
+        child: const Image(
           image: AssetImage('assets/assets/cat-face.png'),
         ),
       ),
@@ -77,7 +75,7 @@ class _SettingScreenState extends State<SettingScreen> {
   Text emailTextAlani() {
     return Text(
       emailaddress,
-      style: TextStyle(
+      style: const TextStyle(
           fontFamily: 'Rajdhani', fontWeight: FontWeight.w700, fontSize: 18),
     );
   }
@@ -85,14 +83,14 @@ class _SettingScreenState extends State<SettingScreen> {
   Text displayNameField() {
     return Text(
       displayName,
-      style: TextStyle(
+      style: const TextStyle(
           fontFamily: 'Rajdhani', fontWeight: FontWeight.w700, fontSize: 18),
     );
   }
 
   Padding settingsText() {
-    return Padding(
-      padding: const EdgeInsets.all(8.0),
+    return const Padding(
+      padding: EdgeInsets.all(8.0),
       child: Row(mainAxisAlignment: MainAxisAlignment.start, children: [
         Text(
           "Settings",
@@ -111,7 +109,7 @@ class _SettingScreenState extends State<SettingScreen> {
       child: Row(
         mainAxisAlignment: MainAxisAlignment.start,
         children: [
-          Text(
+          const Text(
             "Language: ",
             style: TextStyle(
                 fontFamily: 'Rajdhani',
@@ -127,7 +125,7 @@ class _SettingScreenState extends State<SettingScreen> {
                       value: location,
                       child: Text(
                         location,
-                        style: TextStyle(
+                        style: const TextStyle(
                             fontFamily: 'Rajdhani',
                             fontSize: 20,
                             fontWeight: FontWeight.w500),
@@ -172,7 +170,7 @@ class _SettingScreenState extends State<SettingScreen> {
         child: TextButton(
           style: TextButton.styleFrom(foregroundColor: Colors.blue[800]),
           onPressed: () => Navigator.pushNamed(context, "/ResetPassword"),
-          child: Text(
+          child: const Text(
             "[Reset Password]",
             style: TextStyle(
               fontFamily: 'Rajdhani',
@@ -197,14 +195,14 @@ class _SettingScreenState extends State<SettingScreen> {
                 context: context,
                 builder: (context) {
                   return AlertDialog(
-                    title: Row(
+                    title: const Row(
                       children: [
                         Icon(Icons.logout),
                         SizedBox(width: 25),
                         Text("Log Out")
                       ],
                     ),
-                    content: Text("Do you want to sign out?"),
+                    content: const Text("Do you want to sign out?"),
                     actions: [
                       TextButton(
                           onPressed: () {
@@ -221,11 +219,11 @@ class _SettingScreenState extends State<SettingScreen> {
                             girishizmetleri.cikisYap();
                             Navigator.of(context).pushNamed("/LoginPage");
                           },
-                          child: Text(
+                          child: const Text(
                             "Log Out",
                             style: TextStyle(
                                 fontFamily: 'Rajdhani',
-                                color: const Color.fromARGB(255, 229, 53, 91),
+                                color: Color.fromARGB(255, 229, 53, 91),
                                 fontSize: 16,
                                 fontWeight: FontWeight.bold),
                           ))
@@ -233,8 +231,9 @@ class _SettingScreenState extends State<SettingScreen> {
                   );
                 });
           },
-          icon: Icon(Icons.logout_outlined), //icon data for elevated button
-          label: Text("Log Out",
+          icon:
+              const Icon(Icons.logout_outlined), //icon data for elevated button
+          label: const Text("Log Out",
               style: TextStyle(
                   fontFamily: 'Rajdhani',
                   fontSize: 18,
@@ -250,7 +249,7 @@ class _SettingScreenState extends State<SettingScreen> {
       children: [
         Text(
           "version $appversion",
-          style: TextStyle(
+          style: const TextStyle(
               fontFamily: 'Rajdhani',
               fontSize: 15,
               fontWeight: FontWeight.w600),
