@@ -69,7 +69,6 @@ class _OtomatEkraniState extends State<OtomatEkrani> {
               ),
             ),
             Column(
-              //crossAxisAlignment: CrossAxisAlignment.center,
               children: [
                 Image.asset("assets/icons/sunscreen.png"),
                 const Text("SunScreen Cream - SPF15"),
@@ -131,7 +130,6 @@ class _OtomatEkraniState extends State<OtomatEkrani> {
               ],
             ),
             Column(
-              //crossAxisAlignment: CrossAxisAlignment.center,
               children: [
                 Image.asset("assets/icons/sunscreen.png"),
                 const Text("SunScreen Cream - SPF30"),
@@ -193,7 +191,6 @@ class _OtomatEkraniState extends State<OtomatEkrani> {
               ],
             ),
             Column(
-              //crossAxisAlignment: CrossAxisAlignment.center,
               children: [
                 Image.asset("assets/icons/sunscreen.png"),
                 const Text("SunScreen Cream - SPF50"),
@@ -255,7 +252,6 @@ class _OtomatEkraniState extends State<OtomatEkrani> {
               ],
             ),
             Column(
-              //crossAxisAlignment: CrossAxisAlignment.center,
               children: [
                 Image.asset("assets/icons/sunscreen.png"),
                 const Text("SunScreen Cream - SPF50+"),
@@ -317,7 +313,6 @@ class _OtomatEkraniState extends State<OtomatEkrani> {
               ],
             ),
             Column(
-              //crossAxisAlignment: CrossAxisAlignment.center,
               children: [
                 Image.asset("assets/icons/vitamin-d.png"),
                 const Text("Vitamin D"),
@@ -379,7 +374,6 @@ class _OtomatEkraniState extends State<OtomatEkrani> {
               ],
             ),
             Column(
-              //crossAxisAlignment: CrossAxisAlignment.center,
               children: [
                 Image.asset("assets/icons/recycle-bin.png"),
                 const Text("Recycle Bin"),
@@ -447,58 +441,3 @@ class _OtomatEkraniState extends State<OtomatEkrani> {
     );
   }
 }
-
-/* class SunscreenWidget extends StatelessWidget {
-  const SunscreenWidget({super.key});
-
-  @override
-  Widget build(BuildContext context) {
-    return Container(
-      width: 200.0,
-      height: 200.0,
-      decoration: const BoxDecoration(
-        color: Colors.yellow,
-        shape: BoxShape.circle,
-      ),
-      child: const Center(
-        child: Icon(
-          Icons.wb_sunny,
-          size: 100.0,
-          color: Colors.orange,
-        ),
-      ),
-    );
-  }
-}
- */
-/* class CardWidget extends StatelessWidget {
-  const CardWidget(
-      {super.key, required this.productName, required this.stockQuantity});
-
-  final String productName;
-  final int stockQuantity;
-
-  @override
-  Widget build(BuildContext context) {
-    return Column(
-      //crossAxisAlignment: CrossAxisAlignment.center,
-      children: [
-        Image.asset("assets/icons/creme_tube.png"),
-        Text(productName),
-        Text("Stock: $stockQuantity"),
-        ElevatedButton(
-          onPressed: () {
-            print(stockQuantity);
-          },
-          child: const Text(
-            'Buy',
-            style: TextStyle(
-                fontFamily: 'Rajdhani',
-                fontSize: 17,
-                fontWeight: FontWeight.bold),
-          ),
-        ),
-      ],
-    );
-  }
-} */

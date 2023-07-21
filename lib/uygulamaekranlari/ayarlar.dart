@@ -46,7 +46,7 @@ class _SettingScreenState extends State<SettingScreen> {
 
   CircleAvatar circleA() {
     return CircleAvatar(
-      radius: 48, // Image radius
+      radius: 48,
       backgroundImage: NetworkImage(photoURL),
     );
   }
@@ -54,17 +54,17 @@ class _SettingScreenState extends State<SettingScreen> {
   ClipRRect rectAvatar() {
     if (photoURL != "notFill") {
       return ClipRRect(
-        borderRadius: BorderRadius.circular(20), // Image border
+        borderRadius: BorderRadius.circular(20),
         child: SizedBox.fromSize(
-          size: const Size.fromRadius(48), // Image radius
+          size: const Size.fromRadius(48),
           child: Image.network(photoURL, fit: BoxFit.cover),
         ),
       );
     }
     return ClipRRect(
-      borderRadius: BorderRadius.circular(20), // Image border
+      borderRadius: BorderRadius.circular(20),
       child: SizedBox.fromSize(
-        size: const Size.fromRadius(48), // Image radius
+        size: const Size.fromRadius(48),
         child: const Image(
           image: AssetImage('assets/assets/cat-face.png'),
         ),
@@ -231,13 +231,12 @@ class _SettingScreenState extends State<SettingScreen> {
                   );
                 });
           },
-          icon:
-              const Icon(Icons.logout_outlined), //icon data for elevated button
+          icon: const Icon(Icons.logout_outlined),
           label: const Text("Log Out",
               style: TextStyle(
                   fontFamily: 'Rajdhani',
                   fontSize: 18,
-                  fontWeight: FontWeight.bold)), //label text
+                  fontWeight: FontWeight.bold)),
         )
       ],
     );

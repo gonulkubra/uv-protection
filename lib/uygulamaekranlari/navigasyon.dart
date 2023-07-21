@@ -56,7 +56,6 @@ class _NavigationScreenState extends State<NavigationScreen> {
                   var url = Uri.parse(
                       'http://router.project-osrm.org/route/v1/driving/$v2,$v1;$v4,$v3?steps=true&annotations=true&geometries=geojson&overview=full');
                   var response = await http.get(url);
-                  // print(response.body);
                   setState(() {
                     routePoints = [];
                     var routeMaker = jsonDecode(response.body)['routes'][0]
@@ -71,8 +70,6 @@ class _NavigationScreenState extends State<NavigationScreen> {
                           double.parse(lat1[1]), double.parse(long1[0])));
                     }
                     isVisible = !isVisible;
-
-                    // print(routePoints);
                   });
                 },
                 child: const Text('Get Directions'),

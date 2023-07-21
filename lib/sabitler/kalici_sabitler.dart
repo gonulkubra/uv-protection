@@ -1,9 +1,7 @@
-// ignore_for_file: constant_identifier_names
-
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 
-const String google_api_key = "API_KEY";
+const String googleApiKey = "API_KEY";
 
 String appversion = "2.0.0";
 

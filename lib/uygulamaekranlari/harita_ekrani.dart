@@ -33,7 +33,6 @@ class _MapScreenState extends State<MapScreen> {
       return Future.error(
           'Application Permission Denied Indefinitely. Unable to request permission.');
     }
-    //print('_getCurrentLocation calisti');
     return await Geolocator.getCurrentPosition();
   }
 
@@ -43,7 +42,6 @@ class _MapScreenState extends State<MapScreen> {
     _getCurrentLocation().then((value) {
       lat = value.latitude;
       long = value.longitude;
-      //print('initstate calisti');
       setState(() {
         isVisible = true;
       });

@@ -384,11 +384,12 @@ class ColumnBuilder extends StatelessWidget {
         Text(
           title,
           style: const TextStyle(
-              fontFamily: 'Archivo',
-              fontSize: 18,
-              decoration: TextDecoration.underline,
-              fontWeight: FontWeight.w600,
-              color: Colors.black54),
+            fontFamily: 'Archivo',
+            fontSize: 18,
+            decoration: TextDecoration.underline,
+            fontWeight: FontWeight.w600,
+            color: Colors.black54,
+          ),
         ),
         Text(
           value,

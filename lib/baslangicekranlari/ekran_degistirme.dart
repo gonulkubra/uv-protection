@@ -1,5 +1,3 @@
-// ignore_for_file: prefer_const_constructors, prefer_const_literals_to_create_immutables
-
 import 'package:flutter/material.dart';
 import 'package:uv_protection/uygulamaekranlari/ana_ekran.dart';
 import 'package:uv_protection/uygulamaekranlari/harita_ekrani.dart';
@@ -20,11 +18,11 @@ class _FirstPageState extends State<HomePage> {
   @override
   Widget build(BuildContext context) {
     final screens = [
-      MainPage(),
-      MapScreen(),
-      NavigationScreen(),
-      OtomatEkrani(),
-      SettingScreen(),
+      const MainPage(),
+      const MapScreen(),
+      const NavigationScreen(),
+      const OtomatEkrani(),
+      const SettingScreen(),
     ];
     void onItemTapped(int index) {
       setState(() {
@@ -37,7 +35,7 @@ class _FirstPageState extends State<HomePage> {
         child: screens[_selectedIndex],
       ),
       backgroundColor:
-          Color.fromARGB(255, 137, 147, 241), //body arka plan rengi kubra
+          const Color.fromARGB(255, 137, 147, 241), //body arka plan rengi kubra
       bottomNavigationBar: BottomNavigationBar(
         currentIndex: _selectedIndex,
         onTap: onItemTapped,

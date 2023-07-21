@@ -145,6 +145,27 @@ class _LoginPageState extends State<LoginPage> {
     );
   }
 
+  Padding sifremiUnuttum(BuildContext context) {
+    return Padding(
+      padding: const EdgeInsets.symmetric(horizontal: 25.0),
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.end,
+        children: [
+          TextButton(
+            onPressed: () => Navigator.pushNamed(context, "/ResetPassword"),
+            child: const Text(
+              "Forgot your password?",
+              style: TextStyle(
+                  color: Color(0xff040508),
+                  fontSize: 15,
+                  fontWeight: FontWeight.w700),
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+
   Padding signInButton() {
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 25.0),
@@ -299,74 +320,6 @@ class _LoginPageState extends State<LoginPage> {
                 color: Color(0xff040508),
                 fontSize: 18,
                 fontWeight: FontWeight.w500)));
-  }
-
-  Text signInAsaGuest() {
-    return const Text(
-      "Sign In as a Guest",
-      style: TextStyle(
-        color: Color(0xff040508),
-        fontSize: 18,
-        fontWeight: FontWeight.w500,
-      ),
-    );
-  }
-
-  TextButton misafirGirisiMetodu() {
-    return TextButton(
-      child: Column(
-        children: [
-          signInAsaGuest(),
-        ],
-      ),
-      onPressed: () async {
-        //final result = await girishizmetleri.misafirGirisiFonksiyonu();
-        //Navigator.pushNamed(context, "/GuestScreen");
-        Navigator.pushNamed(context, "/HomePage");
-      },
-    );
-  }
-
-/*   TextButton signInGoogle() {
-    return TextButton(
-        onPressed: () async {
-          signInWithGoogle().then((UserCredential user) {
-            Navigator.of(context).pushNamed("/HomePage");
-          }).catchError((e) => print(e));
-        },
-        child: Text("Google Sign In",
-            style: TextStyle(
-                color: Color(0xff040508),
-                fontSize: 18,
-                fontWeight: FontWeight.w500)));
-  }
- */
-/*   Column enAltSatir() {
-    return Column(
-      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-      children: [misafirGirisiMetodu(), registerNow(), signInGoogle()],
-    );
-  } */
-
-  Padding sifremiUnuttum(BuildContext context) {
-    return Padding(
-      padding: const EdgeInsets.symmetric(horizontal: 25.0),
-      child: Row(
-        mainAxisAlignment: MainAxisAlignment.end,
-        children: [
-          TextButton(
-            onPressed: () => Navigator.pushNamed(context, "/ResetPassword"),
-            child: const Text(
-              "Forgot your password?",
-              style: TextStyle(
-                  color: Color(0xff040508),
-                  fontSize: 15,
-                  fontWeight: FontWeight.w700),
-            ),
-          ),
-        ],
-      ),
-    );
   }
 
   Future<UserCredential> signInWithGoogle() async {
